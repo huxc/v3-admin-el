@@ -13,6 +13,7 @@ const __APP_INFO__ = {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  // eslint-disable-next-line node/prefer-global/process
   const env = loadEnv(mode, process.cwd())
 
   // 取所有变量，包含数值转换
@@ -23,8 +24,8 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
-        '/icons': 'src/assets/icons',
-        '/images': 'src/assets/images',
+        '/icons': resolve(__dirname, './src/assets/icons'),
+        '/images': resolve(__dirname, './src/assets/images'),
       },
     },
     plugins: createVitePlugins(viteEnv),

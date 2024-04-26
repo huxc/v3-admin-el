@@ -1,8 +1,8 @@
 {
-    "path-autocomplete.pathMappings": {
-        "@": "${folder}/src/",
-        "/images":"${folder}/src/assets/images"
-    },
+  "path-autocomplete.pathMappings": {
+    "@": "${folder}/src/",
+    "/images": "${folder}/src/assets/images"
+  },
 
   // Enable the ESlint flat config support
   "eslint.experimental.useFlatConfig": true,
@@ -46,6 +46,6 @@
     "jsonc",
     "yaml",
     "toml",
-    "astro",
+    "astro"
   ]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable node/prefer-global/process */
 import { resolve } from 'node:path'
 
 export function isDevFn(mode) {

@@ -1,3 +1,4 @@
+import { resolve } from 'node:path'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -5,6 +6,7 @@ import viteCompression from 'vite-plugin-compression'
 import AutoImport from 'unplugin-auto-import/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
 import Components from 'unplugin-vue-components/vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 export function createVitePlugins(viteEnv) {
@@ -34,12 +36,19 @@ export function createVitePlugins(viteEnv) {
     }),
     // 创建打包压缩配置
     createCompression(viteEnv),
+
     // 注入变量到 html 文件
     createHtmlPlugin({
       minify: true,
       inject: {
         data: { title: VITE_GLOB_APP_TITLE },
       },
+    }),
+
+    // 使用 svg 图标
+    createSvgIconsPlugin({
+      iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[dir]-[name]',
     }),
   ]
 }

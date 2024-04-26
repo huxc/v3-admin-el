@@ -1,0 +1,20 @@
+<template>
+  <!-- <Tabs v-show="tabs" /> -->
+  <el-main>
+    <router-view v-slot="{ Component, route }">
+      <transition appear name="fade-transform" mode="out-in">
+        <keep-alive :include="cacheRouter">
+          <component :is="Component" :key="route.path" />
+        </keep-alive>
+      </transition>
+    </router-view>
+  </el-main>
+</template>
+
+<script setup>
+import { cacheRouter } from '@/routers/dynamicRouter'
+</script>
+
+<style scoped lang="scss">
+@import './index.scss';
+</style>
