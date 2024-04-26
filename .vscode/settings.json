@@ -1,23 +1,17 @@
 {
-  "path-autocomplete.pathMappings": {
-    "@": "${folder}/src/",
-    "/images": "${folder}/src/assets/images"
-  },
-
-  // Enable the ESlint flat config support
+  // 启用ESlint的eslint.config.js配置支持
   "eslint.experimental.useFlatConfig": true,
 
-  // Disable the default formatter, use eslint instead
+  // 禁用默认格式化器，使用eslint代替
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-  // Auto fix
+  // 使用vscode插件eslint格式化
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off" },
     { "rule": "format/*", "severity": "off" },
@@ -31,7 +25,7 @@
     { "rule": "*semi", "severity": "off" }
   ],
 
-  // Enable eslint for all supported languages
+  // 配置所需文件支持eslint格式化
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -47,5 +41,5 @@
     "yaml",
     "toml",
     "astro"
-  ]
+  ],
 }
