@@ -25,5 +25,8 @@ export default antfu(
        */
       markdown: 'prettier',
     },
+    ignores:[
+        './.eslintrc-auto-import'
+    ]
   },
 )
