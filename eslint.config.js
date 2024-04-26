@@ -1,7 +1,9 @@
 import antfu from '@antfu/eslint-config'
+import globs from './.eslintrc-auto-import.json'
 
 export default antfu(
   {
+    globals: globs.globals,
     vue: {
       overrides: {
         'vue/block-order': ['error', { order: ['template', 'script', 'style'] }],
@@ -24,9 +26,6 @@ export default antfu(
        * By default uses Prettier
        */
       markdown: 'prettier',
-    },
-    ignores:[
-        './.eslintrc-auto-import'
-    ]
+    }
   },
 )

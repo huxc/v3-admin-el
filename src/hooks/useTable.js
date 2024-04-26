@@ -1,5 +1,4 @@
 import { invoke, until } from '@vueuse/core'
-import { useRoute, useRouter } from 'vue-router'
 import { filterEmptyValue, typeOf } from '@/utils'
 
 /**
@@ -8,7 +7,7 @@ import { filterEmptyValue, typeOf } from '@/utils'
  * @param initParam 获取数据初始化参数(不必传，默认为{})
  * @function formatQuery 请求前格式化查询参数函数(非必传)
  * @function formatRequest 请求后格式化表格数据函数(非必传)
- * */
+ */
 
 export function useTable(props) {
   const route = useRoute()
@@ -37,8 +36,8 @@ export function useTable(props) {
   const pagingSizes = [10, 20, 50, 100, 200, 500, 1000]
 
   /**
-  * 页码切换
-  */
+   * 页码切换
+   */
   const onPageChange = (page) => {
     state.listQuery.pageNum = page
     router.replace({
