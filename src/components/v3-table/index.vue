@@ -16,13 +16,13 @@
       <el-table-column v-if="selectVisible" type="selection" width="45" align="center" />
       <el-table-column v-if="indexVisible" type="index" :index="indexMethod" width="60px" label="序号" align="center" />
       <template v-for="(column, index) in columns">
-        <el-table-column v-if="column.render" :key="column.prop" :width="column.width" :label="column.label">
+        <el-table-column v-if="column.render" :key="`render-${column.prop}`" :width="column.width" :label="column.label">
           <template #default="{ row }">
             <Render :row="row" :index="index" :render="column.render" />
           </template>
         </el-table-column>
-        <slot v-else-if="column.slot" :key="`slot${column.prop}`" :name="column.slot" />
-        <el-table-column v-else-if="column.isImg" :key="`isImg${column.prop}`" v-bind="setAttrs(column)">
+        <slot v-else-if="column.slot" :key="column.prop" :name="column.slot" />
+        <el-table-column v-else-if="column.isImg" :key="`img-${column.prop}`" v-bind="setAttrs(column)">
           <template #default="{ row }">
             <el-image
               class="srm-table_img" :style="{
@@ -32,7 +32,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column v-else :key="`other${column.prop}`" show-overflow-tooltip v-bind="setAttrs(column)" />
+        <el-table-column v-else :key="`other-${column.prop}`" show-overflow-tooltip v-bind="setAttrs(column)" />
       </template>
     </el-table>
 

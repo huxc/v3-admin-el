@@ -51,16 +51,29 @@ function createService() {
         closeLoading()
 
       const res = response.data
-      if (response.config && response.config.responseType === 'blob') {
-        saveAs(res, response.config.fileName)
-        return res
+      // 导出文件流，fileName参数为必填
+      if (response.config?.responseType === 'blob') {
+        if (res.type !== 'application/json') {
+          if (response.config.fileName)
+            saveAs(res, response.config.fileName)
+        }
+        else {
+          const reader = new FileReader()
+          reader.onload = function (e) {
+            const { msg } = JSON.parse(e.target.result)
+            ElMessage.error(msg)
+          }
+          reader.readAsText(res)
+        }
+        return response
       }
       if (!res.success) {
         // token失效跳转到登录页面
-        if (res.code === 'A02309999' || res.code === 'A02319999') {
-          appStore.userStore.ref_token = true
+        const codes = ['A02309999', 'A02319999']
+        if (codes.includes(res.code)) {
+        //   appStore.userStore.ref_token = true
+        //   appStore.userStore.clearState()
           res.msg = '请重新登录'
-          appStore.userStore.clearState()
           router.push({ path: '/login' })
         }
         // 刷新token 预留判断 (待完善)
