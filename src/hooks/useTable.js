@@ -19,7 +19,7 @@ export function useTable(props) {
   const state = reactive({
     // 页码及每页条数
     listQuery: {
-      pageNum: Number(route?.query?.pageNum) || 1,
+      pageNum: 1,
       pageSize: 10,
     },
     // 总条数
@@ -59,10 +59,8 @@ export function useTable(props) {
    * 获取列表数据
    */
   const getList = () => {
-    if (typeOf(requestApi.value) !== 'function') {
-      // console.log('table组件分页查询接口requestApi-未传')
+    if (typeOf(requestApi.value) !== 'function')
       return
-    }
 
     state.listLoading = true
 

@@ -23,6 +23,7 @@ export function useForm() {
       callback('验证码错误，请重新输入')
   }
   return {
-    rules, imgCode,
+    rules,
+    imgCode,
   }
 }

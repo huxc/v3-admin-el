@@ -1,6 +1,6 @@
 /**
  * @description 表格多选数据操作
- * */
+ */
 export function useSelection() {
   // 是否选中数据
   const isSelected = ref(false)
@@ -17,10 +17,10 @@ export function useSelection() {
   const getRowKeys = row => row.id || row.uuid
 
   /**
-    * @description 多选操作
-    * @param {Array} rowArr 当前选择的所有数据
-    * @return void
-    */
+   * @description 多选操作
+   * @param {Array} rowArr 当前选择的所有数据
+   * @return void
+   */
   const selectionChange = (rowArr) => {
     rowArr.length === 0 ? (isSelected.value = false) : (isSelected.value = true)
     selectedList.value = rowArr

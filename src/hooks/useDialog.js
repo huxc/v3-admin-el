@@ -8,7 +8,7 @@ import { isObjEmpty, typeOf } from '@/utils'
  * @param {object} footer 底部取消/确认按钮 (若为空对象则不显示) 按钮文字：okText(默认‘确定’)，cancelText(默认‘取消’)
  * @param {componentEl} componentEl el-dialog弹出的内容(组件)
  * @param {function(done,param)} beforeClose 弹框关闭之前的回调函数 done:为关闭弹框函数，param：为内部组件的回调参数
- * @param {function} afterClose 窗口关闭之后的回调函数
+ * @param {Function} afterClose 窗口关闭之后的回调函数
  */
 
 export function useDialog({
@@ -112,8 +112,7 @@ export function useDialog({
                 ref: elChild,
                 ...props,
                 onClsDialog: handleClose,
-              }),
-            ),
+              }),),
           //   header: headerDom,
           footer: footerDom,
         })

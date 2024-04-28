@@ -99,10 +99,14 @@ export function base64ToBlob(base64, mime = '') {
 
 // 生成唯一标识
 export function uuid() {
-//   const temp_url = URL.createObjectURL(new Blob())
-//   const uuid = temp_url.toString()
-//   URL.revokeObjectURL(temp_url)
-//   return uuid.substring(uuid.length - 36)
+  const temp_url = URL.createObjectURL(new Blob())
+  const uuid = temp_url.toString()
+  URL.revokeObjectURL(temp_url)
+  return uuid.substring(uuid.length - 36)
+}
+
+// 生成随机码
+export function randomid() {
   let abc = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'g', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
   const [max, min] = [Math.floor(Math.random() * (10 - 7 + 1) + 1), Math.floor(Math.random() * (17 - 10 + 1) + 17)]
   abc = abc.sort(() => 0.4 - Math.random()).slice(max, min).slice(0, 8).join('')

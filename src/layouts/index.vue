@@ -35,7 +35,6 @@ import { useUserStore } from '@/store/modules/user'
 import Main from '@/layouts/components/Main/index.vue'
 import SubMenu from '@/layouts/components/Menu/SubMenu.vue'
 
-// eslint-disable-next-line no-undef
 const route = useRoute()
 const userStore = useUserStore()
 const globalStore = useGlobalStore()

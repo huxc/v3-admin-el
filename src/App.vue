@@ -6,7 +6,7 @@
 
 <script setup name="App">
 // 配置element中文
-import zhCn from "element-plus/es/locale/lang/zh-cn"
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import { storeToRefs } from 'pinia'
 import appStore from '@/store'
 

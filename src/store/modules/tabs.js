@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import router from '@/routers/index.js'
 import piniaPersistConfig from '../persist'
+import router from '@/routers/index.js'
 import { HOME_URL, TABS_BLACK_LIST } from '@/config/globalVariables.js'
 
 function tabs() {

@@ -15,6 +15,7 @@ export function useAutoFocus() {
   }
 
   return {
-    autoFocus, codeboxEl,
+    autoFocus,
+    codeboxEl,
   }
 }

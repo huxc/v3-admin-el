@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
-import { dynamicRouter } from '@/routers/dynamicRouter'
+import { dynamicRouter } from '@/routers/helper/dynamicRouter'
 import { filterAsyncRoutes, splitPageAndBtn } from '@/utils/auth'
 
 // 使用setup模式定义
@@ -30,7 +30,7 @@ function storeSetup() {
     authCodes.value = null
     asyncRoutes.value = null
   }
-  
+
   // 登录
   const logIn = (loginForm) => {
     return new Promise((resolve, reject) => {
@@ -93,6 +93,7 @@ function storeSetup() {
 
 export const useUserStore = defineStore('userStore', storeSetup, {
   persist: {
-    storage: sessionStorage, paths: ['state']
+    storage: sessionStorage,
+    paths: ['state']
   },
 })

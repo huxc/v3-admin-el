@@ -71,7 +71,7 @@ export function useRegister() {
         placeholder: '请输入手机号码',
       },
     },
-    
+
     {
       slot: 'phoneCode',
       itemAttrs: {

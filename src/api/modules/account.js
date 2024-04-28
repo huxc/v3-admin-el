@@ -13,10 +13,10 @@ import { request } from '@/utils/request'
 export default {
 
   /**
-* @description 根据id查询.
-* @param {String} code - code.
-* @param {Number} id - 用户id.
-*/
+   * @description 根据id查询.
+   * @param {string} code - code.
+   * @param {number} id - 用户id.
+   */
   getUser(data, prop = {}) {
     return request({
       data,
@@ -28,9 +28,9 @@ export default {
   },
 
   /**
-* @description 新增.
-* @param {Object} accountDTO - accountDTO.
-*/
+   * @description 新增.
+   * @param {object} accountDTO - accountDTO.
+   */
   postUser(data, prop = {}) {
     return request({
       data,
@@ -42,9 +42,9 @@ export default {
   },
 
   /**
-* @description 修改.
-* @param {Object} accountDTO - accountDTO.
-*/
+   * @description 修改.
+   * @param {object} accountDTO - accountDTO.
+   */
   putUser(data, prop = {}) {
     return request({
       data,
@@ -56,11 +56,11 @@ export default {
   },
 
   /**
-* @description 修改启用状态.
-* @param {String} code - code.
-* @param {Number} id - 用户id.
-* @param {Number} status - 启用状态 0启用 1停用.
-*/
+   * @description 修改启用状态.
+   * @param {string} code - code.
+   * @param {number} id - 用户id.
+   * @param {number} status - 启用状态 0启用 1停用.
+   */
   postUserChange(data, prop = {}) {
     return request({
       data,
@@ -72,9 +72,9 @@ export default {
   },
 
   /**
-* @description 删除.
-* @param {Object} accountIdsDTO - accountIdsDTO.
-*/
+   * @description 删除.
+   * @param {object} accountIdsDTO - accountIdsDTO.
+   */
   putUserIds(data, prop = {}) {
     return request({
       data,
@@ -86,18 +86,18 @@ export default {
   },
 
   /**
-* @description 分页查询.
-* @param {Number} cityId - 城市Id.
-* @param {String} code - code.
-* @param {String} company - 所在公司.
-* @param {Number} pageNum - 页码.
-* @param {Number} pageSize - 页大小.
-* @param {String} phone - 手机号.
-* @param {Number} provinceId - 省份Id.
-* @param {Number} roleId - 角色id.
-* @param {Number} status - 账户状态 0启用 1禁用.
-* @param {String} userName - 用户名.
-*/
+   * @description 分页查询.
+   * @param {number} cityId - 城市Id.
+   * @param {string} code - code.
+   * @param {string} company - 所在公司.
+   * @param {number} pageNum - 页码.
+   * @param {number} pageSize - 页大小.
+   * @param {string} phone - 手机号.
+   * @param {number} provinceId - 省份Id.
+   * @param {number} roleId - 角色id.
+   * @param {number} status - 账户状态 0启用 1禁用.
+   * @param {String} userName - 用户名.
+   */
   getUserPage(data, prop = {}) {
     return request({
       data,
@@ -109,10 +109,10 @@ export default {
   },
 
   /**
-* @description 用户名模糊查询.
-* @param {Number} pageNum - 页码.
-* @param {Number} pageSize - 页大小.
-*/
+   * @description 用户名模糊查询.
+   * @param {number} pageNum - 页码.
+   * @param {number} pageSize - 页大小.
+   */
   getUserSearch(data, prop = {}) {
     return request({
       data,

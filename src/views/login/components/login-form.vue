@@ -82,7 +82,7 @@ function onLogin(loginEl) {
 
 // 登录校验
 function handleValidate() {
-  if (!formEl)
+  if (!formEl.value)
     return
   formEl.value.validate((valid) => {
     if (valid) {
@@ -111,67 +111,70 @@ function changeImageCode() {
 
   <style lang='scss' scoped>
   .login-x {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 522px;
-      height: 620px;
-      background: #FFFFFF;
-      box-shadow: 0px 6px 16px 1px rgba(104, 105, 114, 0.1);
-      border-radius: 30px;
-      :deep(.cusform-box) {
-          .el-form-item__label {
-              font-size: 14px;
-              font-family: Microsoft YaHei UI-Regular, Microsoft YaHei UI;
-              font-weight: 400;
-              color: #495363;
-              line-height: 24px;
-              margin-left: 6px;
-          }
-          .el-input .el-input__password{
-              font-size: 20px !important;
-              margin-left: -2px;
-          }
-          .el-input__suffix-inner{
-              margin-left: -30px;
-          }
-      }
-      .login-title {
-          margin-top: 68px;
-          margin-bottom: 46px;
-          font-size: 24px;
-          font-weight: bold;
-          color: #2B3EB1;
-          font-family: Microsoft YaHei UI-Bold, Microsoft YaHei UI;
-      }
-
-      .cusform-btn {
-          margin-top: 30px;
-          width: 170px;
-          height: 48px;
-          background: #2B3EB1;
-          box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
-          border-radius: 14px;
-          font-size: 16px;
-      }
-      .reset{
-          margin-left: 355px;
-          font-size: 16px;
-          font-family: PingFangSC-Regular-, PingFangSC-Regular;
-          color: #7D8592;
-          cursor: pointer;
-      }
-      .login-footer{
-          font-size: 16px;
-          margin-top: 18px;
-          font-family: PingFangSC-Regular-, PingFangSC-Regular;
-          color: #2B3EB1;
-          .register{
-              color: #FC7100;
-              text-decoration:underline;
-              cursor: pointer;
-          }
-      }
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 522px;
+  height: 620px;
+  background: #ffffff;
+  box-shadow: 0px 6px 16px 1px rgba(104, 105, 114, 0.1);
+  border-radius: 30px;
+  :deep(.cusform-box) {
+    .el-form-item__label {
+      font-size: 14px;
+      font-family:
+        Microsoft YaHei UI-Regular,
+        Microsoft YaHei UI;
+      font-weight: 400;
+      color: #495363;
+      line-height: 24px;
+      margin-left: 6px;
+    }
+    .el-input .el-input__password {
+      font-size: 20px !important;
+      margin-left: -2px;
+    }
+    .el-input__suffix-inner {
+      margin-left: -30px;
+    }
   }
-  </style>
+  .login-title {
+    margin-top: 68px;
+    margin-bottom: 46px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2b3eb1;
+    font-family:
+      Microsoft YaHei UI-Bold,
+      Microsoft YaHei UI;
+  }
+
+  .cusform-btn {
+    margin-top: 30px;
+    width: 170px;
+    height: 48px;
+    background: #2b3eb1;
+    box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
+    border-radius: 14px;
+    font-size: 16px;
+  }
+  .reset {
+    margin-left: 355px;
+    font-size: 16px;
+    font-family: PingFangSC-Regular-, PingFangSC-Regular;
+    color: #7d8592;
+    cursor: pointer;
+  }
+  .login-footer {
+    font-size: 16px;
+    margin-top: 18px;
+    font-family: PingFangSC-Regular-, PingFangSC-Regular;
+    color: #2b3eb1;
+    .register {
+      color: #fc7100;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
+</style>

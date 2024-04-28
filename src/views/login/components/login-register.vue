@@ -12,11 +12,11 @@
         <template #phoneCode>
           <div ref="codeboxEl" class="code-x">
             <el-input v-model="smsCodes[0]" maxlength="1" sms="sms1" class="smsitem del1" />
-            <el-input v-model="smsCodes[1]" maxlength="1" sms="sms2" class="smsitem sms1 del2" del="del1"/>
-            <el-input v-model="smsCodes[2]" maxlength="1" sms="sms3" class="smsitem sms2 del3" del="del2"/>
-            <el-input v-model="smsCodes[3]" maxlength="1" sms="sms4" class="smsitem sms3 del4" del="del3"/>
-            <el-input v-model="smsCodes[4]" maxlength="1" sms="sms5" class="smsitem sms4 del5" del="del4"/>
-            <el-input v-model="smsCodes[5]" maxlength="1" class="smsitem sms5" del="del5"/>
+            <el-input v-model="smsCodes[1]" maxlength="1" sms="sms2" class="smsitem sms1 del2" del="del1" />
+            <el-input v-model="smsCodes[2]" maxlength="1" sms="sms3" class="smsitem sms2 del3" del="del2" />
+            <el-input v-model="smsCodes[3]" maxlength="1" sms="sms4" class="smsitem sms3 del4" del="del3" />
+            <el-input v-model="smsCodes[4]" maxlength="1" sms="sms5" class="smsitem sms4 del5" del="del4" />
+            <el-input v-model="smsCodes[5]" maxlength="1" class="smsitem sms5" del="del5" />
           </div>
           <el-input style="height: 0;width: 0; opacity: 0;" />
           <div class="el-form-item__error">
@@ -35,12 +35,11 @@
 
 <script setup>
 import md5 from 'js-md5'
-import { onKeyStroke } from '@vueuse/core'
+import { onKeyStroke, useEventListener } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useAutoFocus } from './hooks/useAutoFocus'
 import { useRegister } from './hooks/useRegister'
 import { deepCopy } from '@/utils/index'
-import { useEventListener } from '@vueuse/core'
 
 const router = useRouter()
 const componentName = defineModel()
@@ -56,7 +55,7 @@ const {
 
 onMounted(() => {
   autoFocus()
-  //验证码-连续删除
+  // 验证码-连续删除
   onKeyStroke('Backspace', (e) => {
     useEventListener(codeboxEl.value, 'input', (evt) => {
       if (!evt?.data) {
@@ -108,110 +107,114 @@ function handleRegister() {
 </script>
 
   <style lang='scss' scoped>
-  .register-x{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 522px;
-      height: 710px;
-      background: #FFFFFF;
-      border-radius: 30px;
-      box-shadow: 0px 6px 16px 1px rgba(104,105,114,0.1);
+  .register-x {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 522px;
+  height: 710px;
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0px 6px 16px 1px rgba(104, 105, 114, 0.1);
 
-      .btn-x{
-          width: 100%;
-          display: flex;
-          justify-content: center;
-      }
-      .cusform-btn {
-          margin-top: 10px;
-          width: 170px;
-          height: 48px;
-          background: #2B3EB1;
-          box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
-          border-radius: 14px;
-          font-size: 16px;
-          font-family: Microsoft YaHei UI-Regular, Microsoft YaHei UI;
-          font-weight: 400;
-          color: #FFFFFF;
-      }
-      .cusform-btn+.cusform-btn{
-          margin-left: 20px;
-          background: #FC7100;
-          box-shadow: 0px 6px 12px 1px rgba(252,153,72,0.26);
-      }
-      :deep(.form-x){
-          .password {
-              .el-input__password{
-              font-size: 20px !important;
-              margin-left: -2px;
-          }
-              .el-input__suffix{
-                  display: inline-flex;
-                  align-items: center;
-                  justify-content: center;
-                  width: 20px;
-                  margin-left: -20px;
-              }
-          }
-          .smsitem{
-              .el-input__wrapper{
-                  width: 50px;
-                  height: 50px;
-                  border-radius: 14px;
-                  padding: 0;
-                  margin-right: 20px;
-              }
-              .el-input__inner{
-                  display:inline-flex;
-                  justify-content: center;
-                  align-items: center;
-                  width: 58px;
-                  height: 50px;
-                  text-align: center;
-                  border-radius: 0;
-                  font-size: 14px;
-                  background-color: unset;
-              }
-          }
-      }
+  .btn-x {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
-  .form-x{
-      width: 420px;
+  .cusform-btn {
+    margin-top: 10px;
+    width: 170px;
+    height: 48px;
+    background: #2b3eb1;
+    box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
+    border-radius: 14px;
+    font-size: 16px;
+    font-family:
+      Microsoft YaHei UI-Regular,
+      Microsoft YaHei UI;
+    font-weight: 400;
+    color: #ffffff;
   }
-  .login-title{
-      margin-top: 30px;
-      margin-bottom: 30px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #2B3EB1;
-      font-family: Microsoft YaHei UI-Bold, Microsoft YaHei UI;
+  .cusform-btn + .cusform-btn {
+    margin-left: 20px;
+    background: #fc7100;
+    box-shadow: 0px 6px 12px 1px rgba(252, 153, 72, 0.26);
   }
-  .code-x{
-      display: flex;
-      justify-content: space-between;
+  :deep(.form-x) {
+    .password {
+      .el-input__password {
+        font-size: 20px !important;
+        margin-left: -2px;
+      }
+      .el-input__suffix {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        margin-left: -20px;
+      }
+    }
+    .smsitem {
+      .el-input__wrapper {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        padding: 0;
+        margin-right: 20px;
+      }
+      .el-input__inner {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 58px;
+        height: 50px;
+        text-align: center;
+        border-radius: 0;
+        font-size: 14px;
+        background-color: unset;
+      }
+    }
   }
+}
+.form-x {
+  width: 420px;
+}
+.login-title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2b3eb1;
+  font-family:
+    Microsoft YaHei UI-Bold,
+    Microsoft YaHei UI;
+}
+.code-x {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .avatar-list {
+.avatar-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .avatar-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid #c7cfe3;
+    cursor: pointer;
+    box-sizing: border-box;
+    img {
       width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      .avatar-image {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          border: 1px solid #C7CFE3;
-          cursor: pointer;
-          box-sizing: border-box;
-          img {
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-          }
-      }
-      .active {
-          border: 2px solid #FC7100;
-      }
+      height: 100%;
+      border-radius: 50%;
+    }
   }
-  </style>
+  .active {
+    border: 2px solid #fc7100;
+  }
+}
+</style>

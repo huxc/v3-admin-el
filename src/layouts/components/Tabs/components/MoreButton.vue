@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" :teleported="false">
     <div class="more-button">
-      <i :class="'iconfont icon-xiala'"></i>
+      <i class="iconfont icon-xiala" />
     </div>
     <template #dropdown>
       <el-dropdown-menu>
@@ -32,20 +32,20 @@
 </template>
 
 <script setup>
-import { inject, nextTick } from "vue";
-import { HOME_URL } from "@/config/globalVariables";
-import { useTabsStore } from "@/store/modules/tabs";
-import { useGlobalStore } from "@/store/modules/global";
-import { useRoute, useRouter } from "vue-router";
+import { inject } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { HOME_URL } from '@/config/globalVariables'
+import { useTabsStore } from '@/store/modules/tabs'
+import { useGlobalStore } from '@/store/modules/global'
 
 const route = useRoute()
-const router = useRouter();
-const tabStore = useTabsStore();
-const globalStore = useGlobalStore();
+const router = useRouter()
+const tabStore = useTabsStore()
+const globalStore = useGlobalStore()
 
 // refresh current page
-const refreshCurrentPage = inject("refresh");
-const refresh = () => {
+const refreshCurrentPage = inject('refresh')
+function refresh() {
 //   setTimeout(() => {
 //     route.meta.isKeepAlive && keepAliveStore.removeKeepAliveName(route.fullPath);
 //     refreshCurrentPage(false);
@@ -54,26 +54,27 @@ const refresh = () => {
 //       refreshCurrentPage(true);
 //     });
 //   }, 0);
-};
+}
 
 // maximize current page
-const maximize = () => {
-  globalStore.setGlobalState("maximize", true);
-};
+function maximize() {
+  globalStore.setGlobalState('maximize', true)
+}
 
 // Close Current
-const closeCurrentTab = () => {
-  if (route.meta.isAffix) return;
-  tabStore.removeTabs(route.fullPath);
-};
+function closeCurrentTab() {
+  if (route.meta.isAffix)
+    return
+  tabStore.removeTabs(route.fullPath)
+}
 
 // Close All
-const closeAllTab = () => {
-  tabStore.closeMultipleTab();
-  router.push(HOME_URL);
-};
+function closeAllTab() {
+  tabStore.closeMultipleTab()
+  router.push(HOME_URL)
+}
 </script>
 
 <style scoped lang="scss">
-@import "../index.scss";
+@import '../index.scss';
 </style>

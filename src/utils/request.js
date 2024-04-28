@@ -11,7 +11,7 @@ import { closeLoading, openLoading } from '@/utils/el-loading'
 
 /**
  * @description 配置请求方法
- * @param {Object} service axios 实例
+ * @param {object} service axios 实例
  */
 function createRequest(service) {
   // isLoding：判断是否显示loading状态

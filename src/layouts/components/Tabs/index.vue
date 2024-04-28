@@ -5,7 +5,7 @@
         <el-tab-pane v-for="item in tabsMenuList" :key="item.path" :label="item.title" :name="item.path" :closable="item.close">
           <template #label>
             <el-icon v-if="item.icon && tabsIcon" class="tabs-icon">
-              <component :is="item.icon"></component>
+              <component :is="item.icon" />
             </el-icon>
             {{ item.title }}
           </template>
@@ -17,46 +17,46 @@
 </template>
 
 <script setup>
-import Sortable from "sortablejs";
-import { ref, computed, watch, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { useGlobalStore } from "@/store/modules/global";
-import { useTabsStore } from "@/store/modules/tabs";
-import { TabsPaneContext, TabPaneName } from "element-plus";
-import MoreButton from "./components/MoreButton.vue";
+import Sortable from 'sortablejs'
+import { computed, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import MoreButton from './components/MoreButton.vue'
+import { useGlobalStore } from '@/store/modules/global'
+import { useTabsStore } from '@/store/modules/tabs'
 
-const route = useRoute();
-const router = useRouter();
-const tabStore = useTabsStore();
-const globalStore = useGlobalStore();
+const route = useRoute()
+const router = useRouter()
+const tabStore = useTabsStore()
+const globalStore = useGlobalStore()
 
-const tabsMenuValue = ref(route.fullPath);
-const tabsMenuList = computed(() => tabStore.tabsMenuList);
-const tabsIcon = computed(() => globalStore.tabsIcon);
+const tabsMenuValue = ref(route.fullPath)
+const tabsMenuList = computed(() => tabStore.tabsMenuList)
+const tabsIcon = computed(() => globalStore.tabsIcon)
 
 onMounted(() => {
-  tabsDrop();
-  initTabs();
-});
+  tabsDrop()
+  initTabs()
+})
 
 // 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
 watch(
   () => route.fullPath,
   () => {
-    if (route.meta.isFull) return;
-    tabsMenuValue.value = route.fullPath;
+    if (route.meta.isFull)
+      return
+    tabsMenuValue.value = route.fullPath
     const tabsParams = {
-      icon: route.meta.icon ,
+      icon: route.meta.icon,
       title: route.meta.title,
       path: route.fullPath,
       name: route.name,
       close: !route.meta.isAffix,
-      isKeepAlive: route.meta.isKeepAlive
-    };
-    tabStore.addTabs(tabsParams);
+      isKeepAlive: route.meta.isKeepAlive,
+    }
+    tabStore.addTabs(tabsParams)
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 
 // 初始化需要固定的 tabs
 // const initTabs = () => {
@@ -76,31 +76,31 @@ watch(
 // };
 
 // tabs 拖拽排序
-const tabsDrop = () => {
-  Sortable.create(document.querySelector(".el-tabs__nav"), {
-    draggable: ".el-tabs__item",
+function tabsDrop() {
+  Sortable.create(document.querySelector('.el-tabs__nav'), {
+    draggable: '.el-tabs__item',
     animation: 300,
     onEnd({ newIndex, oldIndex }) {
-      const tabsList = [...tabStore.tabsMenuList];
-      const currRow = tabsList.splice(oldIndex, 1)[0];
-      tabsList.splice(newIndex, 0, currRow);
-      tabStore.setTabs(tabsList);
-    }
-  });
-};
+      const tabsList = [...tabStore.tabsMenuList]
+      const currRow = tabsList.splice(oldIndex, 1)[0]
+      tabsList.splice(newIndex, 0, currRow)
+      tabStore.setTabs(tabsList)
+    },
+  })
+}
 
 // Tab Click
-const tabClick = (tabItem) => {
+function tabClick(tabItem) {
   const fullPath = tabItem.props.name
-  router.push(fullPath);
-};
+  router.push(fullPath)
+}
 
 // Remove Tab
-const tabRemove = (fullPath) => {
-  tabStore.removeTabs(fullPath, fullPath == route.fullPath);
-};
+function tabRemove(fullPath) {
+  tabStore.removeTabs(fullPath, fullPath == route.fullPath)
+}
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@import './index.scss';
 </style>

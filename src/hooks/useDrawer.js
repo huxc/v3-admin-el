@@ -7,7 +7,7 @@ import { typeOf } from '@/utils'
  * @param {object} props el-drawer内部组件的prop参数
  * @param {componentEl} componentEl el-drawer弹出的内容(组件)
  * @param {function(done,param)} beforeClose 弹框关闭之前的回调函数 done:为关闭弹框函数，param：为内部组件的回调参数
- * @param {function} afterClose 窗口关闭之后的回调函数
+ * @param {Function} afterClose 窗口关闭之后的回调函数
  */
 export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, afterClose }) {
   const root = document.createElement('div')
@@ -59,7 +59,8 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
             ...props,
             onClsDrawer: onClose,
           }),
-        })
+        },
+)
     },
   })
   app.mount(root)

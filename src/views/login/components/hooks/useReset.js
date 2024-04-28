@@ -85,6 +85,10 @@ export function useReset() {
   ]
 
   return {
-    formItems, smsCodes, codeError, editForm, validateCode,
+    formItems,
+    smsCodes,
+    codeError,
+    editForm,
+    validateCode,
   }
 }

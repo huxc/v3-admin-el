@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { cacheRouter } from '@/routers/dynamicRouter'
+import { cacheRouter } from '@/routers/helper/dynamicRouter'
 </script>
 
 <style scoped lang="scss">

@@ -1,3 +1,4 @@
+/* eslint-disable node/prefer-global/process */
 import { resolve } from 'node:path'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import vue from '@vitejs/plugin-vue'

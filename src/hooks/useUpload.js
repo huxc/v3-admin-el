@@ -47,7 +47,6 @@ export function useUpload(props, fileVModel) {
 
   // 上传成功回调
   const handleSuccess = (res, file) => {
-    console.log('🚀 ~ file: useUpload.js:55 ~ handleSuccess ~ res, file:', res, file)
     if (res.success) {
       limit > 1
         ? fileVModel.value.push(res?.data)

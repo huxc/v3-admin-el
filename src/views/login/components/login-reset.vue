@@ -86,100 +86,104 @@ function handleSubmit() {
 </script>
 
   <style lang='scss' scoped>
-  .register-x{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 522px;
-      height: 640px;
-      background: #FFFFFF;
-      border-radius: 30px;
-      box-shadow: 0px 6px 16px 1px rgba(104,105,114,0.1);
+  .register-x {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 522px;
+  height: 640px;
+  background: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0px 6px 16px 1px rgba(104, 105, 114, 0.1);
 
-      .btn-x{
-          width: 100%;
-          display: flex;
-          justify-content: center;
+  .btn-x {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .cusform-btn {
+    margin-top: 30px;
+    width: 170px;
+    height: 48px;
+    background: #2b3eb1;
+    box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
+    border-radius: 14px;
+    font-size: 16px;
+    font-family:
+      Microsoft YaHei UI-Regular,
+      Microsoft YaHei UI;
+    font-weight: 400;
+    color: #ffffff;
+  }
+  .cusform-btn + .cusform-btn {
+    margin-left: 20px;
+    background: #fc7100;
+    box-shadow: 0px 6px 12px 1px rgba(252, 153, 72, 0.26);
+  }
+  :deep(.form-x) {
+    .password {
+      .el-input__password {
+        font-size: 20px !important;
+        margin-left: -20px;
       }
-      .cusform-btn {
-          margin-top: 30px;
-          width: 170px;
-          height: 48px;
-          background: #2B3EB1;
-          box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
-          border-radius: 14px;
-          font-size: 16px;
-          font-family: Microsoft YaHei UI-Regular, Microsoft YaHei UI;
-          font-weight: 400;
-          color: #FFFFFF;
+      .el-input__suffix {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        margin-left: -20px;
       }
-      .cusform-btn+.cusform-btn{
-          margin-left: 20px;
-          background: #FC7100;
-          box-shadow: 0px 6px 12px 1px rgba(252,153,72,0.26);
+    }
+    .smsitem {
+      .el-input__wrapper {
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
+        padding: 0;
+        margin-right: 20px;
       }
-      :deep(.form-x){
-        .password {
-            .el-input__password{
-            font-size: 20px !important;
-            margin-left: -20px;
-        }
-            .el-input__suffix{
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 20px;
-                margin-left: -20px;
-            }
-        }
-        .smsitem{
-            .el-input__wrapper{
-                width: 50px;
-                height: 50px;
-                border-radius: 14px;
-                padding: 0;
-                margin-right: 20px;
-            }
-            .el-input__inner{
-                display:inline-flex;
-                justify-content: center;
-                align-items: center;
-                width: 58px;
-                height: 50px;
-                text-align: center;
-                border-radius: 0;
-                font-size: 14px;
-                background-color: unset;
-            }
-        }
+      .el-input__inner {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 58px;
+        height: 50px;
+        text-align: center;
+        border-radius: 0;
+        font-size: 14px;
+        background-color: unset;
+      }
     }
   }
-  .form-x{
-      width: 403px;
-  }
-  .login-title{
-      margin-top: 68px;
-      margin-bottom: 46px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #2B3EB1;
-      font-family: Microsoft YaHei UI-Bold, Microsoft YaHei UI;
-  }
-  .code-x{
-      display: flex;
-      justify-content: space-between;
+}
+.form-x {
+  width: 403px;
+}
+.login-title {
+  margin-top: 68px;
+  margin-bottom: 46px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2b3eb1;
+  font-family:
+    Microsoft YaHei UI-Bold,
+    Microsoft YaHei UI;
+}
+.code-x {
+  display: flex;
+  justify-content: space-between;
 
-      .codeitem{
-          display:inline-flex;
-          justify-content: center;
-          align-items: center;
-          width: 58px;
-          height: 50px;
-          background: #FFFFFF;
-          box-shadow: 0px 1px 2px 1px rgba(184,200,224,0.22);
-          border-radius: 14px;
-          border: 1px solid #D8E0F0;
-          margin-right: 15px;
-      }
+  .codeitem {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 58px;
+    height: 50px;
+    background: #ffffff;
+    box-shadow: 0px 1px 2px 1px rgba(184, 200, 224, 0.22);
+    border-radius: 14px;
+    border: 1px solid #d8e0f0;
+    margin-right: 15px;
   }
-  </style>
+}
+</style>

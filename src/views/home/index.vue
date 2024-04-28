@@ -1,14 +1,14 @@
 <template>
   <div class="title">
     首页
-  </div> 
+  </div>
 </template>
 
 <script setup>
 </script>
 
 <style lang='scss' scoped>
-  .title{
-    font-size: 300px;
-  }
+  .title {
+  font-size: 300px;
+}
 </style>

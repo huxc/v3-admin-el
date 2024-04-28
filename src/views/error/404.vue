@@ -28,48 +28,48 @@ const { state } = storeToRefs(appStore.userStore)
 
 <style lang="scss" scoped>
 .errPage-container {
-    width: 800px;
-    max-width: 100%;
-    margin: 100px auto;
+  width: 800px;
+  max-width: 100%;
+  margin: 100px auto;
 
-    .pan-back-btn {
-        color: #fff;
-        border: none !important;
-        text-align: center;
+  .pan-back-btn {
+    color: #fff;
+    border: none !important;
+    text-align: center;
+  }
+
+  .pan-gif {
+    margin: 0 auto;
+    display: block;
+  }
+
+  .pan-img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .text-jumbo {
+    font-size: 60px;
+    font-weight: 700;
+    color: #484848;
+  }
+
+  .list-unstyled {
+    font-size: 14px;
+
+    li {
+      padding-bottom: 5px;
     }
 
-    .pan-gif {
-        margin: 0 auto;
-        display: block;
+    a {
+      color: #008489;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
-
-    .pan-img {
-        display: block;
-        margin: 0 auto;
-        width: 100%;
-    }
-
-    .text-jumbo {
-        font-size: 60px;
-        font-weight: 700;
-        color: #484848;
-    }
-
-    .list-unstyled {
-        font-size: 14px;
-
-        li {
-            padding-bottom: 5px;
-        }
-
-        a {
-            color: #008489;
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
+  }
 }
 </style>

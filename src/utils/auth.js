@@ -25,10 +25,9 @@ export function splitPageAndBtn(auths) {
   for (let i = 0; i < auths.length; i++) {
     const item = auths[i]
     if (item.permissionType === 3 && item.status)
-     {btnAuths.push(item.permissionCode)} 
-    else if((item.permissionType === 1||item.permissionType === 2)&& item.status){
+      btnAuths.push(item.permissionCode)
+    else if ((item.permissionType === 1 || item.permissionType === 2) && item.status)
       pageAuths.push(item.permissionCode)
-    }
   }
   return {
     btnAuths,
