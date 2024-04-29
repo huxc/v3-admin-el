@@ -1,14 +1,16 @@
 import qs from 'qs'
 import { invoke, merge } from 'lodash-es'
-import appStore from '@/store'
+import { isObjEmpty, typeOf } from '@/utils'
+import { useUserStore } from '@/store/modules/user'
 import { domain_list } from '@/api/config/domainConfig'
 
 export function mergeConfig({ domain = 'user', ...config }) {
+  const userStore = useUserStore()
   // 获取token
-  const token = appStore.userStore?.getToken
+  const token = userStore?.getToken
   const _params = config.data || config.params
   // 判断是否有参数
-  if (_params && JSON.stringify(_params) !== '{}') {
+  if (!isObjEmpty(_params)) {
     // 格式化get参数
     if (config.method.toLowerCase() === 'get') {
       config.params = config.data
@@ -20,7 +22,7 @@ export function mergeConfig({ domain = 'user', ...config }) {
     if (isMultipart && isMultipart !== -1) {
       const params = config.data
       const formData = new FormData()
-      if (Object.prototype.toString.call(params) === '[object Object]') {
+      if (typeOf(params) === 'object') {
         for (const key in params)
           formData.append(key, params[key])
 

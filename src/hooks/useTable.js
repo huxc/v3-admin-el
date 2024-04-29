@@ -33,7 +33,7 @@ export function useTable(props) {
   })
 
   // 页码
-  const pagingSizes = [10, 20, 50, 100, 200, 500, 1000]
+  const pagingSizes = [10, 20, 50, 100, 200, 500]
 
   /**
    * 页码切换
@@ -88,7 +88,6 @@ export function useTable(props) {
           state.tableData = response.data?.list || []
           state.totalCount = response.data?.total || 0
         }
-        state.listLoading = false
       })
     }).finally(() => {
       state.listLoading = false

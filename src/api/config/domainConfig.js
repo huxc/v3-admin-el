@@ -25,9 +25,3 @@ export const domain_list = {
 //   system: `${host}`,
 //   account: `${host}`,
 // }
-
-// 文件上传
-export const file_upload_url = `${domain_list.foundation}/template/update`
-
-// 基础元素信息导入
-export const basic_element_Import_url = `${domain_list.account}/element/import`

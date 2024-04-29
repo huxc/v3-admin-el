@@ -6,6 +6,7 @@ function importRouters(routers) {
 }
 // 所有异步路由
 export const dynamicRouter = importRouters(import.meta.glob('../modules/*.js', { eager: true }))
+console.log('🚀 ~ dynamicRouter:', dynamicRouter)
 // 筛选需要缓存的路由
 export const cacheRouter = []
 

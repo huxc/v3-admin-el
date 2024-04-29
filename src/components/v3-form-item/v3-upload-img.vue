@@ -38,7 +38,7 @@
               class="el-upload-list__item-delete"
               @click="onRemove(file)"
             >
-              <el-icon><i-ep-delete /></el-icon>
+              <Icon name="ep-delete" />
             </span>
           </span>
         </div>
@@ -59,7 +59,7 @@
 <script setup name="cus-upload-img">
 import { defineModel } from 'vue'
 import { useUpload } from '@/hooks/useUpload'
-import { file_upload_url } from '@/api/config/domainConfig'
+import { file_upload_url } from '@/api/config/globalsUrl.js'
 import appStore from '@/store/index.js'
 import { typeOf } from '@/utils'
 

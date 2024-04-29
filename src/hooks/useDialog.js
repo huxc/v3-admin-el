@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { createApp, h, ref } from 'vue'
 import { isObjEmpty, typeOf } from '@/utils'
 
@@ -54,24 +55,20 @@ export function useDialog({
       }
 
       // 弹框关闭之前的回调函数
-      const handleClose = (param) => {
+      const onClose = (param) => {
         if (typeOf(beforeClose) === 'function')
           beforeClose(done, param)
-        else dialogRef.value.visible = false
+        else
+          done()
       }
 
       // 确认事件
-      const handleConfirm = () => {
+      const onConfirm = () => {
         if (typeOf(elChild.value.onClsBack) === 'function')
           elChild.value.onClsBack()
-        else handleClose()
+        else
+          onClose()
       }
-      // 自定义头部样式
-      //   const headerDom = () => h('div', {
-      //     style: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'red' }
-      //   }, [
-      //     h('div', {}, 'nihao')
-      //   ])
       // 根据参数渲染底部插槽
       const footerDom = !isObjEmpty(footer)
         ? () =>
@@ -92,7 +89,7 @@ export function useDialog({
                 ),
                 h(
                   ElButton,
-                  { onClick: handleConfirm, type: 'primary' },
+                  { onClick: onConfirm, type: 'primary' },
                   () => footer.okText || '确定',
                 ),
               ],
@@ -100,7 +97,7 @@ export function useDialog({
         : null
 
       const divStyle = {
-        maxHeight: '70vh',
+        maxHeight: '65vh',
         viewStyle: { overflowX: 'hidden' },
       }
       // 返回el-dialog组件
@@ -111,7 +108,7 @@ export function useDialog({
               h(componentEl, {
                 ref: elChild,
                 ...props,
-                onClsDialog: handleClose,
+                onClsDlg: onClose,
               }),),
           //   header: headerDom,
           footer: footerDom,

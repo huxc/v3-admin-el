@@ -1,9 +1,8 @@
 <template>
   <div class="hello">
-    <v3-table-pro
+    <v3-table
       ref="tableRef"
       select-visible :columns="columns" :request-api="requestApi" :query-columns="searchItems"
-      :refresh-state="refresh"
     >
       <template #headLeft="{ rows, ids, isSelected }">
         <el-button class="btn" type="primary" @click="handelCreate(rows, ids, isSelected)">
@@ -19,7 +18,7 @@
           </template>
         </el-table-column>
       </template>
-    </v3-table-pro>
+    </v3-table>
   </div>
 </template>
 

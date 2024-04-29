@@ -1,4 +1,4 @@
-import { HOME_URL, LOGIN_URL } from '@/config/globalVariables'
+import { HOME_URL, LOGIN_URL } from '@/config/global'
 // 静态路由
 export const staticRouter = [
   {

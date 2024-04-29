@@ -8,10 +8,9 @@
  * @version: 1.0.0
  */
 
-import { request } from '@/utils/request'
+import { request } from '../helper/index'
 
 export default {
-
   /**
    * @description 根据id查询.
    * @param {string} code - code.
@@ -96,7 +95,7 @@ export default {
    * @param {number} provinceId - 省份Id.
    * @param {number} roleId - 角色id.
    * @param {number} status - 账户状态 0启用 1禁用.
-   * @param {String} userName - 用户名.
+   * @param {string} userName - 用户名.
    */
   getUserPage(data, prop = {}) {
     return request({

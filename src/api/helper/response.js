@@ -1,5 +1,23 @@
 import { get } from 'lodash-es'
 import { ElMessage } from 'element-plus'
+import { saveAs } from 'file-saver'
+
+export function exportFile(response) {
+  const { data, config } = response
+  // 导出文件流，fileName参数为必填
+  if (data.type !== 'application/json') {
+    if (config.fileName)
+      saveAs(data, response.config.fileName)
+  }
+  else {
+    const reader = new FileReader()
+    reader.onload = function (e) {
+      const { msg } = JSON.parse(e.target.result)
+      ElMessage.error(msg)
+    }
+    reader.readAsText(data)
+  }
+}
 
 export function serviceError(error) {
   const status = get(error, 'response.status')

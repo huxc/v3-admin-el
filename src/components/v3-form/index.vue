@@ -74,7 +74,7 @@ const emit = defineEmits(['change', 'submit', 'afterReset'])
 
 const formModel = toReactive(props.model)
 
-const formRef = ref(Symbol('form'))
+const formRef = ref()
 
 // 根据formItems渲染对应的组件
 const virtualForm = computed(() => {

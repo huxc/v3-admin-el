@@ -1,5 +1,11 @@
 <template>
   <div class="tb-container">
+    <!-- 搜索条件 -->
+    <v3-form
+      v-if="isSearch" ref="formRef" inline footer :model="searchForm" :form-items="searchColumns"
+      :reset-msg="resetMsg" :submit-msg="submitMsg" @submit="refresh"
+    />
+
     <!-- 列表顶部的操作按钮 -->
     <div class="header-buttons">
       <slot name="headLeft" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
@@ -16,13 +22,13 @@
       <el-table-column v-if="selectVisible" type="selection" width="45" align="center" />
       <el-table-column v-if="indexVisible" type="index" :index="indexMethod" width="60px" label="序号" align="center" />
       <template v-for="(column, index) in columns">
-        <el-table-column v-if="column.render" :key="`render-${column.prop}`" :width="column.width" :label="column.label">
+        <el-table-column v-if="column.render" :key="column.prop" :width="column.width" :label="column.label">
           <template #default="{ row }">
             <Render :row="row" :index="index" :render="column.render" />
           </template>
         </el-table-column>
-        <slot v-else-if="column.slot" :key="column.prop" :name="column.slot" />
-        <el-table-column v-else-if="column.isImg" :key="`img-${column.prop}`" v-bind="setAttrs(column)">
+        <slot v-else-if="column.slot" :key="column.prop + 1" :name="column.slot" />
+        <el-table-column v-else-if="column.isImg" :key="column.prop + 2" v-bind="setAttrs(column)">
           <template #default="{ row }">
             <el-image
               class="srm-table_img" :style="{
@@ -32,7 +38,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column v-else :key="`other-${column.prop}`" show-overflow-tooltip v-bind="setAttrs(column)" />
+        <el-table-column v-else :key="column.prop + 3" show-overflow-tooltip v-bind="setAttrs(column)" />
       </template>
     </el-table>
 
@@ -48,7 +54,7 @@
 </template>
 
 <script setup name="CusElTable">
-import Render from './hooks/useRender'
+import Render from '../v3-table/hooks/useRender'
 import { useTableStyle } from './hooks/useStyle'
 import { cusProps } from './hooks/useProps'
 import { useTable } from '@/hooks/useTable'
@@ -58,7 +64,10 @@ const props = defineProps(cusProps)
 
 const emit = defineEmits(['rowClick', 'rowDblclick', 'refBack', 'callBack', 'sendData'])
 
+const formRef = ref(null)
 const tableRoot = ref(null)
+
+const searchColumns = computed(() => props.queryColumns)
 
 const { layout, headerCellStyle, cellStyle } = useTableStyle()
 
@@ -120,6 +129,10 @@ function onClick(row) {
   emit('rowClick', row)
 }
 
+function searchReset() {
+  formRef.value.handleReset()
+}
+
 // 重置选择
 function resetSelections() {
   tableRoot.value.clearSelection()
@@ -131,6 +144,14 @@ function indexMethod(index) {
   return (pageNum - 1) * pageSize + index + 1
 }
 
+function setTableData(tabelList) {
+  tableData.value = tabelList
+}
+
+function handleSearch() {
+  formRef.value.handleSubmit()
+}
+
 // 暴露给父组件的参数和方法
-defineExpose({ refresh, getList, tableData, searchForm, selectedList, tbExport, resetSelections })
+defineExpose({ refresh, getList, tableData, searchForm, selectedList, searchReset, tbExport, resetSelections, setTableData })
 </script>

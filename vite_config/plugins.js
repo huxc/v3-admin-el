@@ -22,7 +22,11 @@ export function createVitePlugins(viteEnv) {
     // 为 Element Plus 按需引入样式
     ElementPlus(),
     AutoImport({
-      imports: ['vue', 'vue-router'],
+      imports: [
+        'vue',
+        'vue-router',
+        '@vueuse/core',
+      ],
       dirs: ['./src/api'],
       resolvers: [
         ElementPlusResolver(),

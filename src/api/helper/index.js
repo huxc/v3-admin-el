@@ -1,13 +1,14 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { has } from 'lodash-es'
-import { saveAs } from 'file-saver'
+import { exportFile, serviceError } from './response'
+import { mergeConfig } from './merge-config'
 import router from '@/routers'
-import appStore from '@/store/index.js'
-import refreshToken from '@/utils/ref-token'
-import { serviceError } from '@/utils/service-error'
-import { mergeConfig } from '@/api/config/requestConfig'
+import { TOKEN_STATE } from '@/config/global'
 import { closeLoading, openLoading } from '@/utils/el-loading'
+
+// token是否过期
+let isRefreshing = false
 
 /**
  * @description 配置请求方法
@@ -50,45 +51,35 @@ function createService() {
       if (response.config.isLoading)
         closeLoading()
 
-      const res = response.data
-      // 导出文件流，fileName参数为必填
-      if (response.config?.responseType === 'blob') {
-        if (res.type !== 'application/json') {
-          if (response.config.fileName)
-            saveAs(res, response.config.fileName)
-        }
-        else {
-          const reader = new FileReader()
-          reader.onload = function (e) {
-            const { msg } = JSON.parse(e.target.result)
-            ElMessage.error(msg)
-          }
-          reader.readAsText(res)
-        }
+      const { data: res, config } = response.data
+
+      if (config?.responseType === 'blob') {
+        exportFile(response)
         return response
       }
+
       if (!res.success) {
         // token失效跳转到登录页面
-        const codes = ['A02309999', 'A02319999']
-        if (codes.includes(res.code)) {
-        //   appStore.userStore.ref_token = true
-        //   appStore.userStore.clearState()
-          res.msg = '请重新登录'
-          router.push({ path: '/login' })
-        }
-        // 刷新token 预留判断 (待完善)
-        if (res.code === '预留判断根据业务调整code值')
-          refreshToken(response)
+        if (TOKEN_STATE.includes(res.code)) {
+          if (!isRefreshing) {
+            isRefreshing = true
+            res.msg = '登录已失效，请重新登录。'
+            router.push({ path: '/login' })
 
-        //
-        if (response.config.isMsg && !appStore.userStore.ref_token) {
-          ElMessage({
-            showClose: true,
-            message: res.msg || '错误',
-            type: 'error',
-            duration: 3 * 1000,
-          })
+            if (response.config.isMsg) {
+              ElMessage({
+                showClose: true,
+                message: res.msg || '错误',
+                type: 'error',
+                duration: 3 * 1000,
+              })
+            }
+            setTimeout(() => {
+              isRefreshing = false
+            }, 300)
+          }
         }
+
         return Promise.reject(res)
       }
       else {

@@ -39,7 +39,7 @@ import { useRoute, useRouter } from 'vue-router'
 import imageCode from './img-code.vue'
 import { useForm } from './hooks/useForm'
 import { deepCopy } from '@/utils/index'
-import { HOME_URL } from '@/config/globalVariables'
+import { HOME_URL } from '@/config/global'
 import appStore from '@/store'
 
 const componentName = defineModel()

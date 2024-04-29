@@ -34,7 +34,7 @@
 <script setup>
 import { inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { HOME_URL } from '@/config/globalVariables'
+import { HOME_URL } from '@/config/global'
 import { useTabsStore } from '@/store/modules/tabs'
 import { useGlobalStore } from '@/store/modules/global'
 

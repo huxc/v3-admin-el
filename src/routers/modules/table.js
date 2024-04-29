@@ -3,7 +3,7 @@ import Layout from '@/layouts/index.vue'
 export default {
   path: '/table',
   name: 'table',
-  component: Layout,
+  component: markRaw(Layout),
   redirect: '/table/index',
   meta: {
     title: '表格',

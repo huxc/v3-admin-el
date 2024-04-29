@@ -3,7 +3,7 @@
     <span class="upload-file__x">
       <el-input v-if="showIpt" v-model="fileName" class="upload-file__ipt" readonly />
       <el-upload
-        ref="upload"
+        ref="uploadRef"
         v-model:file-list="fileList"
         class="upload"
         :data="param"
@@ -39,7 +39,7 @@ import { useVModel } from '@vueuse/core'
 import { genFileId } from 'element-plus'
 import appStore from '@/store/index.js'
 import { useUpload } from '@/hooks/useUpload'
-import { file_upload_url } from '@/api/config/domainConfig'
+import { file_upload_url } from '@/api/config/globalsUrl.js'
 
 const props = defineProps({
   action: {
@@ -97,12 +97,12 @@ const param = computed(() => props.param)
 const formItemVal = useVModel(props, 'modelValue', emit)
 
 const fileName = ref(props.modelValue)
-const upload = ref(null)
+const uploadRef = ref(null)
 const headers = { Authorization: appStore.userStore?.getToken } // 设置token
 
 watch(props, () => {
   if (props?.modelValue?.length === 0) {
-    upload.value.clearFiles()
+    uploadRef.value.clearFiles()
     fileName.value = ''
   }
   else {
@@ -159,15 +159,15 @@ function handleBeforeUpload(file) {
 
 // 导入
 function submitUpload() {
-  upload.value.submit()
+  uploadRef.value.submit()
 }
 
 // 当超出限制时，执行的钩子函数
 function handleExceed(files) {
-  upload.value.clearFiles()
+  uploadRef.value.clearFiles()
   const file = files[0]
   file.uid = genFileId()
-  upload.value.handleStart(file)
+  uploadRef.value.handleStart(file)
 }
 </script>
 

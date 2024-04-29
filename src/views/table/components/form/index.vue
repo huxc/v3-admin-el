@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <v3-form ref="formRef" :model="editForm" :form-items="formItems" @submit="handleSave" />
+    <v3-form ref="formRef" :model="editForm" :form-items="formItems" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ const props = defineProps({
   oldForm: { type: Object, default: () => ({}) },
 })
 
-const emit = defineEmits(['closeDialog'])
+const emit = defineEmits(['clsDlg'])
 
 const { formItems, editForm, formRef } = useForm()
 
@@ -21,13 +21,13 @@ onMounted(() => {
   }, 2000)
 })
 
-function fromValidate() {
+function _expose_fn() {
   formRef.value.submit().then(() => {
-    emit('closeDialog', true)
+    emit('clsDlg', true)
   })
 }
 
 defineExpose({
-  fromValidate
+  _expose_fn
 })
 </script>

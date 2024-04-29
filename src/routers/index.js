@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { useUserStore } from '@/store/modules/user'
 import NProgress from '@/config/nprogress'
-// import { LOGIN_URL } from '@/config/globalVariables'
+// import { LOGIN_URL } from '@/config/global'
 import { errorRouter, staticRouter } from '@/routers/helper/staticRouter'
 
 const route = {
