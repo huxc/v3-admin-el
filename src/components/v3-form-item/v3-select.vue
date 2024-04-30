@@ -1,5 +1,5 @@
 <template>
-  <el-select v-bind="$attrs" v-model="value" style="width: 200px">
+  <el-select v-bind="$attrs" v-model="value">
     <el-option
       v-for="option in $attrs.options"
       :key="`${option[subProps.value]}${option[subProps.label]}`"

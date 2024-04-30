@@ -1,7 +1,7 @@
 // import { useGetTestList } from '@/hooks/useDropDownList'
 
 export function useSearch() {
-  const initParam = { roleName: 888, hobby: 2 }
+  const initParam = { roleName: 888, hobby: '2' }
   const searchItems = [
     {
       tag: 'input',
@@ -13,6 +13,17 @@ export function useSearch() {
         maxlength: 10,
         placeholder: '请输入工号',
       }
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+        },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+        }
     },
     {
       tag: 'select',
@@ -28,7 +39,7 @@ export function useSearch() {
           { value: '3', label: '打豆豆' },
         ]
       },
-    }
+    },
   ]
   return {
     searchItems,

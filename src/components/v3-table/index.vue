@@ -5,7 +5,6 @@
       v-if="searchProps" ref="formRef" inline footer :model="searchForm" :form-items="searchItems"
       :reset-msg="resetMsg" :submit-msg="submitMsg" @submit="refresh"
     />
-
     <!-- 列表顶部的操作按钮 -->
     <div class="header-buttons">
       <slot name="headLeft" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
@@ -14,7 +13,7 @@
 
     <!-- 列表数据 -->
     <el-table
-      v-bind="$attrs" ref="tableRoot" v-loading="listLoading" row-class-name="cus-eltable"
+      v-bind="$attrs" ref="tableRoot" v-loading="listLoading"
       highlight-current-row style="width: 100%" :data="tableData" :row-key="getRowKeys"
       :header-cell-style="headerCellStyle" :cell-style="cellStyle" @selection-change="selectionChange"
       @row-click="onClick" @row-dblclick="onDblclick"
@@ -27,8 +26,8 @@
             <Render :row="row" :index="index" :render="column.render" />
           </template>
         </el-table-column>
-        <slot v-else-if="column.slot" :key="column.prop + 1" :name="column.slot" />
-        <el-table-column v-else-if="column.isImg" :key="column.prop + 2" v-bind="setAttrs(column)">
+        <slot v-else-if="column.slot" :key="`slot-${column.prop}`" :name="column.slot" />
+        <el-table-column v-else-if="column.isImg" :key="`img-${column.prop}`" v-bind="setAttrs(column)">
           <template #default="{ row }">
             <el-image
               class="srm-table_img" :style="{
@@ -38,7 +37,7 @@
             />
           </template>
         </el-table-column>
-        <el-table-column v-else :key="column.prop + 3" show-overflow-tooltip v-bind="setAttrs(column)" />
+        <el-table-column v-else :key="`other-${column.prop}`" show-overflow-tooltip v-bind="setAttrs(column)" />
       </template>
     </el-table>
 

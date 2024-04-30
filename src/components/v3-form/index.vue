@@ -85,26 +85,6 @@ const virtualForm = computed(() => {
   return _formItems
 })
 
-// 表单校验
-function submit() {
-  if (!formRef.value)
-    return
-    // 验证表单中的所有项目
-  formRef.value.validate((valid) => {
-    if (valid) {
-      try {
-        emit('submit')
-        return true
-      }
-      catch (e) {
-      }
-    }
-    else {
-      return false
-    }
-  })
-}
-
 // 表单验证返回promise对象
 function promiseSubmit() {
   return new Promise((resolve, reject) => {
@@ -130,7 +110,7 @@ function handleReset() {
   emit('afterReset')
 }
 
-defineExpose({ submit, handleReset, promiseSubmit })
+defineExpose({ handleReset, promiseSubmit })
 </script>
 
 <style lang='scss' scoped>

@@ -8,10 +8,11 @@ import router from '@/routers'
 
 import 'virtual:svg-icons-register' // svg
 
+import 'animate.css'
+
 import '@/styles/reset.scss'
 import '@/styles/element.scss'
 import '@/styles/common.scss'
-import 'animate.css'
 
 const app = createApp(App)
 

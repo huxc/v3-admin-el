@@ -121,7 +121,7 @@ function changeImageCode() {
   border-radius: 30px;
   :deep(.cusform-box) {
     .el-form-item__label {
-      font-size: 14px;
+      //   font-size: 14px;
       font-family:
         Microsoft YaHei UI-Regular,
         Microsoft YaHei UI;
