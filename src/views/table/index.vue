@@ -1,8 +1,7 @@
 <template>
   <div class="hello">
     <v3-table
-      ref="tableRef"
-      select-visible :columns="columns" :request-api="requestApi" :query-columns="searchItems"
+      ref="tableRef" :search-props :columns :request-api
     >
       <template #headLeft="{ rows, ids, isSelected }">
         <el-button class="btn" type="primary" @click="handelCreate(rows, ids, isSelected)">
@@ -23,14 +22,22 @@
 </template>
 
 <script setup name="example-table">
+import { onMounted } from 'vue'
 import { useSearch } from './hooks/useSearch'
 import { usePageList } from './hooks/usePageList'
 import Form from './components/form/index.vue'
 import { useDialog } from '@/hooks/useDialog'
 
 const tableRef = ref()
-const { searchItems } = useSearch()
+
+const searchProps = useSearch()
+
 const { columns, requestApi } = usePageList()
+onMounted(() => {
+  setTimeout(() => {
+    requestApi.value = api.account.getUserPage
+  }, 3000)
+})
 
 function handelCreate(rows, ids, isSelected) {
   console.warn('🚀 ~ handelCreate ~ rows, ids, isSelected:', rows, ids, isSelected)

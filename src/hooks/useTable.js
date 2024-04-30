@@ -3,18 +3,16 @@ import { filterEmptyValue, typeOf } from '@/utils'
 
 /**
  * @description table 页面操作方法封装
- * @param requestApi 获取表格数据 请求接口Api(必传)
- * @param initParam 获取数据初始化参数(不必传，默认为{})
- * @function formatQuery 请求前格式化查询参数函数(非必传)
+ * @param {requestApi} 获取表格数据 请求接口Api(必传)
  * @function formatRequest 请求后格式化表格数据函数(非必传)
+ * @param {searchProps.initParam} 获取数据初始化参数(不必传，默认为{})
+ * @function searchProps.formatQuery 请求前格式化查询参数函数(非必传)
  */
 
 export function useTable(props) {
-  const route = useRoute()
-  const router = useRouter()
-
   const requestApi = toRef(props, 'requestApi')
-  const { initParam, formatQuery, formatRequest } = props
+  const { formatRequest, searchProps } = props
+  const initParam = searchProps?.initParam || {}
 
   const state = reactive({
     // 页码及每页条数
@@ -40,13 +38,6 @@ export function useTable(props) {
    */
   const onPageChange = (page) => {
     state.listQuery.pageNum = page
-    router.replace({
-      path: route.path,
-      query: {
-        ...route.query,
-        pageNum: page,
-      },
-    })
   }
   /**
    *  条数切换
@@ -63,12 +54,11 @@ export function useTable(props) {
       return
 
     state.listLoading = true
-
     const query = filterEmptyValue(state.listQuery, initParam, state.searchForm)
 
     // 格式化查询参数
-    if (typeOf(formatQuery) === 'function')
-      formatQuery(query)
+    if (typeOf(searchProps.formatQuery) === 'function')
+      searchProps.formatQuery(query)
 
     // 接口请求数据
     requestApi.value(query).then((response) => {
