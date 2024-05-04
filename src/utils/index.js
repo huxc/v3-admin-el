@@ -18,7 +18,7 @@ export { typeOf }
 
 // 判断空对象
 function isObjEmpty(obj) {
-  return Reflect.ownKeys(obj).length === 0 && obj.constructor === Object
+  return obj?.constructor === Object && Reflect.ownKeys(obj).length === 0
 }
 export { isObjEmpty }
 

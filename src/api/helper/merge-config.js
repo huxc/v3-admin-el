@@ -10,7 +10,7 @@ export function mergeConfig({ domain = 'user', ...config }) {
   const token = userStore?.getToken
   const _params = config.data || config.params
   // 判断是否有参数
-  if (typeOf(_params) === 'object' && !isObjEmpty(_params)) {
+  if (!isObjEmpty(_params)) {
     // 格式化get参数
     if (config.method.toLowerCase() === 'get') {
       config.params = config.data
