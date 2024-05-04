@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import md5 from 'js-md5'
+// import md5 from 'js-md5'
 import { onKeyStroke } from '@vueuse/core'
 import { useRoute, useRouter } from 'vue-router'
 import imageCode from './img-code.vue'
@@ -70,7 +70,7 @@ function onLogin(loginEl) {
   if (!loginEl)
     return
   const params = deepCopy(formLogin)
-  params.password = md5(params.password)
+  // params.password = md5(params.password)
   params.phone = params.username
   appStore.userStore.logIn(params).then(() => {
     // 避免获取token失败

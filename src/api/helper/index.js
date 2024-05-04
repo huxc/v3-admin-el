@@ -102,4 +102,4 @@ function createService() {
   return service
 }
 export const service = createService()
-export const request = createRequest(service)
+export const useRequest = createRequest(service)

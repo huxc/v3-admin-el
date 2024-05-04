@@ -5,6 +5,12 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  api_account_getUser()
+  // console.log('api :>> ', api)
+})
 </script>
 
 <style lang='scss' scoped>

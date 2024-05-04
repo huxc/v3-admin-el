@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import md5 from 'js-md5'
+// import md5 from 'js-md5'
 import { onKeyStroke } from '@vueuse/core'
 import { useReset } from './hooks/useReset'
 import { useAutoFocus } from './hooks/useAutoFocus'
@@ -62,7 +62,7 @@ function handleSave() {
   if (smsVcode.length === 6)
     editForm.code = smsVcode
   const params = deepCopy(editForm)
-  params.password = md5(params.password)
+  // params.password = md5(params.password)
   delete params.passwords
   api.login.postForget(params).then(() => {
     ElNotification({

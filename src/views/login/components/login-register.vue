@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import md5 from 'js-md5'
+// import md5 from 'js-md5'
 import { onKeyStroke, useEventListener } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 import { useAutoFocus } from './hooks/useAutoFocus'
@@ -80,7 +80,7 @@ function handleSave() {
   if (smsVcode.length === 6)
     editForm.code = smsVcode
   const params = deepCopy(editForm)
-  params.password = md5(params.password)
+  // params.password = md5(params.password)
   delete params.passwords
   api.login.postRegister(params).then((res) => {
     if (res) {

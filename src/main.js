@@ -18,8 +18,6 @@ const app = createApp(App)
 
 app.use(router).use(directives).use(pinia)
 
-app.config.globalProperties.msg = api
-
 app.component('Icon', Icon)
 
 app.mount('#app')

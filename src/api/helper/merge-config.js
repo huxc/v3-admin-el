@@ -1,8 +1,8 @@
 import qs from 'qs'
 import { invoke, merge } from 'lodash-es'
-import { isObjEmpty, typeOf } from '@/utils'
-import { useUserStore } from '@/store/modules/user'
-import { domain_list } from '@/api/config/domainConfig'
+import { isObjEmpty, typeOf } from '../../utils'
+import { useUserStore } from '../../store/modules/user'
+import { domain_list } from '../../api/config/domainConfig'
 
 export function mergeConfig({ domain = 'user', ...config }) {
   const userStore = useUserStore()
@@ -10,7 +10,7 @@ export function mergeConfig({ domain = 'user', ...config }) {
   const token = userStore?.getToken
   const _params = config.data || config.params
   // 判断是否有参数
-  if (!isObjEmpty(_params)) {
+  if (typeOf(_params) === 'object' && !isObjEmpty(_params)) {
     // 格式化get参数
     if (config.method.toLowerCase() === 'get') {
       config.params = config.data

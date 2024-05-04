@@ -1,5 +1,6 @@
 /* eslint-disable node/prefer-global/process */
-import { resolve } from 'node:path'
+import { basename, extname, resolve } from 'node:path'
+import { globSync } from 'glob'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -26,8 +27,9 @@ export function createVitePlugins(viteEnv) {
         'vue',
         'vue-router',
         '@vueuse/core',
+        getApiKeys()
       ],
-      dirs: ['./src/api'],
+      // dirs: ['./src/api'],
       resolvers: [
         ElementPlusResolver(),
       ],
@@ -89,3 +91,19 @@ function createCompression(viteEnv) {
   }
   return plugins
 };
+
+function getApiKeys() {
+  const modules = {
+    '../helper/index': ['useRequest']
+  }
+  const files = globSync('./src/api/modules/*.js')
+  files.forEach((file) => {
+    const fileName = basename(file, extname(file))
+    const key = `@/api/modules/${fileName}`
+    const fns = require(`../src/api/modules/${fileName}.js`)
+    modules[key] = Object.keys(fns).reduce((pre, cur) => {
+      return pre.push([cur, `api_${fileName}_${cur}`]), pre
+    }, [])
+  })
+  return modules
+}
