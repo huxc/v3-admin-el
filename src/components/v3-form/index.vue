@@ -2,8 +2,7 @@
 <template>
   <div class="container from-container">
     <el-form
-      ref="formRef" v-bind="$attrs" :model="formModel" :inline="inline" :rules="rules"
-      :label-width="labelWidth" @submit.native.prevent
+      ref="formRef" :inline :rules :label-width v-bind="$attrs" :model="formModel" @submit.native.prevent
     >
       <el-row :gutter="gutter">
         <template v-for="(item, index) in virtualForm">
@@ -39,19 +38,32 @@
             </component>
           </template>
         </template>
-        <component :is="inline ? 'span' : 'el-col'" v-if="footer" :span="btnCol">
-          <el-form-item>
-            <slot name="buttons" />
-            <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
-              {{ submitMsg }}
-            </el-button>
-            <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset(formRef)">
-              {{ resetMsg }}
-            </el-button>
-          </el-form-item>
-        </component>
       </el-row>
     </el-form>
+    <template v-if="footer">
+      <!-- 一般用于查询 -->
+      <span v-if="inline" class="span-btns">
+        <slot name="before-btns" />
+        <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
+          {{ submitMsg }}
+        </el-button>
+        <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset(formRef)">
+          {{ resetMsg }}
+        </el-button>
+        <slot name="after-btns" />
+      </span>
+      <!-- 一般用于表单提交 重复html用于方便修改按钮样式 -->
+      <div v-else class="div-btns">
+        <slot name="before-btns" />
+        <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
+          {{ submitMsg }}
+        </el-button>
+        <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset(formRef)">
+          {{ resetMsg }}
+        </el-button>
+        <slot name="after-btns" />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -84,6 +96,26 @@ const virtualForm = computed(() => {
   })
   return _formItems
 })
+
+// 表单校验
+function submit() {
+  if (!formRef.value)
+    return
+  // 验证表单中的所有项目
+  formRef.value.validate((valid) => {
+    if (valid) {
+      try {
+        emit('submit')
+        return true
+      }
+      catch (e) {
+      }
+    }
+    else {
+      return false
+    }
+  })
+}
 
 // 表单验证返回promise对象
 function promiseSubmit() {
@@ -118,6 +150,7 @@ defineExpose({ handleReset, promiseSubmit })
 :deep(.el-select),
 :deep(.el-date-editor) {
   width: 100%;
+  min-width: 190px;
 }
 
 :deep(.el-date-editor .el-input__wrapper) {
@@ -158,5 +191,9 @@ defineExpose({ handleReset, promiseSubmit })
       }
     }
   }
+}
+.div-btns {
+  text-align: center;
+  margin-bottom: 10px;
 }
 </style>

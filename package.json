@@ -41,6 +41,7 @@
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "eslint": "^9.1.1",
     "eslint-plugin-format": "^0.1.1",
+    "glob": "^10.3.12",
     "sass": "^1.75.0",
     "unplugin-auto-import": "^0.17.5",
     "unplugin-element-plus": "^0.8.0",

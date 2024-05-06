@@ -38,10 +38,25 @@ export const cusProps = {
     type: Boolean,
     default: false 
   },
+  // 获取数据初始化参数
+  initParam: {
+    type: Boolean,
+    default: () => ({}) 
+  },
   // 格式化列表数据
   formatRequest: {
     type: Function,
     required: false 
+  },
+  // 页码与每页条数
+  pageRequest: {
+    type: [Object],
+    default: () => ({ page: 1, pageSize: 10 })
+  },
+  // 每页显示个数选择器的选项设置
+  pageSizes: {
+    type: [Array],
+    default: [10, 20, 50, 100, 200, 500] //参数见下-search_props_default
   },
   searchProps: {
     type: [Object, null],
@@ -54,6 +69,5 @@ export const search_props_default = reactive({
   submitMsg: '查询', // 查询按钮名称
   resetMsg: '重置', // 重置按钮名称
   searchItems: [], // 查询表单
-  initParam: {}, // 筛选默认值
   formatQuery: null, // 格式化查询数据-需定义为方法
 })

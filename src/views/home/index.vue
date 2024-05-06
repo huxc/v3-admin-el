@@ -5,11 +5,8 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-
 onMounted(() => {
-  api_account_getUser()
-  // console.log('api :>> ', api)
+//   api_account_getUser()
 })
 </script>
 

@@ -15,10 +15,6 @@ export const cusProps = {
     type: [Boolean, String],
     default: '提交'
     },
-  backTxt: {
-    type: String,
-    default: '返回'
-    },
   resetMsg: {
     type: [Boolean, String],
     default: '重置'
@@ -26,10 +22,6 @@ export const cusProps = {
   labelWidth: {
     type: String,
     default: 'auto'
-    },
-  showBack: {
-    type: Boolean,
-    default: false
     },
   footer: {
     type: Boolean,

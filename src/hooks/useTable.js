@@ -5,20 +5,19 @@ import { filterEmptyValue, typeOf } from '@/utils'
  * @description table 页面操作方法封装
  * @param {requestApi} 获取表格数据 请求接口Api(必传)
  * @function formatRequest 请求后格式化表格数据函数(非必传)
- * @param {searchProps.initParam} 获取数据初始化参数(不必传，默认为{})
+ * @param {initParam} 获取数据初始化参数(不必传，默认为{})
  * @function searchProps.formatQuery 请求前格式化查询参数函数(非必传)
  */
 
 export function useTable(props) {
   const requestApi = toRef(props, 'requestApi')
-  const { formatRequest, searchProps } = props
-  const initParam = searchProps?.initParam || {}
+  const { formatRequest, searchProps, pageRequest, initParam } = props
 
   const state = reactive({
     // 页码及每页条数
     listQuery: {
-      pageNum: 1,
-      pageSize: 10,
+      pageNum: pageRequest.page,
+      pageSize: pageRequest.pageSize,
     },
     // 总条数
     totalCount: 0,
@@ -29,9 +28,6 @@ export function useTable(props) {
     // 是否加载中
     listLoading: false,
   })
-
-  // 页码
-  const pagingSizes = [10, 20, 50, 100, 200, 500]
 
   /**
    * 页码切换
@@ -112,7 +108,6 @@ export function useTable(props) {
   return {
     getList,
     refresh,
-    pagingSizes,
     onPageChange,
     onSizeChange,
     ...toRefs(state),

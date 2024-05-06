@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <v3-form ref="formRef" :model="editForm" :form-items="formItems" />
+    <v3-form ref="formRef" footer :btn-col="12" :model="editForm" :form-items="formItems" @submit="onSubmit" />
   </div>
 </template>
 
@@ -21,13 +21,17 @@ onMounted(() => {
   }, 2000)
 })
 
-function _expose_fn() {
+function onSubmit() {
+  emit('clsDlg', true)
+}
+
+function expose_fn() {
   formRef.value.submit().then(() => {
     emit('clsDlg', true)
   })
 }
 
 defineExpose({
-  _expose_fn
+  expose_fn
 })
 </script>

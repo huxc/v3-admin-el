@@ -2,8 +2,8 @@
   <div class="tb-container">
     <!-- 搜索条件 -->
     <v3-form
-      v-if="searchProps" ref="formRef" inline footer :model="searchForm" :form-items="searchItems"
-      :reset-msg="resetMsg" :submit-msg="submitMsg" @submit="refresh"
+      v-if="searchProps" ref="formRef" inline footer :reset-msg :submit-msg :model="searchForm"
+      :form-items="searchItems" @submit="refresh"
     />
     <!-- 列表顶部的操作按钮 -->
     <div class="header-buttons">
@@ -44,7 +44,7 @@
     <!-- 分页栏 -->
     <div v-if="isPagination && onePage" class="toolbar">
       <el-pagination
-        v-show="isPagination" v-model:current-page="listQuery.pageNum" :page-sizes="pagingSizes"
+        v-show="isPagination" v-model:current-page="listQuery.pageNum" :page-sizes
         class="pagination" background :layout="layout" :total="totalCount" :page-size="listQuery.pageSize"
         @current-change="onPageChange" @size-change="onSizeChange"
       />
@@ -69,7 +69,7 @@ const tableRoot = ref(null)
 // 合并props.searchProps
 Object.assign(search_props_default, props.searchProps || {})
 
-const { searchItems, submitMsg, resetMsg, initParam } = toRefs(search_props_default)
+const { searchItems, submitMsg, resetMsg } = toRefs(search_props_default)
 
 const { layout, headerCellStyle, cellStyle } = useTableStyle()
 
@@ -80,7 +80,7 @@ const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected }
 const { refresh, getList, tableData, totalCount, listLoading, listQuery, searchForm, onSizeChange, onPageChange, pagingSizes, tbExport } = useTable(props)
 
 // 初始化查询条件
-Object.assign(searchForm, initParam)
+Object.assign(searchForm, props.initParam)
 
 const onePage = computed(() => {
   if (props.isOnePage)
