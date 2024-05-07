@@ -15,9 +15,7 @@
       :on-remove="handleDeleteFile"
       :before-upload="handleBeforeUpload"
     >
-      <el-icon>
-        <i-ep-plus />
-      </el-icon>
+      <v3-icon icon="ep:plus" />
       <template #file="{ file }">
         <div style="width: 100%;">
           <img class="el-upload-list__item-thumbnail" :src="file.url" alt="">
@@ -38,7 +36,7 @@
               class="el-upload-list__item-delete"
               @click="onRemove(file)"
             >
-              <Icon name="ep-delete" />
+              <v3-icon icon="ep:delete" />
             </span>
           </span>
         </div>
@@ -57,7 +55,6 @@
 </template>
 
 <script setup name="cus-upload-img">
-import { defineModel } from 'vue'
 import { useUpload } from '@/hooks/useUpload'
 import { file_upload_url } from '@/api/config/globalsUrl.js'
 import appStore from '@/store/index.js'
@@ -108,11 +105,11 @@ const {
   uploadRef,
   handleError,
   handleExceed,
+  handlePreview,
   handleSuccess,
   maxSizeWithUnit,
   handleDeleteFile,
   handleBeforeUpload,
-  handlePreview
 } = useUpload(props, formItem)
 
 function onRemove(file) {

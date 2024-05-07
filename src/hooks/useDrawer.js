@@ -1,4 +1,5 @@
 import { createApp, h, ref } from 'vue'
+import { Icon } from '@iconify/vue'
 import { typeOf } from '@/utils'
 
 /**
@@ -57,11 +58,12 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
           default: () => h(componentEl, {
             ref: elChild,
             ...props,
-            onClsDrawer: onClose,
+            onClsDwr: onClose,
           }),
         },
 )
     },
   })
+  app.component('v3-icon', Icon)
   app.mount(root)
 }

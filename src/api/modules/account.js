@@ -1,14 +1,4 @@
 /**
- * @fileDescription: 用户域
- * @title: 用户
- * @date: 2024-01-26 14:57:59
- * @host: 172.16.164.172:9302
- * @basePath: /
- * @description: Account Controller
- * @version: 1.0.0
- */
-
-/**
  * @description 根据id查询.
  * @param {string} code - code.
  * @param {number} id - 用户id.
@@ -52,22 +42,6 @@ export function putUser(data, prop = {}) {
 }
 
 /**
- * @description 修改启用状态.
- * @param {string} code - code.
- * @param {number} id - 用户id.
- * @param {number} status - 启用状态 0启用 1停用.
- */
-export function postUserChange(data, prop = {}) {
-  return useRequest({
-    data,
-    ...prop,
-    method: 'post',
-    domain: 'account',
-    url: '/user/change',
-    })
-}
-
-/**
  * @description 删除.
  * @param {object} accountIdsDTO - accountIdsDTO.
  */
@@ -100,7 +74,7 @@ export function getUserPage(data, prop = {}) {
     ...prop,
     method: 'get',
     domain: 'account',
-    url: '/user/page',
+    url: '/accounts',
     })
 }
 
@@ -119,6 +93,12 @@ export function getUserSearch(data, prop = {}) {
     })
 }
 
-export function dd() {
-  console.log('666 :>> ', 666)
+export function gettDepartments(data, prop = {}) {
+  return useRequest({
+    data,
+    ...prop,
+    method: 'get',
+    domain: 'account',
+    url: '/departments',
+    })
 }

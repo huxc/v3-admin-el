@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 import { createApp, h, ref } from 'vue'
+import { Icon } from '@iconify/vue'
 import { isObjEmpty, typeOf } from '@/utils'
 
 /**
@@ -12,19 +12,14 @@ import { isObjEmpty, typeOf } from '@/utils'
  * @param {Function} afterClose 窗口关闭之后的回调函数
  */
 
-export function useDialog({
-  attrs = {},
-  props = {},
-  footer = {},
-  componentEl,
-  beforeClose,
-  afterClose,
-}) {
+export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, beforeClose, afterClose }) {
   const root = document.createElement('div')
   document.body.prepend(root)
 
   const app = createApp({
-    components: { ComponentEl: componentEl },
+    components: {
+      ComponentEl: componentEl
+     },
 
     setup() {
       const dialogRef = ref()
@@ -64,8 +59,8 @@ export function useDialog({
 
       // 确认事件
       const onConfirm = () => {
-        if (typeOf(elChild.value.onClsBack) === 'function')
-          elChild.value.onClsBack()
+        if (typeOf(elChild.value.expose_fn) === 'function')
+          elChild.value.expose_fn()
         else
           onClose()
       }
@@ -97,7 +92,7 @@ export function useDialog({
         : null
 
       const divStyle = {
-        maxHeight: '65vh',
+        maxHeight: !isObjEmpty(footer) ? '50vh' : '65vh',
         viewStyle: { overflowX: 'hidden' },
       }
       // 返回el-dialog组件
@@ -115,5 +110,6 @@ export function useDialog({
         })
     },
   })
+  app.component('v3-icon', Icon)
   app.mount(root)
 }

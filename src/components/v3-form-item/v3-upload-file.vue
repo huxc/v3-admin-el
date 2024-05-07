@@ -78,7 +78,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
     },
-  modelValue: String,
+  modelValue: {
+    type: [String, Object],
+    default: '',
+  },
   // 手动上传
   autoUpload: {
     type: Boolean,
@@ -89,8 +92,11 @@ const props = defineProps({
     type: String,
     default: '导入',
     },
-  limit: String,
-  })
+  limit: {
+    type: Number,
+    default: 1,
+    },
+})
 
 const emit = defineEmits(['update:modelValue', 'upload'])
 const param = computed(() => props.param)

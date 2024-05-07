@@ -1,7 +1,6 @@
-// import { useGetTestList } from '@/hooks/useDropDownList'
+import { getDepOptions } from '@/hooks/useOptions'
 
 export function useSearch() {
-  const initParam = { roleName: 888, hobby: '2' }
   const searchItems = [
     {
       tag: 'input',
@@ -13,17 +12,6 @@ export function useSearch() {
         maxlength: 10,
         placeholder: '请输入工号',
       }
-    },
-    {
-      tag: 'input',
-      itemAttrs: {
-        label: '角色',
-        },
-      attrs: {
-        key: 'roleName',
-        maxlength: 10,
-        placeholder: '请输入工号',
-        }
     },
     {
       tag: 'select',
@@ -40,9 +28,27 @@ export function useSearch() {
         ]
       },
     },
+    {
+      tag: 'select',
+      itemAttrs: {
+        label: '部门',
+      },
+      attrs: shallowReactive({
+        key: 'depid',
+        placeholder: '请选择部门',
+        subProps: {
+          value: 'id',
+          label: 'departmentName'
+        },
+        options: []
+      }),
+    },
   ]
+
+  // 动态给key='depid'的options赋值
+  getDepOptions(searchItems, 'depid')
+
   return {
-    searchItems,
-    initParam,
+    searchItems
   }
 }

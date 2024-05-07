@@ -31,10 +31,6 @@ export const cusProps = {
     type: Number,
     default: 24
     },
-  btnCol: {
-    type: Number,
-    default: 24
-    },
   rules: {
     type: Object,
     default: () => {}

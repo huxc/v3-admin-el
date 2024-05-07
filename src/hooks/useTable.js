@@ -13,6 +13,7 @@ export function useTable(props) {
   const requestApi = toRef(props, 'requestApi')
   const { formatRequest, searchProps, pageRequest, initParam } = props
 
+  const searchForm = reactive({})
   const state = reactive({
     // 页码及每页条数
     listQuery: {
@@ -23,8 +24,6 @@ export function useTable(props) {
     totalCount: 0,
     // 获取数据
     tableData: [],
-    // 筛选条件
-    searchForm: {},
     // 是否加载中
     listLoading: false,
   })
@@ -50,7 +49,7 @@ export function useTable(props) {
       return
 
     state.listLoading = true
-    const query = filterEmptyValue(state.listQuery, initParam, state.searchForm)
+    const query = filterEmptyValue(state.listQuery, initParam, searchForm)
 
     // 格式化查询参数
     if (typeOf(searchProps.formatQuery) === 'function')
@@ -110,6 +109,7 @@ export function useTable(props) {
     refresh,
     onPageChange,
     onSizeChange,
+    searchForm,
     ...toRefs(state),
   }
 }

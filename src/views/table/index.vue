@@ -1,11 +1,17 @@
 <template>
-  <div class="table-box">
+  <div class="table-box" style="position:relative">
     <v3-table
-      ref="tableRef" :search-props :columns :request-api
+      ref="tableRef" :search-props :init-param :columns :request-api
     >
       <template #headLeft="{ rows, ids, isSelected }">
-        <el-button class="btn" type="primary" @click="handelCreate(rows, ids, isSelected)">
-          新建
+        <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
+          新建[useDrawer]
+        </el-button>
+        <el-button class="btn" type="primary" @click="onDialog(rows, ids, isSelected)">
+          新建[useDialog]
+        </el-button>
+        <el-button class="btn" type="primary" @click="visible = true">
+          局部弹框v3-ialog
         </el-button>
       </template>
       <template #operation>
@@ -18,6 +24,9 @@
         </el-table-column>
       </template>
     </v3-table>
+    <v3-dialog v-model="visible">
+      <span style="font-size:30px">弹框内容</span>
+    </v3-dialog>
   </div>
 </template>
 
@@ -26,27 +35,43 @@ import { onMounted } from 'vue'
 import { useSearch } from './hooks/useSearch'
 import { usePageList } from './hooks/usePageList'
 import Form from './components/form/index.vue'
+import { useDrawer } from '@/hooks/useDrawer'
 import { useDialog } from '@/hooks/useDialog'
 
 const tableRef = ref()
-
+const visible = ref(false)
+const initParam = { roleName: 888, hobby: '2', depid: 5 }
 const searchProps = useSearch()
 
 const { columns, requestApi } = usePageList()
+
 onMounted(() => {
   setTimeout(() => {
     // requestApi.value = api.account.getUserPage
   }, 3000)
 })
 
-function handelCreate(rows, ids, isSelected) {
-  console.warn('🚀 ~ handelCreate ~ rows, ids, isSelected:', rows, ids, isSelected)
+function onDialog(rows) {
   useDialog({
     attrs: { title: '表单编辑' },
-    props: { oldForm: { name: 8888 } },
+    footer: { okText: '提交' },
+    props: { oldForm: rows },
     componentEl: Form,
-    beforeClose: () => {
+    beforeClose: (done) => {
       tableRef.value.refresh()
+      done()
+    }
+  })
+}
+
+function onDrawer(rows) {
+  useDrawer({
+    attrs: { title: '表单编辑' },
+    props: { oldForm: rows },
+    componentEl: Form,
+    beforeClose: (done) => {
+      tableRef.value.refresh()
+      done()
     }
   })
 }

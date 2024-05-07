@@ -38,27 +38,29 @@
             </component>
           </template>
         </template>
+        <!-- 一般用于查询 -->
+        <template v-if="footer && inline">
+          <span class="span-btns">
+            <slot name="before-btns" />
+            <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
+              {{ submitMsg }}
+            </el-button>
+            <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset">
+              {{ resetMsg }}
+            </el-button>
+            <slot name="after-btns" />
+          </span>
+        </template>
       </el-row>
     </el-form>
-    <template v-if="footer">
-      <!-- 一般用于查询 -->
-      <span v-if="inline" class="span-btns">
+    <!-- 一般用于表单提交 重复html用于方便修改按钮样式 -->
+    <template v-if="footer && !inline">
+      <div class="div-btns">
         <slot name="before-btns" />
         <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
           {{ submitMsg }}
         </el-button>
-        <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset(formRef)">
-          {{ resetMsg }}
-        </el-button>
-        <slot name="after-btns" />
-      </span>
-      <!-- 一般用于表单提交 重复html用于方便修改按钮样式 -->
-      <div v-else class="div-btns">
-        <slot name="before-btns" />
-        <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
-          {{ submitMsg }}
-        </el-button>
-        <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset(formRef)">
+        <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset">
           {{ resetMsg }}
         </el-button>
         <slot name="after-btns" />

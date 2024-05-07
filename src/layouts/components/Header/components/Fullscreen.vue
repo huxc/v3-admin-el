@@ -1,7 +1,7 @@
 <template>
   <el-tooltip effect="dark" :content="isFullscreen ? '退出全屏' : '全屏'" placement="bottom">
-    <Icon v-show="isFullscreen" class="header-icon" icon="ant-design:fullscreen-exit-outlined" @click="toggle" />
-    <Icon v-show="!isFullscreen" class="header-icon" icon="ant-design:fullscreen-outlined" @click="toggle" />
+    <v3-icon v-show="isFullscreen" class="header-icon" icon="ant-design:fullscreen-exit-outlined" @click="toggle" />
+    <v3-icon v-show="!isFullscreen" class="header-icon" icon="ant-design:fullscreen-outlined" @click="toggle" />
   </el-tooltip>
 </template>
 

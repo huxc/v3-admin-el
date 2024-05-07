@@ -17,7 +17,7 @@ defineProps({
     default: () => ({
       label: 'label',
       value: 'value',
-      disabled: 'disabled'
+      disabled: ''
     })
   },
 })

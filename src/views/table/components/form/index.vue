@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
-    <v3-form ref="formRef" footer :btn-col="12" :model="editForm" :form-items="formItems" @submit="onSubmit" />
+    <v3-form ref="formRef" footer :model="editForm" :form-items="formItems" @submit="onSubmit" />
+    <p style="color:red;text-align:center">
+      上方的的提交，重置按钮 通过footer进行隐藏显示
+    </p>
   </div>
 </template>
 
@@ -8,10 +11,13 @@
 import { useForm } from './hooks/useForm'
 
 const props = defineProps({
-  oldForm: { type: Object, default: () => ({}) },
+  oldForm: {
+    type: Object,
+    default: () => ({}) 
+  }
 })
 
-const emit = defineEmits(['clsDlg'])
+const emit = defineEmits(['clsDwr'])
 
 const { formItems, editForm, formRef } = useForm()
 
@@ -22,12 +28,12 @@ onMounted(() => {
 })
 
 function onSubmit() {
-  emit('clsDlg', true)
+  emit('clsDwr', true)
 }
 
 function expose_fn() {
-  formRef.value.submit().then(() => {
-    emit('clsDlg', true)
+  formRef.value.promiseSubmit().then(() => {
+    emit('clsDwr', true)
   })
 }
 

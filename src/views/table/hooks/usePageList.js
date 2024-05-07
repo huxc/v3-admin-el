@@ -1,6 +1,6 @@
 export function usePageList() {
   // 分页查询接口
-  const requestApi = ref(null)
+  const requestApi = ref(api_account_getUserPage)
 
   // 列表列名
   const columns = [

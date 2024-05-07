@@ -40,7 +40,7 @@ export const cusProps = {
   },
   // 获取数据初始化参数
   initParam: {
-    type: Boolean,
+    type: Object,
     default: () => ({}) 
   },
   // 格式化列表数据
@@ -50,13 +50,13 @@ export const cusProps = {
   },
   // 页码与每页条数
   pageRequest: {
-    type: [Object],
+    type: Object,
     default: () => ({ page: 1, pageSize: 10 })
   },
   // 每页显示个数选择器的选项设置
   pageSizes: {
-    type: [Array],
-    default: [10, 20, 50, 100, 200, 500] //参数见下-search_props_default
+    type: Array,
+    default: [10, 20, 50, 100, 200, 500] 
   },
   searchProps: {
     type: [Object, null],

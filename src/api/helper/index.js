@@ -51,14 +51,14 @@ function createService() {
       if (response.config.isLoading)
         closeLoading()
 
-      const { data: res, config } = response.data
+      const { data: res, config, success } = response.data
 
       if (config?.responseType === 'blob') {
         exportFile(response)
         return response
       }
 
-      if (!res.success) {
+      if (!success) {
         // token失效跳转到登录页面
         if (TOKEN_STATE.includes(res.code)) {
           if (!isRefreshing) {
@@ -85,8 +85,7 @@ function createService() {
       else {
         if (response.config.isLoading)
           closeLoading()
-
-        return res
+        return response.data
       }
     },
     (error) => {

@@ -77,9 +77,8 @@ const { layout, headerCellStyle, cellStyle } = useTableStyle()
 const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection()
 
 // 表格操作 Hooks
-const { refresh, getList, tableData, totalCount, listLoading, listQuery, searchForm, onSizeChange, onPageChange, pagingSizes, tbExport } = useTable(props)
+const { refresh, getList, tableData, totalCount, listLoading, listQuery, searchForm, onSizeChange, onPageChange, tbExport } = useTable(props)
 
-// 初始化查询条件
 Object.assign(searchForm, props.initParam)
 
 const onePage = computed(() => {

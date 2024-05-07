@@ -17,7 +17,6 @@ import '@/styles/common.scss'
 const app = createApp(App)
 
 app.use(router).use(directives).use(pinia)
-
-app.component('Icon', Icon)
+app.component('v3-icon', Icon)
 
 app.mount('#app')
