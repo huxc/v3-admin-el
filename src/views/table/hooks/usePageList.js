@@ -4,6 +4,8 @@ export function usePageList() {
 
   // 列表列名
   const columns = [
+    { type: 'selection', label: '多选' },
+    { type: 'index', label: '序号', width: '60px' },
     { prop: 'jobNo', label: '工号' },
     { prop: 'nickName', label: '姓名' },
     {

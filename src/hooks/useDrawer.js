@@ -26,7 +26,7 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
         ref: drawerRef,
         title: '默认标题',
         class: 'cus-drawer',
-        modelValue: visible,
+        modelValue: visible.value,
         closeOnClickModal: false,
         onClosed: () => {
           if (typeOf(afterClose) === 'function')

@@ -4,10 +4,22 @@ import { saveAs } from 'file-saver'
 
 export function exportFile(response) {
   const { data, config } = response
-  // 导出文件流，fileName参数为必填
+  // 导出文件流，自定义文件名fileName
   if (data.type !== 'application/json') {
-    if (config.fileName)
+    if (config.fileName) {
       saveAs(data, response.config.fileName)
+    }
+    else {
+      // 获取文件流返回的文件名
+      const contentDisposition = response.headers['Content-Disposition']
+      let fileName
+      if (contentDisposition) {
+        const match = contentDisposition.match(/filename="?([^";]*)"?/)
+        fileName = match ? match[1] : null
+        if (fileName)
+          saveAs(data, fileName)
+      }
+    }
   }
   else {
     const reader = new FileReader()

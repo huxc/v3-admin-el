@@ -31,12 +31,9 @@
 </template>
 
 <script setup name="example-table">
-import { onMounted } from 'vue'
 import { useSearch } from './hooks/useSearch'
 import { usePageList } from './hooks/usePageList'
 import Form from './components/form/index.vue'
-import { useDrawer } from '@/hooks/useDrawer'
-import { useDialog } from '@/hooks/useDialog'
 
 const tableRef = ref()
 const visible = ref(false)
@@ -57,9 +54,8 @@ function onDialog(rows) {
     footer: { okText: '提交' },
     props: { oldForm: rows },
     componentEl: Form,
-    beforeClose: (done) => {
-      tableRef.value.refresh()
-      done()
+    afterClose: (param) => {
+      console.log('🚀 ~ onDialog ~ param:', param)
     }
   })
 }

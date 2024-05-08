@@ -18,10 +18,9 @@
       :header-cell-style="headerCellStyle" :cell-style="cellStyle" @selection-change="selectionChange"
       @row-click="onClick" @row-dblclick="onDblclick"
     >
-      <el-table-column v-if="isMultiple" type="selection" width="45" align="center" />
-      <el-table-column v-if="indexVisible" type="index" :index="indexMethod" width="60px" label="序号" align="center" />
       <template v-for="(column, index) in columns">
-        <el-table-column v-if="column.render" :key="column.prop" :width="column.width" :label="column.label">
+        <el-table-column v-if="column?.type === 'index'" :key="`index-${column.prop}`" :index="indexMethod" v-bind="setAttrs(column)" />
+        <el-table-column v-else-if="column.render" :key="column.prop" :width="column.width" :label="column.label">
           <template #default="{ row }">
             <Render :row="row" :index="index" :render="column.render" />
           </template>
@@ -66,6 +65,9 @@ const emit = defineEmits(cusEmits)
 const formRef = ref(null)
 const tableRoot = ref(null)
 
+// 是否可多选
+const isMultiple = props.columns.some(i => i?.type === 'selection')
+
 // 合并props.searchProps
 Object.assign(search_props_default, props.searchProps || {})
 
@@ -77,7 +79,7 @@ const { layout, headerCellStyle, cellStyle } = useTableStyle()
 const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection()
 
 // 表格操作 Hooks
-const { refresh, getList, tableData, totalCount, listLoading, listQuery, searchForm, onSizeChange, onPageChange, tbExport } = useTable(props)
+const { refresh, getList, tableData, totalCount, listLoading, listQuery, searchForm, onSizeChange, onPageChange } = useTable(props)
 
 Object.assign(searchForm, props.initParam)
 
@@ -109,7 +111,7 @@ function setAttrs(params) {
 function isCheckRow() {
   emit('callBack')
 
-  if (!props.isMultiple)
+  if (!isMultiple)
     return
 
   if (tableData.value) {
@@ -126,9 +128,10 @@ function onDblclick(row) {
 
 // 单击
 function onClick(row) {
-  if (props.isMultiple)
+  if (isMultiple) {
+    tableRoot.value.clearSelection()
     tableRoot.value.toggleRowSelection(row)
-
+  }
   emit('rowClick', row)
 }
 
@@ -151,10 +154,6 @@ function setTableData(tabelList) {
   tableData.value = tabelList
 }
 
-function handleSearch() {
-  formRef.value.handleSubmit()
-}
-
 // 暴露给父组件的参数和方法
-defineExpose({ refresh, getList, tableData, searchForm, selectedList, searchReset, tbExport, resetSelections, setTableData })
+defineExpose({ refresh, getList, tableData, searchReset, resetSelections, setTableData })
 </script>

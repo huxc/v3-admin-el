@@ -1,8 +1,8 @@
 import qs from 'qs'
 import { invoke, merge } from 'lodash-es'
-import { isObjEmpty, typeOf } from '../../utils'
-import { useUserStore } from '../../store/modules/user'
-import { domain_list } from '../../api/config/domainConfig'
+import { isObjEmpty, typeOf } from '@/utils'
+import { domain_list } from '@/api/config/domainConfig'
+import { useUserStore } from '@/store/modules/user'
 
 export function mergeConfig({ domain = 'user', ...config }) {
   const userStore = useUserStore()

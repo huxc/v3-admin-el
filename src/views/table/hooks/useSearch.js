@@ -20,6 +20,7 @@ export function useSearch() {
       },
       attrs: {
         key: 'hobby',
+        multiple: true,
         placeholder: '请输入兴趣',
         options: [
           { value: '1', label: '吃饭' },

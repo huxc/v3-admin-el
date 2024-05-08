@@ -22,6 +22,7 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
      },
 
     setup() {
+      let bcParam = null
       const dialogRef = ref()
       const visible = ref(true)
       const elChild = ref(null)
@@ -32,11 +33,11 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
           ref: dialogRef,
           title: '默认标题',
           class: 'cus-dialog',
-          modelValue: visible,
+          modelValue: visible.value,
           closeOnClickModal: false,
           onClosed: () => {
             if (typeOf(afterClose) === 'function')
-              afterClose()
+              afterClose(bcParam)
 
             app.unmount()
             document.body.removeChild(root)
@@ -51,6 +52,7 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
 
       // 弹框关闭之前的回调函数
       const onClose = (param) => {
+        bcParam = param
         if (typeOf(beforeClose) === 'function')
           beforeClose(done, param)
         else

@@ -1,6 +1,5 @@
 /* eslint-disable node/prefer-global/process */
-import { basename, extname, resolve } from 'node:path'
-import { globSync } from 'glob'
+import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -11,6 +10,7 @@ import viteCompression from 'vite-plugin-compression'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { getApiKeys } from './getAutoImp'
 
 export function createVitePlugins(viteEnv) {
   const { VITE_GLOB_APP_TITLE } = viteEnv
@@ -91,19 +91,3 @@ function createCompression(viteEnv) {
   }
   return plugins
 };
-
-function getApiKeys() {
-  const modules = {
-    '../helper/index': ['useRequest']
-  }
-  const files = globSync('./src/api/modules/*.js')
-  files.forEach((file) => {
-    const fileName = basename(file, extname(file))
-    const key = `@/api/modules/${fileName}`
-    const fns = require(`../src/api/modules/${fileName}.js`)
-    modules[key] = Object.keys(fns).reduce((pre, cur) => {
-      return pre.push([cur, `api_${fileName}_${cur}`]), pre
-    }, [])
-  })
-  return modules
-}

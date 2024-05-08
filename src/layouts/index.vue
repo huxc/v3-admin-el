@@ -3,7 +3,7 @@
     <el-aside>
       <div class="aside-box" :style="{ width: isCollapse ? '65px' : '210px' }">
         <div class="logo flx-center">
-          <img class="logo-img" src="/images/logo.svg" alt="logo">
+          <img class="logo-img" src="/logo.svg" alt="logo">
           <span v-show="!isCollapse" class="logo-text">管理系统</span>
         </div>
         <el-scrollbar>

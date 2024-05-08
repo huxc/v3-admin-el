@@ -17,7 +17,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['clsDwr'])
+const emit = defineEmits(['clsDwr', 'clsDlg'])
 
 const { formItems, editForm, formRef } = useForm()
 
@@ -28,12 +28,14 @@ onMounted(() => {
 })
 
 function onSubmit() {
-  emit('clsDwr', true)
+  emit('clsDwr', { a: 1, b: 2 })
+  emit('clsDlg', { a: 1, b: 2 })
 }
 
 function expose_fn() {
   formRef.value.promiseSubmit().then(() => {
-    emit('clsDwr', true)
+    emit('clsDwr', { a: 1, b: 2 })
+    emit('clsDlg', { a: 1, b: 2 })
   })
 }
 

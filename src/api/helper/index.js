@@ -6,9 +6,13 @@ import { mergeConfig } from './merge-config'
 import router from '@/routers'
 import { TOKEN_STATE } from '@/config/global'
 import { closeLoading, openLoading } from '@/utils/el-loading'
+import { useUserStore } from '@/store/modules/user'
 
 // token是否过期
 let isRefreshing = false
+
+// 保存需要重新发起请求的队列
+const retryRequests = []
 
 /**
  * @description 配置请求方法
@@ -63,6 +67,9 @@ function createService() {
         if (TOKEN_STATE.includes(res.code)) {
           if (!isRefreshing) {
             isRefreshing = true
+
+            /** 此处为调转到登录逻辑 */
+
             res.msg = '登录已失效，请重新登录。'
             router.push({ path: '/login' })
 
@@ -74,10 +81,46 @@ function createService() {
                 duration: 3 * 1000,
               })
             }
+
+            /**
+             * 此处为刷新token逻辑
+            return api_刷新token的方法
+              .then((res) => {
+                const userStore = useUserStore()
+                // 赋值刷新后的Token
+                userStore.refToken(res.data)
+                //   遍历执行需要重新发起请求的队列
+                retryRequests.forEach(cb => cb(res))
+                //   清空队列
+                retryRequests = []
+                return createRequest(service)
+              })
+              .catch(() => {
+                retryRequests = []
+                res.msg = '登录已失效，请重新登录。'
+                router.push({ path: '/login' })
+              })
+              .finally(() => {
+                // 请求完成后重置flag
+                isRefreshing = false
+              })
+
+             */
             setTimeout(() => {
               isRefreshing = false
             }, 300)
           }
+        }
+        else {
+          // 正在刷新token，返回一个未执行resolve的promise
+          // 把promise 的resolve 保存到队列的回调里面，等待刷新Token后调用
+          // 原调用者会处于等待状态直到 队列重新发起请求，再把响应返回，以达到用户无感知的目的（无痛刷新）
+          return new Promise((resolve) => {
+            // 将resolve放进队列，用一个函数形式来保存，等token刷新后直接执行
+            retryRequests.push(() => {
+              resolve(createRequest(service))
+            })
+          })
         }
 
         return Promise.reject(res)
