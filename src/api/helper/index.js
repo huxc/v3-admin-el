@@ -6,7 +6,7 @@ import { mergeConfig } from './merge-config'
 import router from '@/routers'
 import { TOKEN_STATE } from '@/config/global'
 import { closeLoading, openLoading } from '@/utils/el-loading'
-import { useUserStore } from '@/store/modules/user'
+// import { useUserStore } from '@/store/modules/user'
 
 // token是否过期
 let isRefreshing = false
@@ -108,7 +108,7 @@ function createService() {
              */
             setTimeout(() => {
               isRefreshing = false
-            }, 300)
+            }, 3000)
           }
         }
         else {
