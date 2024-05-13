@@ -3,7 +3,7 @@ import { Icon } from '@iconify/vue'
 import { typeOf } from '@/utils'
 
 /**
- * @description js方式弹出el-drawer
+ *   js方式弹出el-drawer
  * @param {object} attrs el-drawer组件参数
  * @param {object} props el-drawer内部组件的prop参数
  * @param {componentEl} componentEl el-drawer弹出的内容(组件)
@@ -16,6 +16,9 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
   const app = createApp({
     components: { ComponentEl: componentEl },
 
+    /**
+     * setup
+     */
     setup() {
       const drawerRef = ref()
       const visible = ref(true)
@@ -28,6 +31,9 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
         class: 'cus-drawer',
         modelValue: visible.value,
         closeOnClickModal: false,
+        /**
+         * 关闭
+         */
         onClosed: () => {
           if (typeOf(afterClose) === 'function')
             afterClose()
@@ -37,11 +43,16 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
         },
       }, attrs)
 
+      /**
+       * 关闭
+       */
       const done = () => {
         drawerRef.value.handleClose()
       }
 
-      // 关闭事件
+      /**
+       * 关闭处理事件
+       */
       const onClose = (param) => {
         // 关闭之前的回调事件
         if (typeOf(beforeClose) === 'function')
@@ -55,13 +66,16 @@ export function useDrawer({ attrs = {}, props = {}, componentEl, beforeClose, af
         ElDrawer,
         cusAttrs,
         {
+          /**
+           * 合并参数
+           */
           default: () => h(componentEl, {
             ref: elChild,
             ...props,
             onClsDwr: onClose,
           }),
         },
-)
+      )
     },
   })
   app.component('v3-icon', Icon)

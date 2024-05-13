@@ -1,10 +1,14 @@
-// 判断路由是否拥有权限
+/**
+ * 判断路由是否拥有权限
+ */
 function hasAuth(route, authCodes) {
   const authCode = route?.meta.permissionCode
   return authCode ? authCodes.includes(authCode) : true
 }
 
-// 递归根据权限数组过滤动态路由
+/**
+ * 递归根据权限数组过滤动态路由
+ */
 export function filterAsyncRoutes(asyncRotuers, authCodes) {
   const filterRoutes = []
   asyncRotuers.forEach((route) => {
@@ -19,6 +23,9 @@ export function filterAsyncRoutes(asyncRotuers, authCodes) {
   return filterRoutes
 }
 
+/**
+ * 权限筛选
+ */
 export function splitPageAndBtn(auths) {
   const btnAuths = []
   const pageAuths = []

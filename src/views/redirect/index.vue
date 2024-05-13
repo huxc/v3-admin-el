@@ -2,6 +2,7 @@
 import { useRoute, useRouter } from 'vue-router'
 
 export default {
+  // eslint-disable-next-line jsdoc/require-jsdoc
   setup() {
     const router = useRouter()
     const route = useRoute()

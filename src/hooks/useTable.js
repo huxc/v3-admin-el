@@ -2,13 +2,12 @@ import { invoke, until } from '@vueuse/core'
 import { filterEmptyValue, typeOf } from '@/utils'
 
 /**
- * @description table 页面操作方法封装
+ *   table 页面操作方法封装
  * @param {requestApi} 获取表格数据 请求接口Api(必传)
  * @function formatRequest 请求后格式化表格数据函数(非必传)
  * @param {initParam} 获取数据初始化参数(不必传，默认为{})
  * @function searchProps.formatQuery 请求前格式化查询参数函数(非必传)
  */
-
 export function useTable(props) {
   const requestApi = toRef(props, 'requestApi')
   const { formatRequest, searchProps, pageRequest, initParam } = props

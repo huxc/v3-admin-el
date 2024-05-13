@@ -1,6 +1,5 @@
 import antfu from '@antfu/eslint-config'
 import globs from './.eslintrc-auto-import.json' assert {type: 'json'}
-
 export default antfu(
   {
     vue: {
@@ -13,6 +12,11 @@ export default antfu(
       html: true,
       markdown: 'prettier'
     },
+    ignores: [
+        '**/eslint.config.js',
+        '**/vite_config',
+        '**/routers'
+    ]
   },
   {
     languageOptions: {
@@ -23,7 +27,18 @@ export default antfu(
   },
   {
     rules: {
-        'comma-dangle': ["error", "never"]
+      'jsdoc/check-param-names':'off',
+      "jsdoc/check-alignment": "error",
+      "jsdoc/require-description": ["error", {"descriptionStyle":"any"}],
+      'jsdoc/require-jsdoc': ['error', {
+        require: {
+          ArrowFunctionExpression: true,
+          ClassDeclaration: true,
+          ClassExpression: true,
+          FunctionExpression: true,
+          MethodDefinition: true,
+        },
+      }],
     }
   }
 )

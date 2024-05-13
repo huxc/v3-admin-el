@@ -65,7 +65,9 @@ onKeyStroke('Enter', (e) => {
   handleValidate()
 })
 
-// 登录
+/**
+ *登录
+ */
 function onLogin(loginEl) {
   if (!loginEl)
     return
@@ -80,7 +82,9 @@ function onLogin(loginEl) {
   })
 }
 
-// 登录校验
+/**
+ *登录校验
+ */
 function handleValidate() {
   if (!formEl.value)
     return
@@ -99,11 +103,16 @@ function handleValidate() {
   })
 }
 
+/**
+ *getImgBase64
+ */
 function getImgBase64(code) {
   imgCode.value = code
 }
 
-// 刷新验证码操作
+/**
+ *changeImageCode
+ */
 function changeImageCode() {
   imgRefresh.value = !imgRefresh.value
 }

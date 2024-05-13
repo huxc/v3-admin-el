@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-alignment */
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { has } from 'lodash-es'
@@ -15,7 +16,7 @@ let isRefreshing = false
 const retryRequests = []
 
 /**
- * @description 配置请求方法
+ * 配置请求方法
  * @param {object} service axios 实例
  */
 function createRequest(service) {
@@ -33,7 +34,7 @@ function createRequest(service) {
 }
 
 /**
- * @description 创建请求实例
+ *   创建请求实例
  */
 function createService() {
   // 创建一个 axios 实例
@@ -69,7 +70,6 @@ function createService() {
             isRefreshing = true
 
             /** 此处为调转到登录逻辑 */
-
             res.msg = '登录已失效，请重新登录。'
             router.push({ path: '/login' })
 
@@ -105,6 +105,9 @@ function createService() {
                 isRefreshing = false
               })
 
+             */
+            /**
+             * 延迟
              */
             setTimeout(() => {
               isRefreshing = false

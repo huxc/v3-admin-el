@@ -1,5 +1,7 @@
+/**
+ * 分页查询接口
+ */
 export function usePageList() {
-  // 分页查询接口
   const requestApi = ref(api_account_getUserPage)
 
   // 列表列名
@@ -11,6 +13,9 @@ export function usePageList() {
     {
       prop: 'departmentName',
       label: '部门',
+      /**
+       * 格式化参数
+       */
       render: (h, { row }) => {
         return h('span', { style: { color: '#60D7A7' } }, row.departmentName)
       },

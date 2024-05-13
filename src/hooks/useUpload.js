@@ -1,5 +1,8 @@
 import { typeOf } from '@/utils'
 
+/**
+ * 上传hooks
+ */
 export function useUpload(props, fileVModel) {
   const { ext, maxSize, limit, imageList } = props
   const uploadRef = ref()
@@ -7,7 +10,9 @@ export function useUpload(props, fileVModel) {
   const visible = ref(false)
   const imageUrl = ref('')
   const isLoading = ref(false)
-  // 上传前校检格式和大小
+  /**
+   * 上传前校检格式和大小
+   */
   const handleBeforeUpload = (file) => {
     const fileExt = file.name.lastIndexOf('.')
     const subExt = file.name.substring(fileExt).toLocaleLowerCase()
@@ -28,7 +33,9 @@ export function useUpload(props, fileVModel) {
     return true
   }
 
-  // 文件个数超出限制
+  /**
+   * 文件个数超出限制
+   */
   const handleExceed = () => {
     ElMessage.warning({
       showClose: true,
@@ -36,7 +43,9 @@ export function useUpload(props, fileVModel) {
     })
   }
 
-  // 上传失败回调
+  /**
+   *上传失败回调
+   */
   const handleError = (err) => {
     isLoading.value = false
     ElMessage.warning({
@@ -45,7 +54,9 @@ export function useUpload(props, fileVModel) {
     })
   }
 
-  // 上传成功回调
+  /**
+   *上传成功回调
+   */
   const handleSuccess = (res, file) => {
     if (res.success) {
       limit > 1
@@ -58,19 +69,25 @@ export function useUpload(props, fileVModel) {
     }
   }
 
-  // 预览事件
+  /**
+   *预览事件
+   */
   const handlePreview = (file) => {
     imageUrl.value = file.url
     visible.value = true
   }
 
-  // 删除上传文件前
+  /**
+   *删除上传文件前
+   */
   const beforeDelete = (file) => {
     if (file.status === 'success')
       return ElMessageBox.confirm(`确定删除文件【${file.name}】`)
   }
 
-  // 上传单图/多图的删除
+  /**
+   *上传单图/多图的删除
+   */
   const handleDeleteFile = (file) => {
     if (file.status === 'success') {
       const url = file?.response?.data || file.url

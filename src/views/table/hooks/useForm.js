@@ -1,6 +1,9 @@
-export const useForm = () => {
+/**
+ * 表单配置
+ */
+export function useForm() {
   const editForm = reactive({
-    checkboxGroup: ['1']
+    checkboxGroup: ['1'],
   })
   const formRef = ref()
   const formItems = [
@@ -10,23 +13,25 @@ export const useForm = () => {
         label: '姓名',
         col: 12,
         rules: [
-          { required: true, message: '年龄不能为空', trigger: 'click' }
-        ]
+          { required: true, message: '年龄不能为空', trigger: 'click' },
+        ],
       },
       attrs: {
         key: 'name',
-        placeholder: '请输入姓名'
+        placeholder: '请输入姓名',
       },
+      /**
+       * 返回一个被合并到当前attrs属性里的对象
+       */
       getAttrs(Model) {
-        // 返回一个被合并到当前attrs属性里的对象
         return Model.age === '22' ? { disabled: true } : null
-      }
+      },
     },
     {
       tag: 'select',
       itemAttrs: {
         label: '兴趣',
-        col: 12
+        col: 12,
       },
       attrs: {
         key: 'hobby',
@@ -34,109 +39,112 @@ export const useForm = () => {
         options: [
           { value: 1, label: '吃饭' },
           { value: 2, label: '睡觉' },
-          { value: 3, label: '打豆豆' }
-        ]
-      }
+          { value: 3, label: '打豆豆' },
+        ],
+      },
     },
     {
       tag: 'input',
       itemAttrs: {
         label: '年龄',
         rules: [
-          { required: true, message: '年龄不能为空', trigger: 'click' }
-        ]
+          { required: true, message: '年龄不能为空', trigger: 'click' },
+        ],
       },
       attrs: {
         key: 'age',
-        placeholder: '请输入年龄'
+        placeholder: '请输入年龄',
       },
+      /**
+       *当Model.hobby === 2才显示
+       */
       ifRender(Model) {
         return Model.hobby === 2
-      }
+      },
     },
     {
       tag: 'date',
       itemAttrs: {
         label: '日期',
-        col: 12
+        col: 12,
       },
       attrs: {
-        key: 'date',
-        'value-format': 'yyyy-MM-dd'
-      }
+        'key': 'date',
+        'value-format': 'yyyy-MM-dd',
+      },
     },
     {
       tag: 'daterange',
       itemAttrs: {
         label: '日期范围',
-        col: 10
+        col: 10,
       },
       attrs: {
-        key: ['start', 'end']
-      }
+        key: ['start', 'end'],
+      },
     },
     {
       tag: 'radio',
       itemAttrs: {
-        label: '单选框'
+        label: '单选框',
       },
       attrs: {
         value: '1',
         key: 'radio',
-        options: [{ value: '1', label: '男' }, { value: '2', label: '女' }]
-      }
+        options: [{ value: '1', label: '男' }, { value: '2', label: '女' }],
+      },
     },
     {
       tag: 'uploadFile',
       itemAttrs: {
         label: '文件',
-        col: 24
+        col: 24,
       },
       attrs: {
         key: 'file_uri',
-        limit: 1
-      }
+        limit: 1,
+      },
     },
     {
       tag: 'uploadImg',
       itemAttrs: {
         label: '文章封面',
-        col: 24
+        col: 24,
       },
       attrs: {
         key: 'image_uri',
-        limit: 2
-      }
+        limit: 2,
+      },
     },
     {
       tag: 'radio',
       itemAttrs: {
-        label: '调用后端接口-单选框'
+        label: '调用后端接口-单选框',
       },
       attrs: {
         value: '1',
         key: 'asyncRadio',
-        options: []
-      }
+        options: [],
+      },
     },
     {
       tag: 'checkbox-group',
       itemAttrs: {
-        label: '复选框组'
+        label: '复选框组',
       },
       attrs: {
         key: 'checkboxGroup',
         options: [
           { value: '1', label: '复选框1' },
           { value: '2', label: '复选框2' },
-          { value: '3', label: '复选框3' }
-        ]
-      }
+          { value: '3', label: '复选框3' },
+        ],
+      },
     },
     {
       tag: 'cascader',
       itemAttrs: {
-        label: '级联选择器'
+        label: '级联选择器',
       },
       attrs: {
         key: 'cascader',
@@ -151,21 +159,21 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'consistency',
-                    label: 'Consistency'
+                    label: 'Consistency',
                   },
                   {
                     value: 'feedback',
-                    label: 'Feedback'
+                    label: 'Feedback',
                   },
                   {
                     value: 'efficiency',
-                    label: 'Efficiency'
+                    label: 'Efficiency',
                   },
                   {
                     value: 'controllability',
-                    label: 'Controllability'
-                  }
-                ]
+                    label: 'Controllability',
+                  },
+                ],
               },
               {
                 value: 'navigation',
@@ -173,15 +181,15 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'side nav',
-                    label: 'Side Navigation'
+                    label: 'Side Navigation',
                   },
                   {
                     value: 'top nav',
-                    label: 'Top Navigation'
-                  }
-                ]
-              }
-            ]
+                    label: 'Top Navigation',
+                  },
+                ],
+              },
+            ],
           },
           {
             value: 'component',
@@ -193,25 +201,25 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'layout',
-                    label: 'Layout'
+                    label: 'Layout',
                   },
                   {
                     value: 'color',
-                    label: 'Color'
+                    label: 'Color',
                   },
                   {
                     value: 'typography',
-                    label: 'Typography'
+                    label: 'Typography',
                   },
                   {
                     value: 'icon',
-                    label: 'Icon'
+                    label: 'Icon',
                   },
                   {
                     value: 'button',
-                    label: 'Button'
-                  }
-                ]
+                    label: 'Button',
+                  },
+                ],
               },
               {
                 value: 'form',
@@ -219,61 +227,61 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'radio',
-                    label: 'Radio'
+                    label: 'Radio',
                   },
                   {
                     value: 'checkbox',
-                    label: 'Checkbox'
+                    label: 'Checkbox',
                   },
                   {
                     value: 'input',
-                    label: 'Input'
+                    label: 'Input',
                   },
                   {
                     value: 'input-number',
-                    label: 'InputNumber'
+                    label: 'InputNumber',
                   },
                   {
                     value: 'select',
-                    label: 'Select'
+                    label: 'Select',
                   },
                   {
                     value: 'cascader',
-                    label: 'Cascader'
+                    label: 'Cascader',
                   },
                   {
                     value: 'switch',
-                    label: 'Switch'
+                    label: 'Switch',
                   },
                   {
                     value: 'slider',
-                    label: 'Slider'
+                    label: 'Slider',
                   },
                   {
                     value: 'time-picker',
-                    label: 'TimePicker'
+                    label: 'TimePicker',
                   },
                   {
                     value: 'date-picker',
-                    label: 'DatePicker'
+                    label: 'DatePicker',
                   },
                   {
                     value: 'datetime-picker',
-                    label: 'DateTimePicker'
+                    label: 'DateTimePicker',
                   },
                   {
                     value: 'upload',
-                    label: 'Upload'
+                    label: 'Upload',
                   },
                   {
                     value: 'rate',
-                    label: 'Rate'
+                    label: 'Rate',
                   },
                   {
                     value: 'form',
-                    label: 'Form'
-                  }
-                ]
+                    label: 'Form',
+                  },
+                ],
               },
               {
                 value: 'data',
@@ -281,29 +289,29 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'table',
-                    label: 'Table'
+                    label: 'Table',
                   },
                   {
                     value: 'tag',
-                    label: 'Tag'
+                    label: 'Tag',
                   },
                   {
                     value: 'progress',
-                    label: 'Progress'
+                    label: 'Progress',
                   },
                   {
                     value: 'tree',
-                    label: 'Tree'
+                    label: 'Tree',
                   },
                   {
                     value: 'pagination',
-                    label: 'Pagination'
+                    label: 'Pagination',
                   },
                   {
                     value: 'badge',
-                    label: 'Badge'
-                  }
-                ]
+                    label: 'Badge',
+                  },
+                ],
               },
               {
                 value: 'notice',
@@ -311,25 +319,25 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'alert',
-                    label: 'Alert'
+                    label: 'Alert',
                   },
                   {
                     value: 'loading',
-                    label: 'Loading'
+                    label: 'Loading',
                   },
                   {
                     value: 'message',
-                    label: 'Message'
+                    label: 'Message',
                   },
                   {
                     value: 'message-box',
-                    label: 'MessageBox'
+                    label: 'MessageBox',
                   },
                   {
                     value: 'notification',
-                    label: 'Notification'
-                  }
-                ]
+                    label: 'Notification',
+                  },
+                ],
               },
               {
                 value: 'navigation',
@@ -337,25 +345,25 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'menu',
-                    label: 'Menu'
+                    label: 'Menu',
                   },
                   {
                     value: 'tabs',
-                    label: 'Tabs'
+                    label: 'Tabs',
                   },
                   {
                     value: 'breadcrumb',
-                    label: 'Breadcrumb'
+                    label: 'Breadcrumb',
                   },
                   {
                     value: 'dropdown',
-                    label: 'Dropdown'
+                    label: 'Dropdown',
                   },
                   {
                     value: 'steps',
-                    label: 'Steps'
-                  }
-                ]
+                    label: 'Steps',
+                  },
+                ],
               },
               {
                 value: 'others',
@@ -363,31 +371,31 @@ export const useForm = () => {
                 children: [
                   {
                     value: 'dialog',
-                    label: 'Dialog'
+                    label: 'Dialog',
                   },
                   {
                     value: 'tooltip',
-                    label: 'Tooltip'
+                    label: 'Tooltip',
                   },
                   {
                     value: 'popover',
-                    label: 'Popover'
+                    label: 'Popover',
                   },
                   {
                     value: 'card',
-                    label: 'Card'
+                    label: 'Card',
                   },
                   {
                     value: 'carousel',
-                    label: 'Carousel'
+                    label: 'Carousel',
                   },
                   {
                     value: 'collapse',
-                    label: 'Collapse'
-                  }
-                ]
-              }
-            ]
+                    label: 'Collapse',
+                  },
+                ],
+              },
+            ],
           },
           {
             value: 'resource',
@@ -395,46 +403,46 @@ export const useForm = () => {
             children: [
               {
                 value: 'axure',
-                label: 'Axure Components'
+                label: 'Axure Components',
               },
               {
                 value: 'sketch',
-                label: 'Sketch Templates'
+                label: 'Sketch Templates',
               },
               {
                 value: 'docs',
-                label: 'Design Documentation'
-              }
-            ]
-          }
-        ]
+                label: 'Design Documentation',
+              },
+            ],
+          },
+        ],
 
-      }
+      },
     },
     {
       tag: 'checkbox',
       itemAttrs: {
-        label: '复选框'
+        label: '复选框',
       },
       attrs: {
         key: 'checkbox',
         value: true,
-        label: '复选框'
-      }
+        label: '复选框',
+      },
     },
     {
       tag: 'textarea',
       itemAttrs: {
-        label: '文本框'
+        label: '文本框',
       },
       attrs: {
-        key: 'textarea'
-      }
-    }
+        key: 'textarea',
+      },
+    },
   ]
   return {
     formRef,
     editForm,
-    formItems
+    formItems,
   }
 }

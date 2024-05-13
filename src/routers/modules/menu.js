@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-jsdoc */
 import Layout from '@/layouts/index.vue'
 
 export default {

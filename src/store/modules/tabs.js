@@ -1,8 +1,12 @@
+/* eslint-disable jsdoc/require-description */
 import { defineStore } from 'pinia'
 import piniaPersistConfig from '../persist'
 import router from '@/routers/index.js'
 import { HOME_URL, TABS_BLACK_LIST } from '@/config/global.js'
 
+/**
+ *
+ */
 function tabs() {
   const tabsState = reactive({
     tabsMenuValue: '/home',
@@ -12,10 +16,16 @@ function tabs() {
   })
 
   // 替换首页
+  /**
+   *
+   */
   const replaceTabsFirst = (tabFirst) => {
     tabsState.tabsMenuList.splice(0, 1, tabFirst)
   }
 
+  /**
+   *
+   */
   const addTabs = (tabItem) => {
     if (TABS_BLACK_LIST.includes(tabItem.path))
       return
@@ -28,16 +38,22 @@ function tabs() {
     if (tabsState.tabsMenuList.every(item => item.path !== tabItem.path))
       tabsState.tabsMenuList.push(tabInfo)
 
-    setTabsMenuValue(tabItem.path)
+    // setTabsMenuValue(tabItem.path)
     router.push(tabItem.fullPath)
   }
 
+  /**
+   *
+   */
   const removeAllTabs = () => {
     tabsState.tabsMenuList = [
       { title: '工作台', path: '/home', fullPath: '/home', icon: 'home-filled', close: false },
     ]
   }
 
+  /**
+   *
+   */
   const removeTabs = (tabPath) => {
     let tabsMenuValue = tabsState.tabsMenuValue
     const tabsMenuList = tabsState.tabsMenuList
@@ -59,12 +75,18 @@ function tabs() {
   }
 
   // 根据path修改title
+  /**
+   *
+   */
   const modifyTabsTitle = (path, title) => {
     const tab = tabsState.tabsMenuList.find(i => i.path === path)
     if (tab)
       tab.title = title
   }
 
+  /**
+   *
+   */
   const changeTabs = (tabItem) => {
     tabsState.tabsMenuList.forEach((item) => {
       if (item.title === tabItem.label)
@@ -72,21 +94,33 @@ function tabs() {
     })
   }
 
+  /**
+   *
+   */
   const setTabsMenuValue = (tabsMenuValue) => {
     tabsState.tabsMenuValue = tabsMenuValue
   }
 
+  /**
+   *
+   */
   const setTabsMenuList = (tabsMenuList) => {
     tabsState.tabsMenuList = tabsMenuList
   }
 
   // 关闭多个tabs
+  /**
+   *
+   */
   const closeMultipleTab = (tabsMenuValue) => {
     tabsState.tabsMenuList = tabsState.tabsMenuList.filter((item) => {
       return item.path === tabsMenuValue || item.path === HOME_URL
     })
   }
   // 首页
+  /**
+   *
+   */
   const goHome = () => {
     router.push(HOME_URL)
     tabsState.tabsMenuValue = HOME_URL

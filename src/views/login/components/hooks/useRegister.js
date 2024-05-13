@@ -1,5 +1,8 @@
 import { nmb_eleven, reg_password } from '@/utils/regexs.js'
 
+/**
+ * 注册
+ */
 export function useRegister() {
   const editForm = reactive({})
   const formRef = ref(null)
@@ -10,6 +13,9 @@ export function useRegister() {
     avatarList: [], // 头像列表
   })
 
+  /**
+   * 校验
+   */
   const validateCode = () => {
     if (smsCodes.value.join('').length !== 6) {
       codeError.value = '请输入6位短信验证码'
@@ -21,6 +27,9 @@ export function useRegister() {
     }
   }
 
+  /**
+   * 校验
+   */
   const validatePass = (rule, value, callback) => {
     if (editForm.password === editForm.passwords)
       callback()

@@ -1,7 +1,8 @@
 /**
- * @description 根据id查询.
- * @param {string} code - code.
- * @param {number} id - 用户id.
+ * 根据id查询.
+ * @param {string} data
+ * @param {string} data.code - code.
+ * @param {number} data.id - 用户id.
  */
 export function getUser(data, prop = {}) {
   return useRequest({
@@ -10,11 +11,11 @@ export function getUser(data, prop = {}) {
     method: 'get',
     domain: 'account',
     url: '/user',
-    })
+  })
 }
 
 /**
- * @description 新增.
+ *   新增.
  * @param {object} accountDTO - accountDTO.
  */
 export function postUser(data, prop = {}) {
@@ -24,11 +25,11 @@ export function postUser(data, prop = {}) {
     method: 'post',
     domain: 'account',
     url: '/user',
-    })
+  })
 }
 
 /**
- * @description 修改.
+ *   修改.
  * @param {object} accountDTO - accountDTO.
  */
 export function putUser(data, prop = {}) {
@@ -38,11 +39,11 @@ export function putUser(data, prop = {}) {
     method: 'put',
     domain: 'account',
     url: '/user',
-    })
+  })
 }
 
 /**
- * @description 删除.
+ *   删除.
  * @param {object} accountIdsDTO - accountIdsDTO.
  */
 export function putUserIds(data, prop = {}) {
@@ -52,11 +53,11 @@ export function putUserIds(data, prop = {}) {
     method: 'put',
     domain: 'account',
     url: '/user/ids',
-    })
+  })
 }
 
 /**
- * @description 分页查询.
+ *   分页查询.
  * @param {number} cityId - 城市Id.
  * @param {string} code - code.
  * @param {string} company - 所在公司.
@@ -75,11 +76,11 @@ export function getUserPage(data, prop = {}) {
     method: 'get',
     domain: 'account',
     url: '/accounts',
-    })
+  })
 }
 
 /**
- * @description 用户名模糊查询.
+ *   用户名模糊查询.
  * @param {number} pageNum - 页码.
  * @param {number} pageSize - 页大小.
  */
@@ -90,9 +91,12 @@ export function getUserSearch(data, prop = {}) {
     method: 'get',
     domain: 'account',
     url: '/user/search',
-    })
+  })
 }
 
+/**
+ *gettDepartments
+ */
 export function gettDepartments(data, prop = {}) {
   return useRequest({
     data,
@@ -100,5 +104,5 @@ export function gettDepartments(data, prop = {}) {
     method: 'get',
     domain: 'account',
     url: '/departments',
-    })
+  })
 }

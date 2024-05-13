@@ -1,3 +1,4 @@
+<!-- eslint-disable jsdoc/require-description -->
 <template>
   <div class="tabs-box">
     <div class="tabs-menu">
@@ -35,7 +36,7 @@ const tabsIcon = computed(() => globalStore.tabsIcon)
 
 onMounted(() => {
   tabsDrop()
-  initTabs()
+//   initTabs()
 })
 
 // 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
@@ -75,11 +76,16 @@ watch(
 //   });
 // };
 
-// tabs 拖拽排序
+/**
+ * tabs 拖拽排序
+ */
 function tabsDrop() {
   Sortable.create(document.querySelector('.el-tabs__nav'), {
     draggable: '.el-tabs__item',
     animation: 300,
+    /**
+     * end
+     */
     onEnd({ newIndex, oldIndex }) {
       const tabsList = [...tabStore.tabsMenuList]
       const currRow = tabsList.splice(oldIndex, 1)[0]
@@ -89,15 +95,19 @@ function tabsDrop() {
   })
 }
 
-// Tab Click
+/**
+ *Tab Click
+ */
 function tabClick(tabItem) {
   const fullPath = tabItem.props.name
   router.push(fullPath)
 }
 
-// Remove Tab
+/**
+ *Remove Tab
+ */
 function tabRemove(fullPath) {
-  tabStore.removeTabs(fullPath, fullPath == route.fullPath)
+  tabStore.removeTabs(fullPath, fullPath === route.fullPath)
 }
 </script>
 

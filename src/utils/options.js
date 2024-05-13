@@ -1,11 +1,14 @@
 import { get } from 'lodash-es'
 
+/**
+ * 根据key获取配置对象
+ */
 export function findTreeItem(tree, key) {
   return tree.find(item => item.attrs && item.attrs.key === key)
 }
 
 /**
- * @description 设置表单Option值的通用方法.
+ *   设置表单Option值的通用方法.
  * @param {Array} tree - 要设置的formItem数组.
  * @param {string} key - 要设置的formItem的某个对象key.
  * @param {Array} data - 赋给option的值.
@@ -18,7 +21,7 @@ export function setAttribute(tree, key, data, attrName = 'options') {
 }
 
 /**
- * @description 设置表单Option值的通用方法.
+ *   设置表单Option值的通用方法.
  * @param {number} getOptions - 请求接口函数.
  * @param {number} tree - 要设置的formItem数组.
  * @param {number} key - 要设置的formItem的某个对象key.

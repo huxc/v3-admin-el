@@ -1,3 +1,6 @@
+/**
+ * 获取类型
+ */
 function typeOf(obj) {
   const toString = Object.prototype.toString
   const map = {
@@ -16,13 +19,17 @@ function typeOf(obj) {
 }
 export { typeOf }
 
-// 判断空对象
+/**
+ * 判断空对象
+ */
 function isObjEmpty(obj) {
   return obj?.constructor === Object && Reflect.ownKeys(obj).length === 0
 }
 export { isObjEmpty }
 
-// deepCopy
+/**
+ * deepCopy
+ */
 function deepCopy(data) {
   const t = typeOf(data)
   let o
@@ -46,6 +53,9 @@ function deepCopy(data) {
 }
 export { deepCopy }
 
+/**
+ * 清除无效参数
+ */
 export function filterEmptyValue(...rest) {
   const query = Object.assign({}, ...rest)
   for (const key in query) {
@@ -55,19 +65,26 @@ export function filterEmptyValue(...rest) {
   return query
 }
 
+/**
+ * 查询
+ */
 export function findItem(formItems, key) {
   return formItems.find(
     formItem => formItem.attrs && formItem.attrs.key === key,
   )
 }
 
-// blob文件流生成本地地址并打开
+/**
+ * blob文件流生成本地地址并打开
+ */
 export function openDoc(blobStream) {
   const localUrl = URL.createObjectURL(blobStream)
   window.open(localUrl)
 }
 
-// base64字符转blob
+/**
+ * base64字符转blob
+ */
 export function base64ToBlob(base64, mime = '') {
   let byteChars // 解码base64后的字符串
   const sliceSize = 1024 // 切割文件按1G循环处理
@@ -97,7 +114,9 @@ export function base64ToBlob(base64, mime = '') {
   return new Blob(byteArrays, { type: mime })
 }
 
-// 生成唯一标识
+/**
+ * 生成唯一标识
+ */
 export function uuid() {
   const temp_url = URL.createObjectURL(new Blob())
   const uuid = temp_url.toString()
@@ -105,7 +124,9 @@ export function uuid() {
   return uuid.substring(uuid.length - 36)
 }
 
-// 生成随机码
+/**
+ * 生成随机码
+ */
 export function randomid() {
   let abc = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'g', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
   const [max, min] = [Math.floor(Math.random() * (10 - 7 + 1) + 1), Math.floor(Math.random() * (17 - 10 + 1) + 17)]
@@ -113,7 +134,9 @@ export function randomid() {
   return (abc + new Date().getTime())
 }
 
-// 扁平数据结构转Tree
+/**
+ * 扁平数据结构转Tree
+ */
 export function arrayToTree(items) {
   if (items && items.length <= 1)
     return items || []
@@ -152,7 +175,9 @@ export function arrayToTree(items) {
   return result
 }
 
-// 根据字符串、字号计算在html中占用的宽度
+/**
+ * 根据字符串、字号计算在html中占用的宽度
+ */
 export function measureText(txt, fontSize) {
   const canvas = document.createElement('canvas')
   const context = canvas.getContext('2d')

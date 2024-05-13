@@ -8,14 +8,16 @@ const route = {
   history: createWebHashHistory(),
   routes: [...staticRouter, ...errorRouter],
   strict: false,
-  // 切换页面，滚动到最顶部
+  /**
+   *切换页面，滚动到最顶部
+   */
   scrollBehavior: () => ({ left: 0, top: 0 }),
 }
 
 const router = createRouter(route)
 
 /**
- * @description 路由拦截 beforeEach
+ *   路由拦截 beforeEach
  */
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
@@ -49,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
 })
 
 /**
- * @description 路由跳转错误
+ *   路由跳转错误
  */
 router.onError((error) => {
   NProgress.done()
@@ -57,13 +59,15 @@ router.onError((error) => {
 })
 
 /**
- * @description 路由跳转结束
+ *   路由跳转结束
  */
 router.afterEach(() => {
   NProgress.done()
 })
 
-// 重置路由
+/**
+ *重置路由
+ */
 export function resetRouter() {
   const newRouter = createRouter(route)
   // 重置matcher以确保所有的路由都被重新定义

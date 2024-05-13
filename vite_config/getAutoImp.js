@@ -1,6 +1,9 @@
 import { basename, extname } from 'node:path'
 import { globSync } from 'glob'
 
+/**
+ *
+ */
 export function getApiKeys() {
   const modules = {
     '@/api/helper/index': ['useRequest'],
@@ -8,7 +11,7 @@ export function getApiKeys() {
     '@/hooks/useDrawer': ['useDrawer'],
     '@/hooks/useHandleData': ['useHandleData'],
     '@/hooks/useEcharts': ['useEcharts'],
-    }
+  }
   const files = globSync('./src/api/modules/*.js')
   files.forEach((file) => {
     const fileName = basename(file, extname(file))

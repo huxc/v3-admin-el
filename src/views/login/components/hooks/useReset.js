@@ -1,10 +1,16 @@
 import { nmb_eleven, reg_password } from '@/utils/regexs.js'
 
+/**
+ * 重置
+ */
 export function useReset() {
   const codeError = ref('')
   const editForm = reactive({})
   const smsCodes = ref(['', '', '', '', '', ''])
 
+  /**
+   * 短信
+   */
   const validateCode = () => {
     if (smsCodes.value.join('').length !== 6)
       codeError.value = '请输入6位短信验证码'
@@ -12,6 +18,9 @@ export function useReset() {
       codeError.value = null
   }
 
+  /**
+   * 校验
+   */
   const validatePass = (rule, value, callback) => {
     if (editForm.password === editForm.passwords)
       callback()

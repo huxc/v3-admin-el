@@ -4,6 +4,9 @@ import { isObjEmpty, typeOf } from '@/utils'
 import { domain_list } from '@/api/config/domainConfig'
 import { useUserStore } from '@/store/modules/user'
 
+/**
+ * 合并axios参数
+ */
 export function mergeConfig({ domain = 'user', ...config }) {
   const userStore = useUserStore()
   // 获取token
@@ -44,7 +47,9 @@ export function mergeConfig({ domain = 'user', ...config }) {
     // 选择相应的域名
     baseURL: domain_list[domain],
 
-    // 序列化`params`
+    /**
+     *序列化`params`
+     */
     paramsSerializer: (params) => {
       // get请求格式化对象/数组并转义字符
       return qs.stringify(params, { allowDots: true, encode: true, indices: false })

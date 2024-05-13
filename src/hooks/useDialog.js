@@ -3,7 +3,7 @@ import { Icon } from '@iconify/vue'
 import { isObjEmpty, typeOf } from '@/utils'
 
 /**
- * @description js方式弹出el-dialog
+ * js方式弹出el-dialog
  * @param {object} attrs el-dialog组件参数
  * @param {object} props el-dialog内部组件的prop参数
  * @param {object} footer 底部取消/确认按钮 (若为空对象则不显示) 按钮文字：okText(默认‘确定’)，cancelText(默认‘取消’)
@@ -11,16 +11,18 @@ import { isObjEmpty, typeOf } from '@/utils'
  * @param {function(done,param)} beforeClose 弹框关闭之前的回调函数 done:为关闭弹框函数，param：为内部组件的回调参数
  * @param {Function} afterClose 窗口关闭之后的回调函数
  */
-
 export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, beforeClose, afterClose }) {
   const root = document.createElement('div')
   document.body.prepend(root)
 
   const app = createApp({
     components: {
-      ComponentEl: componentEl
-     },
+      ComponentEl: componentEl,
+    },
 
+    /**
+     * setup
+     */
     setup() {
       let bcParam = null
       const dialogRef = ref()
@@ -35,6 +37,9 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
           class: 'cus-dialog',
           modelValue: visible.value,
           closeOnClickModal: false,
+          /**
+           * 关闭
+           */
           onClosed: () => {
             if (typeOf(afterClose) === 'function')
               afterClose(bcParam)
@@ -46,11 +51,16 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
         attrs,
       )
 
+      /**
+       * 关闭
+       */
       const done = () => {
         dialogRef.value.visible = false
       }
 
-      // 弹框关闭之前的回调函数
+      /**
+       * 弹框关闭之前的回调函数
+       */
       const onClose = (param) => {
         bcParam = param
         if (typeOf(beforeClose) === 'function')
@@ -59,7 +69,9 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
           done()
       }
 
-      // 确认事件
+      /**
+       * 确认事件
+       */
       const onConfirm = () => {
         if (typeOf(elChild.value.expose_fn) === 'function')
           elChild.value.expose_fn()
@@ -100,13 +112,16 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
       // 返回el-dialog组件
       return () =>
         h(ElDialog, dialogAttrs, {
+          /**
+           * 合并属性
+           */
           default: () =>
             h(ElScrollbar, divStyle, () =>
               h(componentEl, {
                 ref: elChild,
                 ...props,
                 onClsDlg: onClose,
-              }),),
+              })),
           //   header: headerDom,
           footer: footerDom,
         })

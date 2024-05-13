@@ -1,5 +1,8 @@
 import { h } from 'vue'
 
+/**
+ * h函数渲染
+ */
 function Render(props) {
   const params = {
     row: props.row,

@@ -23,18 +23,25 @@ const props = defineProps({
   tableRef: { type: Object },
   colSetting: {
     type: Array,
-    default: () => []
-  }
+    /**
+     * 可配置列
+     */
+    default: () => [],
+  },
 })
 
 const drawerVisible = ref(false)
 
-// 打开列设置
+/**
+ * 打开列设置
+ */
 function openColSetting() {
   drawerVisible.value = true
 }
 
-// 列显隐时重新布局 table
+/**
+ * 列显隐时重新布局 table
+ */
 function switchShow() {
   nextTick(() => {
     props.tableRef.doLayout()

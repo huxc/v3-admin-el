@@ -2,7 +2,12 @@ import { ElLoading } from 'element-plus'
 
 /* 全局请求 loading(服务方式调用) */
 let loadingInstance
+
 const loadList = []
+
+/**
+ * 打开loading
+ */
 export function openLoading(text = 'Loading') {
   loadingInstance = ElLoading.service({
     text,
@@ -14,11 +19,14 @@ export function openLoading(text = 'Loading') {
   loadList.push(loadingInstance)
 }
 
+/**
+ * 关闭loading
+ */
 export function closeLoading() {
   setTimeout(() => {
     if (loadList.length > 0) {
       loadList[0].close()
-	  loadList.splice(0, 1)
-	   }
+      loadList.splice(0, 1)
+    }
   }, 300)
 }

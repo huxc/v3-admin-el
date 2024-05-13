@@ -1,5 +1,5 @@
 /**
- * @description 表格多选数据操作
+ *   表格多选数据操作
  */
 export function useSelection() {
   // 是否选中数据
@@ -13,11 +13,13 @@ export function useSelection() {
     return selectedList.value.map(i => i.id)
   })
 
-  // 获取行数据的 Key,用来优化 Table 的渲染;在使用跨页多选时,该属性是必填的
+  /**
+   *获取行数据的 Key,用来优化 Table 的渲染;在使用跨页多选时,该属性是必填的
+   */
   const getRowKeys = row => row.id || row.uuid
 
   /**
-   * @description 多选操作
+   *   多选操作
    * @param {Array} rowArr 当前选择的所有数据
    * @return void
    */

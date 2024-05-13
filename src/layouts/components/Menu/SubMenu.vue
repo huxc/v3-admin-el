@@ -20,6 +20,7 @@
 defineProps({
   menuList: {
     type: Array,
+    // eslint-disable-next-line jsdoc/require-jsdoc
     default: () => [],
   },
 })
@@ -30,6 +31,10 @@ const iconStyle = {
   height: '20px',
   marginRight: '10px',
 }
+
+/**
+ *handleClickMenu
+ */
 function handleClickMenu(subItem) {
   if (subItem.meta.isLink)
     return window.open(subItem.meta.isLink, '_blank')

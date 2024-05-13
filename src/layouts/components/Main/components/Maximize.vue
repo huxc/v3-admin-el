@@ -8,6 +8,9 @@
 import { useGlobalStore } from '@/store/modules/global'
 
 const globalStore = useGlobalStore()
+/**
+ *exitMaximize
+ */
 function exitMaximize() {
   globalStore.setGlobalState('maximize', false)
 }

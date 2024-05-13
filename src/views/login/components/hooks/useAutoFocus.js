@@ -1,7 +1,13 @@
 import { useEventListener } from '@vueuse/core'
 
+/**
+ * 自动获取交代你
+ */
 export function useAutoFocus() {
   const codeboxEl = ref(null)
+  /**
+   * 等
+   */
   const autoFocus = () => {
     useEventListener(codeboxEl.value, 'input', (evt) => {
       if (evt?.data?.length === 1) {

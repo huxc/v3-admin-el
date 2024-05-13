@@ -1,38 +1,44 @@
 export const cusProps = {
   model: {
     type: Object,
-    default: () => {}
-    },
+    /**
+     * v-model对象
+     */
+    default: () => {},
+  },
   formItems: {
     type: Array,
-    required: true
-    },
+    required: true,
+  },
   inline: {
     type: Boolean,
-    default: false
-    },
+    default: false,
+  },
   submitMsg: {
     type: [Boolean, String],
-    default: '提交'
-    },
+    default: '提交',
+  },
   resetMsg: {
     type: [Boolean, String],
-    default: '重置'
-    },
+    default: '重置',
+  },
   labelWidth: {
     type: String,
-    default: 'auto'
-    },
+    default: 'auto',
+  },
   footer: {
     type: Boolean,
-    default: false
-    },
+    default: false,
+  },
   gutter: {
     type: Number,
-    default: 24
-    },
+    default: 24,
+  },
   rules: {
     type: Object,
-    default: () => {}
-    }
+    /**
+     * 校验规则
+     */
+    default: () => {},
+  },
 }

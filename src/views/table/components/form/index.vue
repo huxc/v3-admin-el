@@ -13,8 +13,11 @@ import { useForm } from './hooks/useForm'
 const props = defineProps({
   oldForm: {
     type: Object,
-    default: () => ({}) 
-  }
+    /**
+     * 表单赋值对象
+     */
+    default: () => ({}),
+  },
 })
 
 const emit = defineEmits(['clsDwr', 'clsDlg'])
@@ -27,11 +30,17 @@ onMounted(() => {
   }, 2000)
 })
 
+/**
+ * 提交
+ */
 function onSubmit() {
   emit('clsDwr', { a: 1, b: 2 })
   emit('clsDlg', { a: 1, b: 2 })
 }
 
+/**
+ * 导出给弹窗确定按钮使用
+ */
 function expose_fn() {
   formRef.value.promiseSubmit().then(() => {
     emit('clsDwr', { a: 1, b: 2 })
@@ -40,6 +49,6 @@ function expose_fn() {
 }
 
 defineExpose({
-  expose_fn
+  expose_fn,
 })
 </script>

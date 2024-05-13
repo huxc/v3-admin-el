@@ -1,3 +1,7 @@
+/* eslint-disable jsdoc/require-description */
+/**
+ * easeInOutQuad
+ */
 Math.easeInOutQuad = function (t, b, c, d) {
   t /= d / 2
   if (t < 1)
@@ -29,6 +33,9 @@ function move(amount) {
   document.body.scrollTop = amount
 }
 
+/**
+ * position
+ */
 function position() {
   return (
     document.documentElement.scrollTop
@@ -38,6 +45,7 @@ function position() {
 }
 
 /**
+ * scrollTo
  * @param {number} to
  * @param {number} duration
  * @param {Function} callback
@@ -48,6 +56,9 @@ export function scrollTo(to, duration, callback) {
   const increment = 20
   let currentTime = 0
   duration = typeof duration === 'undefined' ? 500 : duration
+  /**
+   *
+   */
   const animateScroll = function () {
     // increment the time
     currentTime += increment

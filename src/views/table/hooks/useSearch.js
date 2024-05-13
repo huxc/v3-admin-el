@@ -1,5 +1,8 @@
 import { getDepOptions } from '@/hooks/useOptions'
 
+/**
+ * 查询条件配置
+ */
 export function useSearch() {
   const searchItems = [
     {
@@ -11,7 +14,7 @@ export function useSearch() {
         key: 'roleName',
         maxlength: 10,
         placeholder: '请输入工号',
-      }
+      },
     },
     {
       tag: 'select',
@@ -26,7 +29,7 @@ export function useSearch() {
           { value: '1', label: '吃饭' },
           { value: '2', label: '睡觉' },
           { value: '3', label: '打豆豆' },
-        ]
+        ],
       },
     },
     {
@@ -39,9 +42,9 @@ export function useSearch() {
         placeholder: '请选择部门',
         subProps: {
           value: 'id',
-          label: 'departmentName'
+          label: 'departmentName',
         },
-        options: []
+        options: [],
       }),
     },
   ]
@@ -50,6 +53,6 @@ export function useSearch() {
   getDepOptions(searchItems, 'depid')
 
   return {
-    searchItems
+    searchItems,
   }
 }

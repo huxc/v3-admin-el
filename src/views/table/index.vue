@@ -48,27 +48,38 @@ onMounted(() => {
   }, 3000)
 })
 
+/**
+ * 弹窗编辑
+ */
 function onDialog(rows) {
   useDialog({
     attrs: { title: '表单编辑' },
     footer: { okText: '提交' },
     props: { oldForm: rows },
     componentEl: Form,
-    afterClose: (param) => {
-      console.log('🚀 ~ onDialog ~ param:', param)
-    }
+    /**
+     * 刷新列表
+     */
+    afterClose: () => {
+    },
   })
 }
 
+/**
+ *弹窗编辑
+ */
 function onDrawer(rows) {
   useDrawer({
     attrs: { title: '表单编辑' },
     props: { oldForm: rows },
     componentEl: Form,
+    /**
+     * 刷新列表
+     */
     beforeClose: (done) => {
       tableRef.value.refresh()
       done()
-    }
+    },
   })
 }
 </script>

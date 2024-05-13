@@ -45,39 +45,42 @@ const props = defineProps({
   action: {
     type: String,
     default: file_upload_url,
-    },
+  },
   param: {
     type: Object,
+    /**
+     * 参数
+     */
     default: () => {},
-    },
+  },
   maxSize: {
     type: Number,
     default: 5 * 1024,
-    },
+  },
   ext: {
     type: String,
     default: '.xls,.pdf,.jpg,.png,.jpeg',
-    },
+  },
   showMsg: {
     type: Boolean,
     default: true,
-    },
+  },
   showIpt: {
     type: Boolean,
     default: true,
-    },
+  },
   isBack: {
     type: Boolean,
     default: true,
-    },
+  },
   btnMsg: {
     type: String,
     default: '查找',
-    },
+  },
   isAllData: {
     type: Boolean,
     default: false,
-    },
+  },
   modelValue: {
     type: [String, Object],
     default: '',
@@ -86,16 +89,16 @@ const props = defineProps({
   autoUpload: {
     type: Boolean,
     default: true,
-    },
+  },
   // 手动上传 button text
   exportBtnMsg: {
     type: String,
     default: '导入',
-    },
+  },
   limit: {
     type: Number,
     default: 1,
-    },
+  },
 })
 
 const emit = defineEmits(['update:modelValue', 'upload'])
@@ -123,6 +126,9 @@ watch(fileList, () => {
     fileName.value = fileList.value[0].name
 })
 
+/**
+ * 成功处理
+ */
 function handleSuccess(res, file, files) {
   if (props.isBack) {
     if (res.success) {
@@ -139,7 +145,10 @@ function handleSuccess(res, file, files) {
   }
   isLoading.value = false
 }
-// 上传前校检格式和大小
+
+/**
+ *上传前校检格式和大小
+ */
 function handleBeforeUpload(file) {
   const fileExt = file.name.lastIndexOf('.')
   const subExt = file.name.substring(fileExt).toLocaleLowerCase()
@@ -148,7 +157,7 @@ function handleBeforeUpload(file) {
     ElMessage.warning({
       showClose: true,
       message: `只能上传${props.ext}格式的文件！`,
-      })
+    })
     return false
   }
   const isLtmaxWidth = file.size / 1024 < props.maxSize
@@ -156,19 +165,23 @@ function handleBeforeUpload(file) {
     ElMessage.warning({
       showClose: true,
       message: `上传文件大小不能超过${props.maxSize}KB！`,
-      })
+    })
     return false
   }
   isLoading.value = true
   return true
 }
 
-// 导入
+/**
+ *导入
+ */
 function submitUpload() {
   uploadRef.value.submit()
 }
 
-// 当超出限制时，执行的钩子函数
+/**
+ * 当超出限制时，执行的钩子函数
+ */
 function handleExceed(files) {
   uploadRef.value.clearFiles()
   const file = files[0]

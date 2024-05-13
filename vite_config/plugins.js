@@ -27,7 +27,7 @@ export function createVitePlugins(viteEnv) {
         'vue',
         'vue-router',
         '@vueuse/core',
-        getApiKeys()
+        getApiKeys(),
       ],
       // dirs: ['./src/api'],
       resolvers: [
@@ -64,7 +64,7 @@ export function createVitePlugins(viteEnv) {
 }
 
 /**
- * @description 根据 compress 配置，生成不同的压缩规则
+ *   根据 compress 配置，生成不同的压缩规则
  * @param viteEnv
  */
 function createCompression(viteEnv) {

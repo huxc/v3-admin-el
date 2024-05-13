@@ -1,11 +1,10 @@
-/**
- * v-auth
- * 按钮权限控制隐藏显示
- */
-
 import appStore from '@/store/index.js'
 
 const auth = {
+  /**
+   * v-auth
+   * 按钮权限控制隐藏显示
+   */
   mounted(el, binding) {
     const value = binding.value || ''
     const auths = appStore.userStore.authCodes || []

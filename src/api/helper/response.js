@@ -2,9 +2,12 @@ import { get } from 'lodash-es'
 import { ElMessage } from 'element-plus'
 import { saveAs } from 'file-saver'
 
+/**
+ *导出文件流
+ */
 export function exportFile(response) {
   const { data, config } = response
-  // 导出文件流，自定义文件名fileName
+  // 自定义文件名fileName
   if (data.type !== 'application/json') {
     if (config.fileName) {
       saveAs(data, response.config.fileName)
@@ -23,6 +26,9 @@ export function exportFile(response) {
   }
   else {
     const reader = new FileReader()
+    /**
+     *错误处理
+     */
     reader.onload = function (e) {
       const { msg } = JSON.parse(e.target.result)
       ElMessage.error(msg)
@@ -31,6 +37,9 @@ export function exportFile(response) {
   }
 }
 
+/**
+ *请求错误代码
+ */
 export function serviceError(error) {
   const status = get(error, 'response.status')
   switch (status) {
@@ -72,8 +81,8 @@ export function serviceError(error) {
   }
   // 打印到控制台
   if (import.meta.env.MODE === 'development') {
-    console.log('>>>>>> 接口错误： >>>>>>')
-    console.log(error)
+    console.error('>>>>>> 接口错误： >>>>>>')
+    console.error(error)
   }
 
   // 显示提示

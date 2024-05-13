@@ -15,7 +15,9 @@ import {
   ElUpload,
 } from 'element-plus'
 
-// 因为按需加载插件无法打包动态组件(component标签)，所以封装form组件按需引入
+/**
+ * 因为按需加载插件无法打包动态组件(component标签)，所以封装form组件按需引入
+ */
 export function elementComponent() {
   const elementComponent = {
     ElInput,
@@ -34,13 +36,16 @@ export function elementComponent() {
   return elementComponent
 }
 
+/**
+ * 组件的映射关系
+ */
 export function formItemComponents() {
   const components = {
     'v3-select': defineAsyncComponent(() => import('./v3-select.vue')),
     'v3-upload-img': defineAsyncComponent(() => import('./v3-upload-img.vue')),
     'v3-upload-file': defineAsyncComponent(() => import('./v3-upload-file.vue')),
     'v3-radio-group': defineAsyncComponent(() => import('./v3-radio-group.vue')),
-    'v3-checkbox-group': defineAsyncComponent(() => import('./v3-checkbox-group.vue'))
+    'v3-checkbox-group': defineAsyncComponent(() => import('./v3-checkbox-group.vue')),
   }
   return components
 }
@@ -49,22 +54,22 @@ const componentMap = {
   'input': {
     component: 'el-input',
     attrs: {
-      placeholder: '请输入'
-    }
+      placeholder: '请输入',
+    },
   },
   'selectv2': {
     component: 'el-select-v2', // 虚拟化选择器
     attrs: {
-      placeholder: '请输入'
-    }
+      placeholder: '请输入',
+    },
   },
   'select': {
     component: 'v3-select', // 自定义组件,为了在el-select添加options能够生成el-options节点
     attrs: {
       placeholder: '请选择',
       clearable: true,
-      filterable: true
-    }
+      filterable: true,
+    },
   },
   'date': {
     component: 'el-date-picker',
@@ -73,36 +78,36 @@ const componentMap = {
       'clearable': true,
       'type': 'date',
       'format': 'YYYY-MM-DD',
-      'value-format': 'YYYY-MM-DD HH:mm:ss'
-    }
+      'value-format': 'YYYY-MM-DD HH:mm:ss',
+    },
   },
   'radio': {
     component: 'v3-radio-group', // 自定义组件,为了在el-radio-group添加options能够生成el-radio节点
     value: [],
     attrs: {
       placeholder: '选择',
-      clearable: true
-    }
+      clearable: true,
+    },
   },
   'checkbox': {
-    component: 'el-checkbox'
+    component: 'el-checkbox',
   },
   'checkbox-group': {
-    component: 'v3-checkbox-group' // 同上
+    component: 'v3-checkbox-group', // 同上
   },
 
   'cascader': {
     component: 'el-cascader',
     attrs: {
       placeholder: '请选择',
-      clearable: true
-    }
+      clearable: true,
+    },
   },
   'textarea': {
     component: 'el-input',
     attrs: {
-      type: 'textarea'
-    }
+      type: 'textarea',
+    },
   },
   'number': {
     component: 'el-input-number',
@@ -110,17 +115,20 @@ const componentMap = {
       min: 1,
       max: 999,
       controls: false,
-      precision: 2
-    }
+      precision: 2,
+    },
   },
   'uploadImg': {
-    component: 'v3-upload-img'
+    component: 'v3-upload-img',
   },
   'uploadFile': {
-    component: 'v3-upload-file'
+    component: 'v3-upload-file',
   },
 }
 
+/**
+ * 初始化处理
+ */
 export function computeFormItem(formItem, fModel) {
   const item = { ...formItem }
   // 表单控件的类型

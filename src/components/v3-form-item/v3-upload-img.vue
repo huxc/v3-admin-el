@@ -64,36 +64,41 @@ const props = defineProps({
   action: {
     type: String,
     default: file_upload_url,
-    },
+  },
   param: {
     type: Object,
+    /**
+     * 参数
+     */
     default: () => {},
-    },
+  },
   maxSize: {
     type: Number,
     default: 5 * 1024,
-    },
+  },
   limit: {
     type: Number,
     default: 1,
-    },
+  },
   ext: {
     type: String,
     default: '.jpg,.png,.jpeg',
-    },
+  },
   tip: {
     type: String,
     default: '',
-    },
+  },
   showMsg: {
     type: Boolean,
     default: true,
-    },
+  },
   imageList: {
-    // 详情图片回显，数组格式[{url:xxx}]
     type: Array,
+    /**
+     * 详情图片回显，数组格式[{url:xxx}]
+     */
     default: () => [],
-    },
+  },
 })
 const formItem = defineModel()
 // 设置token
@@ -112,6 +117,9 @@ const {
   handleBeforeUpload,
 } = useUpload(props, formItem)
 
+/**
+ * 移出事件
+ */
 function onRemove(file) {
   uploadRef.value.handleRemove(file)
 }

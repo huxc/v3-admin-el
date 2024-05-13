@@ -78,8 +78,8 @@ defineOptions({
   name: 'V3Form',
   components: {
     ...elementComponent(),
-    ...formItemComponents() // 动态加载表单子组件
-    },
+    ...formItemComponents(), // 动态加载表单子组件
+  },
 })
 
 const props = defineProps(cusProps)
@@ -99,7 +99,9 @@ const virtualForm = computed(() => {
   return _formItems
 })
 
-// 表单校验
+/**
+ *表单校验
+ */
 function submit() {
   if (!formRef.value)
     return
@@ -119,7 +121,9 @@ function submit() {
   })
 }
 
-// 表单验证返回promise对象
+/**
+ * 表单验证返回promise对象
+ */
 function promiseSubmit() {
   return new Promise((resolve, reject) => {
     formRef.value.validate((valid) => {
@@ -136,7 +140,10 @@ function promiseSubmit() {
     })
   })
 }
-// 重置表单
+
+/**
+ * 重置表单
+ */
 function handleReset() {
   if (!formRef.value)
     return

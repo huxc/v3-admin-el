@@ -23,7 +23,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-src/api/autoApi
+src/api/auto-api
 .eslintrc-auto-import.json
+.eslintrc-auto-import.js
 auto-imports.d.ts
 components.d.ts

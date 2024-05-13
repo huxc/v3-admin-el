@@ -36,12 +36,10 @@
 <script setup>
 // import md5 from 'js-md5'
 import { onKeyStroke, useEventListener } from '@vueuse/core'
-import { useRouter } from 'vue-router'
 import { useAutoFocus } from './hooks/useAutoFocus'
 import { useRegister } from './hooks/useRegister'
 import { deepCopy } from '@/utils/index'
 
-const router = useRouter()
 const componentName = defineModel()
 const { autoFocus, codeboxEl } = useAutoFocus()
 const {
@@ -56,7 +54,7 @@ const {
 onMounted(() => {
   autoFocus()
   // 验证码-连续删除
-  onKeyStroke('Backspace', (e) => {
+  onKeyStroke('Backspace', () => {
     useEventListener(codeboxEl.value, 'input', (evt) => {
       if (!evt?.data) {
         const lastClass = evt.target.getAttribute('del')
@@ -75,6 +73,9 @@ onKeyStroke('Enter', (e) => {
   handleRegister()
 })
 
+/**
+ * 保存
+ */
 function handleSave() {
   const smsVcode = smsCodes.value.join('')
   if (smsVcode.length === 6)
@@ -84,11 +85,15 @@ function handleSave() {
   delete params.passwords
   api.login.postRegister(params).then((res) => {
     if (res) {
+      // eslint-disable-next-line no-undef
       ElNotification({
         title: '已成功注册！',
         message: '即将跳转至登录',
         type: 'success',
         duration: 2 * 1000,
+        /**
+         * 关闭
+         */
         onClose: () => {
         // appStore.userStore.refToken(res.data)
         // router.push({ path: '/project/list' })
@@ -99,6 +104,9 @@ function handleSave() {
   })
 }
 
+/**
+ * 校验
+ */
 function handleRegister() {
   const isVali = validateCode()
   if (isVali)

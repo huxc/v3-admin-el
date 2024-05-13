@@ -98,7 +98,9 @@ watch(tableData, () => {
   }, 200)
 })
 
-// 绑定属性
+/**
+ * 绑定属性
+ */
 function setAttrs(params) {
   const { slot, ...options } = params
   if (!options.align)
@@ -107,7 +109,9 @@ function setAttrs(params) {
   return { ...options }
 }
 
-// 判断是否存在选择行，如存在即清除
+/**
+ *  判断是否存在选择行，如存在即清除
+ */
 function isCheckRow() {
   emit('callBack')
 
@@ -121,12 +125,17 @@ function isCheckRow() {
     })
   }
 }
-// 双击
+
+/**
+ * 双击
+ */
 function onDblclick(row) {
   emit('rowDblclick', row)
 }
 
-// 单击
+/**
+ * 单击
+ */
 function onClick(row) {
   if (isMultiple) {
     tableRoot.value.clearSelection()
@@ -135,21 +144,31 @@ function onClick(row) {
   emit('rowClick', row)
 }
 
+/**
+ * 重置表单
+ */
 function searchReset() {
   formRef.value.handleReset()
 }
 
-// 重置选择
+/**
+ * 重置选择
+ */
 function resetSelections() {
   tableRoot.value.clearSelection()
 }
 
-// 配置序号
+/**
+ * 配置序号
+ */
 function indexMethod(index) {
   const { pageNum, pageSize } = listQuery.value
   return (pageNum - 1) * pageSize + index + 1
 }
 
+/**
+ * 手动设置表单数据源
+ */
 function setTableData(tabelList) {
   tableData.value = tabelList
 }

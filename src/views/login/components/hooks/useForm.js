@@ -1,3 +1,7 @@
+/* eslint-disable jsdoc/require-description */
+/**
+ *
+ */
 export function useForm() {
   const imgCode = ref()
 
@@ -16,6 +20,9 @@ export function useForm() {
     ],
   }
 
+  /**
+   *
+   */
   function validateCode(rule, value, callback) {
     if (value === imgCode.value)
       callback()

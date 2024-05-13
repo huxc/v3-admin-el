@@ -57,6 +57,9 @@ onKeyStroke('Enter', (e) => {
   handleSubmit()
 })
 
+/**
+ * 保存
+ */
 function handleSave() {
   const smsVcode = smsCodes.value.join('')
   if (smsVcode.length === 6)
@@ -65,11 +68,15 @@ function handleSave() {
   // params.password = md5(params.password)
   delete params.passwords
   api.login.postForget(params).then(() => {
+    // eslint-disable-next-line no-undef
     ElNotification({
       title: '密码已重置！',
       message: '即将跳转至登录',
       type: 'success',
       duration: 2 * 1000,
+      /**
+       * 关闭
+       */
       onClose: () => {
         componentName.value = 'loginForm'
       },
@@ -77,6 +84,9 @@ function handleSave() {
   })
 }
 
+/**
+ * 校验表单
+ */
 function handleSubmit() {
   setTimeout(() => {
     validateCode()

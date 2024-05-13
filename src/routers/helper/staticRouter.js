@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-description */
 import { HOME_URL, LOGIN_URL } from '@/config/global'
 // 静态路由
 export const staticRouter = [
@@ -8,6 +9,9 @@ export const staticRouter = [
   {
     path: '/home',
     name: 'home',
+    /**
+     *
+     */
     component: () => import('@/views/home/index.vue'),
   },
   {
@@ -19,6 +23,9 @@ export const staticRouter = [
     props: {
       type: 1,
     },
+    /**
+     *
+     */
     component: () => import('@/views/login/index.vue'),
   },
 ]
@@ -31,6 +38,9 @@ export const errorRouter = [
     children: [
       {
         path: '/redirect/:path*',
+        /**
+         *
+         */
         component: () => import('@/views/redirect/index.vue'),
       },
     ],
@@ -41,6 +51,9 @@ export const errorRouter = [
     meta: {
       title: '未找到页面',
     },
+    /**
+     *
+     */
     component: () => import ('@/views/error/404.vue'),
   },
 ]

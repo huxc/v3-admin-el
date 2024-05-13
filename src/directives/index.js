@@ -10,9 +10,11 @@ const directivesList = {
 }
 
 const directives = {
+  /**
+   * 注册自定义指令
+   */
   install(app) {
     Object.keys(directivesList).forEach((key) => {
-      // 注册自定义指令
       app.directive(key, directivesList[key])
     })
   },

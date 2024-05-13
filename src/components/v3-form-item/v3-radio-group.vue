@@ -15,12 +15,15 @@
 defineProps({
   subProps: {
     type: Object,
+    /**
+     *设置默认的label，value，disabled的显示字段
+     */
     default: () => ({
       label: 'label',
       value: 'value',
       disabled: 'disabled',
     }),
-  }
+  },
 })
 
 const value = defineModel()

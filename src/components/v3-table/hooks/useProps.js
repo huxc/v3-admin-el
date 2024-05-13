@@ -11,57 +11,64 @@ export const cusProps = {
   // 定义列
   columns: {
     type: Array,
+    /**
+     * 定义列
+     */
     default: () => [],
- },
+  },
   // 列表数据接口
   requestApi: {
     type: [Function, null],
-    default: null 
+    default: null,
   },
   // 是否多选
   isMultiple: {
     type: Boolean,
     default: true,
- },
+  },
   // 是否显示序号
   indexVisible: {
     type: Boolean,
     default: true,
- },
+  },
   // 是否显示分页
   isPagination: {
     type: Boolean,
-    default: true 
+    default: true,
   },
   // 只有一页的时候是否显示分页
   isOnePage: {
     type: Boolean,
-    default: false 
+    default: false,
   },
-  // 获取数据初始化参数
   initParam: {
     type: Object,
-    default: () => ({}) 
+    /**
+     *获取数据初始化参数
+     */
+    default: () => ({}),
   },
   // 格式化列表数据
   formatRequest: {
     type: Function,
-    required: false 
+    required: false,
   },
-  // 页码与每页条数
   pageRequest: {
     type: Object,
-    default: () => ({ page: 1, pageSize: 10 })
+    /**
+     * 页码与每页条数
+     */
+    default: () => ({ page: 1, pageSize: 10 }),
   },
   // 每页显示个数选择器的选项设置
   pageSizes: {
     type: Array,
-    default: [10, 20, 50, 100, 200, 500] 
+    default: [10, 20, 50, 100, 200, 500],
   },
   searchProps: {
     type: [Object, null],
-    default: null //参数见下-search_props_default
-  }
+    default: null, // 参数见下-search_props_default
+  },
 }
 
 // searchProps的默认值

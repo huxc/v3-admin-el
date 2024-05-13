@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { HOME_URL } from '@/config/global'
 import { useTabsStore } from '@/store/modules/tabs'
@@ -44,7 +43,11 @@ const tabStore = useTabsStore()
 const globalStore = useGlobalStore()
 
 // refresh current page
-const refreshCurrentPage = inject('refresh')
+// const refreshCurrentPage = inject('refresh')
+
+/**
+ * refresh
+ */
 function refresh() {
 //   setTimeout(() => {
 //     route.meta.isKeepAlive && keepAliveStore.removeKeepAliveName(route.fullPath);
@@ -57,18 +60,25 @@ function refresh() {
 }
 
 // maximize current page
+/**
+ *maximize
+ */
 function maximize() {
   globalStore.setGlobalState('maximize', true)
 }
 
-// Close Current
+/**
+ *Close Current
+ */
 function closeCurrentTab() {
   if (route.meta.isAffix)
     return
   tabStore.removeTabs(route.fullPath)
 }
 
-// Close All
+/**
+ *Close All
+ */
 function closeAllTab() {
   tabStore.closeMultipleTab()
   router.push(HOME_URL)

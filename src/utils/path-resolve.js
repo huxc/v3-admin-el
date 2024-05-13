@@ -1,3 +1,6 @@
+/**
+ * 合并路径
+ */
 export function resolve(...paths) {
   let resolvePath = ''
   let isAbsolutePath = false
