@@ -27,10 +27,8 @@ router.beforeEach(async (to, from, next) => {
   const hasToken = userStore.state.access_token
 
   if (to.path.toLocaleLowerCase() === LOGIN_URL) {
-    if (hasToken) {
-      next(from.fullPath)
-      return
-    }
+    if (hasToken)
+      return next(from.fullPath)
     resetRouter()
     return next()
   }
