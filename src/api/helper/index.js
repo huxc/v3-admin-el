@@ -1,6 +1,5 @@
 /* eslint-disable jsdoc/check-alignment */
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
 import { has } from 'lodash-es'
 import { exportFile, serviceError } from './response'
 import { mergeConfig } from './merge-config'
@@ -56,7 +55,7 @@ function createService() {
       if (response.config.isLoading)
         closeLoading()
 
-      const { data: res, config, success, msg } = response.data
+      const { data: res, config, success, msg, code } = response.data
 
       if (config?.responseType === 'blob') {
         exportFile(response)
@@ -65,7 +64,7 @@ function createService() {
 
       if (!success) {
         // token失效跳转到登录页面
-        if (TOKEN_STATE.includes(res.code)) {
+        if (TOKEN_STATE.includes(code)) {
           if (!isRefreshing) {
             isRefreshing = true
 

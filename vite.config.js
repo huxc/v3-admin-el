@@ -21,6 +21,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: viteEnv.VITE_PUBLIC_PATH,
+    define: {
+      __APP_INFO__: JSON.stringify(__APP_INFO__),
+    },
     resolve: {
       alias: {
         '@': resolve(__dirname, './src'),
@@ -29,18 +32,17 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: createVitePlugins(viteEnv),
-    define: {
-      __APP_INFO__: JSON.stringify(__APP_INFO__),
-    },
-    esbuild: {
-      drop: viteEnv.VITE_DROP_CONSOLE ? ['console', 'debugger'] : [],
-    },
+
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/styles/var.scss";',
+          additionalData: `@use "@/styles/el-var.scss" as *;`,
         },
       },
+    },
+
+    esbuild: {
+      drop: viteEnv.VITE_DROP_CONSOLE ? ['console', 'debugger'] : [],
     },
     build: {
       outDir: viteEnv.VITE_OUTPUT_DIR,

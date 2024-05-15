@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import ElementPlus from 'unplugin-element-plus/vite'
+// import ElementPlus from 'unplugin-element-plus/vite'
 import Components from 'unplugin-vue-components/vite'
 import viteCompression from 'vite-plugin-compression'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
@@ -20,8 +20,7 @@ export function createVitePlugins(viteEnv) {
     vueJsx(),
     // name 可以写在 script 标签上
     vueSetupExtend({}),
-    // 为 Element Plus 按需引入样式
-    ElementPlus(),
+    
     AutoImport({
       imports: [
         'vue',
@@ -29,9 +28,8 @@ export function createVitePlugins(viteEnv) {
         '@vueuse/core',
         getApiKeys(),
       ],
-      // dirs: ['./src/api'],
       resolvers: [
-        ElementPlusResolver(),
+        ElementPlusResolver({importStyle: 'sass'}),
       ],
       eslintrc: {
         enabled: true,
@@ -41,7 +39,7 @@ export function createVitePlugins(viteEnv) {
       dirs: ['src/components/'],
       extensions: ['vue'],
       resolvers: [
-        ElementPlusResolver(),
+        ElementPlusResolver({ importStyle: "sass"}),
       ],
     }),
     // 创建打包压缩配置

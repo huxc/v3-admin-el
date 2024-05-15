@@ -1,5 +1,4 @@
 <template>
-  <!-- <Tabs v-show="tabs" /> -->
   <el-main>
     <router-view v-slot="{ Component, route }">
       <transition appear name="fade-transform" mode="out-in">
@@ -16,5 +15,5 @@ import { cacheRouter } from '@/routers/helper/dynamicRouter'
 </script>
 
 <style scoped lang="scss">
-@import './index.scss';
+@use './index.scss' as *;
 </style>

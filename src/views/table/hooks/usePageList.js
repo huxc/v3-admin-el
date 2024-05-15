@@ -2,26 +2,30 @@
  * 分页查询接口
  */
 export function usePageList() {
-  const requestApi = ref(api_account_getUserPage)
+  const requestApi = ref(api_account_getUsers)
 
   // 列表列名
   const columns = [
     { type: 'selection', label: '多选' },
     { type: 'index', label: '序号', width: '60px' },
-    { prop: 'jobNo', label: '工号' },
-    { prop: 'nickName', label: '姓名' },
+    // { prop: 'avatar', label: '头像', isImg: true },
+    { prop: 'gender', label: '性别' },
+    { prop: 'age', label: '年龄' },
+    { prop: 'idCard', label: '身份证' },
+    { prop: 'email', label: '邮箱' },
+    { prop: 'address', label: '地址' },
+    { prop: 'email', label: '邮箱' },
     {
-      prop: 'departmentName',
-      label: '部门',
-      /**
-       * 格式化参数
-       */
+      prop: 'status',
+      label: '状态',
+      // eslint-disable-next-line jsdoc/require-jsdoc
       render: (h, { row }) => {
-        return h('span', { style: { color: '#60D7A7' } }, row.departmentName)
+        const status = ['禁用', '启用']
+        const types = ['danger', 'success']
+        return h('el-tag', { type: types[row.status] }, status[row.status])
       },
     },
-    { prop: 'roleName', label: '角色' },
-    { prop: 'createAt', label: '创建时间' },
+    { prop: 'createTime', label: '创建时间' },
     { slot: 'operation', label: '操作' },
   ]
 

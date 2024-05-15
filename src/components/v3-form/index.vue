@@ -1,72 +1,70 @@
 <!-- eslint-disable vue/no-deprecated-v-on-native-modifier -->
 <template>
-  <div class="container from-container">
-    <el-form
-      ref="formRef" :inline :rules :label-width v-bind="$attrs" :model="formModel" @submit.native.prevent
-    >
-      <el-row :gutter="gutter">
-        <template v-for="(item, index) in virtualForm">
-          <template v-if="!item.hidden">
-            <!-- eslint-disable vue/valid-v-for -->
-            <component
-              :is="inline ? 'span' : 'el-col'" v-if="item._ifRender"
-              :span="item.itemAttrs?.col || 24"
-            >
-              <template v-if="item._ifRender">
-                <slot v-if="item.colSlot" :name="item.colSlot" :scope="$attrs.model" />
-                <el-form-item
-                  v-else :key="index + item.attrs.key || item.slot"
-                  v-bind="item.itemAttrs || {}" :prop="item.attrs.key" class="tooltip-form-item"
-                >
-                  <!-- 将表单内部的数据通过作用域插槽传给外部 -->
-                  <slot v-if="item.slot" :name="item.slot" :scope="formModel" />
-                  <!-- 其他组件 -->
-                  <template v-else>
-                    <div style="display: flex;width: 100%;">
-                      <span v-if="item.attrs.prefix" class="attr-prefix">{{ item.attrs.prefix
-                      }}</span>
-                      <component
-                        :is="item.tag" v-model="formModel[item.attrs.key]"
-                        v-bind="item.attrs || {}" v-on="item.listeners || {}"
-                      />
-                      <span v-if="item.attrs.suffix" class="attr-suffix">{{ item.attrs.suffix
-                      }}</span>
-                    </div>
-                  </template>
-                </el-form-item>
-              </template>
-            </component>
-          </template>
+  <el-form
+    ref="formRef" :inline :rules :label-width v-bind="$attrs" :model="formModel" @submit.native.prevent
+  >
+    <el-row :gutter="gutter" style="margin: 0 !important;">
+      <template v-for="(item, index) in virtualForm">
+        <template v-if="!item.hidden">
+          <!-- eslint-disable vue/valid-v-for -->
+          <component
+            :is="inline ? 'span' : 'el-col'" v-if="item._ifRender"
+            :span="item.itemAttrs?.col || 24"
+          >
+            <template v-if="item._ifRender">
+              <slot v-if="item.colSlot" :name="item.colSlot" :scope="$attrs.model" />
+              <el-form-item
+                v-else :key="index + item.attrs.key || item.slot"
+                v-bind="item.itemAttrs || {}" :prop="item.attrs.key" class="tooltip-form-item"
+              >
+                <!-- 将表单内部的数据通过作用域插槽传给外部 -->
+                <slot v-if="item.slot" :name="item.slot" :scope="formModel" />
+                <!-- 其他组件 -->
+                <template v-else>
+                  <div style="display: flex;width: 100%;">
+                    <span v-if="item.attrs.prefix" class="attr-prefix">{{ item.attrs.prefix
+                    }}</span>
+                    <component
+                      :is="item.tag" v-model="formModel[item.attrs.key]"
+                      v-bind="item.attrs || {}" v-on="item.listeners || {}"
+                    />
+                    <span v-if="item.attrs.suffix" class="attr-suffix">{{ item.attrs.suffix
+                    }}</span>
+                  </div>
+                </template>
+              </el-form-item>
+            </template>
+          </component>
         </template>
-        <!-- 一般用于查询 -->
-        <template v-if="footer && inline">
-          <span class="span-btns">
-            <slot name="before-btns" />
-            <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
-              {{ submitMsg }}
-            </el-button>
-            <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset">
-              {{ resetMsg }}
-            </el-button>
-            <slot name="after-btns" />
-          </span>
-        </template>
-      </el-row>
-    </el-form>
-    <!-- 一般用于表单提交 重复html用于方便修改按钮样式 -->
-    <template v-if="footer && !inline">
-      <div class="div-btns">
-        <slot name="before-btns" />
-        <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
-          {{ submitMsg }}
-        </el-button>
-        <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset">
-          {{ resetMsg }}
-        </el-button>
-        <slot name="after-btns" />
-      </div>
-    </template>
-  </div>
+      </template>
+      <!-- 一般用于查询 -->
+      <template v-if="footer && inline">
+        <span class="span-btns">
+          <slot name="before-btns" />
+          <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
+            {{ submitMsg }}
+          </el-button>
+          <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset">
+            {{ resetMsg }}
+          </el-button>
+          <slot name="after-btns" />
+        </span>
+      </template>
+    </el-row>
+  </el-form>
+  <!-- 一般用于表单提交 重复html用于方便修改按钮样式 -->
+  <template v-if="footer && !inline">
+    <div class="div-btns">
+      <slot name="before-btns" />
+      <el-button v-if="!!submitMsg" class="footer-btn" type="primary" @click="submit">
+        {{ submitMsg }}
+      </el-button>
+      <el-button v-if="resetMsg" class="footer-btn" type="info" @click="handleReset">
+        {{ resetMsg }}
+      </el-button>
+      <slot name="after-btns" />
+    </div>
+  </template>
 </template>
 
 <script setup>

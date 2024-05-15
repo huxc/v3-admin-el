@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-jsdoc */
 /**
  * 事件
  * {rowClick} 单机事件回调
@@ -36,7 +37,7 @@ export const cusProps = {
     type: Boolean,
     default: true,
   },
-  // 只有一页的时候是否显示分页
+  // 只有一页的时候是否隐藏分页
   isOnePage: {
     type: Boolean,
     default: false,
@@ -55,15 +56,12 @@ export const cusProps = {
   },
   pageRequest: {
     type: Object,
-    /**
-     * 页码与每页条数
-     */
     default: () => ({ page: 1, pageSize: 10 }),
   },
   // 每页显示个数选择器的选项设置
   pageSizes: {
     type: Array,
-    default: [10, 20, 50, 100, 200, 500],
+    default: () => [10, 20, 50, 100, 200, 500],
   },
   searchProps: {
     type: [Object, null],

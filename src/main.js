@@ -7,12 +7,8 @@ import directives from '@/directives' // 自定义指令
 import router from '@/routers'
 
 import 'virtual:svg-icons-register' // svg
-
-import 'animate.css'
-
-import '@/styles/reset.scss'
-import '@/styles/element.scss'
-import '@/styles/common.scss'
+import '@/styles/element/index.scss'
+// import '@/styles/common.scss'
 
 const app = createApp(App)
 

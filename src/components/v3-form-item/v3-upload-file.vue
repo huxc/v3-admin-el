@@ -36,7 +36,7 @@
 <script setup name="cus-upload-file">
 import { last } from 'lodash-es'
 import { useVModel } from '@vueuse/core'
-import { ElMessage, genFileId } from 'element-plus'
+import { genFileId } from 'element-plus'
 import appStore from '@/store/index.js'
 import { useUpload } from '@/hooks/useUpload'
 import { file_upload_url } from '@/api/config/globalsUrl.js'

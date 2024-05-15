@@ -1,5 +1,4 @@
 <template>
-  {{ a }}
   <el-config-provider :locale="zhCn" :button="config" :size="assemblySize">
     <router-view />
   </el-config-provider>
@@ -12,6 +11,7 @@ import { storeToRefs } from 'pinia'
 import appStore from '@/store'
 
 const { assemblySize } = storeToRefs(appStore.globalStore)
+
 // 配置element按钮文字中间是否有空格
 const config = reactive({
   autoInsertSpace: false,

@@ -1,57 +1,65 @@
 <template>
-  <div class="tb-container">
-    <!-- 搜索条件 -->
-    <v3-form
-      v-if="searchProps" ref="formRef" inline footer :reset-msg :submit-msg :model="searchForm"
-      :form-items="searchItems" @submit="refresh"
+  <!-- 搜索条件 -->
+  <v3-form
+    v-if="searchProps" ref="formRef" inline footer :reset-msg :submit-msg :model="searchForm"
+    :form-items="searchItems" @submit="refresh"
+  />
+  <!-- 列表顶部的操作按钮 -->
+  <div class="header-buttons">
+    <slot name="headLeft" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
+    <slot name="headRight" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
+  </div>
+
+  <!-- 列表数据 -->
+  <el-table
+    v-bind="$attrs" ref="tableRoot" v-loading="listLoading"
+    highlight-current-row style="width: 100%" :data="tableData" :row-key="getRowKeys"
+    :header-cell-style="headerCellStyle" :cell-style="cellStyle" @selection-change="selectionChange"
+    @row-click="onClick" @row-dblclick="onDblclick"
+  >
+    <template v-for="(column, index) in columns">
+      <el-table-column v-if="column?.type === 'index'" :key="`index-${column.prop}`" :index="indexMethod" v-bind="setAttrs(column)" />
+      <el-table-column v-else-if="column.render" :key="column.prop" :width="column.width" :label="column.label">
+        <template #default="{ row }">
+          <Render :row="row" :index="index" :render="column.render" />
+        </template>
+      </el-table-column>
+      <!-- <el-table-column v-else-if="column.render" :key="column.prop" v-bind="setAttrs(column)">
+        <template #default="{ row }">
+          <component :is="column.render" v-bind="row" />
+        </template>
+      </el-table-column> -->
+      <slot v-else-if="column.slot" :key="`slot-${column.prop}`" :name="column.slot" />
+      <el-table-column v-else-if="column.isImg" :key="`img-${column.prop}`" v-bind="setAttrs(column)">
+        <template #default="{ row }">
+          <el-image
+            class="srm-table_img" :style="{
+              width: column.width || '60px',
+              height: column.height || 'auto',
+            }" :src="`${row[column.prop]}`" :preview-src-list="[row[column.prop]]"
+          />
+        </template>
+      </el-table-column>
+      <el-table-column v-else :key="`other-${column.prop}`" show-overflow-tooltip v-bind="setAttrs(column)" />
+    </template>
+  </el-table>
+  <!-- 分页栏 -->
+  <div v-if="isPagination" class="toolbar">
+    <el-pagination
+      v-model:current-page="listQuery.pageNum"
+      class="pagination"
+      background
+      :page-sizes="pageSizes"
+      :total="totalCount"
+      layout="total, sizes, prev, pager, next, jumper"
+      :page-size="listQuery.pageSize"
+      :hide-on-single-page="onePage"
+      @current-change="onPageChange" @size-change="onSizeChange"
     />
-    <!-- 列表顶部的操作按钮 -->
-    <div class="header-buttons">
-      <slot name="headLeft" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
-      <slot name="headRight" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
-    </div>
-
-    <!-- 列表数据 -->
-    <el-table
-      v-bind="$attrs" ref="tableRoot" v-loading="listLoading"
-      highlight-current-row style="width: 100%" :data="tableData" :row-key="getRowKeys"
-      :header-cell-style="headerCellStyle" :cell-style="cellStyle" @selection-change="selectionChange"
-      @row-click="onClick" @row-dblclick="onDblclick"
-    >
-      <template v-for="(column, index) in columns">
-        <el-table-column v-if="column?.type === 'index'" :key="`index-${column.prop}`" :index="indexMethod" v-bind="setAttrs(column)" />
-        <el-table-column v-else-if="column.render" :key="column.prop" :width="column.width" :label="column.label">
-          <template #default="{ row }">
-            <Render :row="row" :index="index" :render="column.render" />
-          </template>
-        </el-table-column>
-        <slot v-else-if="column.slot" :key="`slot-${column.prop}`" :name="column.slot" />
-        <el-table-column v-else-if="column.isImg" :key="`img-${column.prop}`" v-bind="setAttrs(column)">
-          <template #default="{ row }">
-            <el-image
-              class="srm-table_img" :style="{
-                width: column.width || '120px',
-                height: column.height || 'auto',
-              }" :src="`${row[column.prop]}`" :preview-src-list="[row[column.prop]]"
-            />
-          </template>
-        </el-table-column>
-        <el-table-column v-else :key="`other-${column.prop}`" show-overflow-tooltip v-bind="setAttrs(column)" />
-      </template>
-    </el-table>
-
-    <!-- 分页栏 -->
-    <div v-if="isPagination && onePage" class="toolbar">
-      <el-pagination
-        v-show="isPagination" v-model:current-page="listQuery.pageNum" :page-sizes
-        class="pagination" background :layout="layout" :total="totalCount" :page-size="listQuery.pageSize"
-        @current-change="onPageChange" @size-change="onSizeChange"
-      />
-    </div>
   </div>
 </template>
 
-<script setup name="CusElTable">
+<script setup name="V3Table">
 import Render from '../v3-table/hooks/useRender'
 import { useTableStyle } from './hooks/useStyle'
 import { cusEmits, cusProps, search_props_default } from './hooks/useProps'
@@ -73,7 +81,7 @@ Object.assign(search_props_default, props.searchProps || {})
 
 const { searchItems, submitMsg, resetMsg } = toRefs(search_props_default)
 
-const { layout, headerCellStyle, cellStyle } = useTableStyle()
+const { headerCellStyle, cellStyle } = useTableStyle()
 
 // 表格多选 Hooks
 const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection()
@@ -176,3 +184,9 @@ function setTableData(tabelList) {
 // 暴露给父组件的参数和方法
 defineExpose({ refresh, getList, tableData, searchReset, resetSelections, setTableData })
 </script>
+
+<style>
+.header-buttons {
+  margin-bottom: 10px;
+}
+</style>

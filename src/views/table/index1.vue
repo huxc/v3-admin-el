@@ -1,5 +1,5 @@
 <template>
-  <div class="table-box card">
+  <div class="table-box" style="position:relative">
     <v3-table
       ref="tableRef" :search-props :init-param :columns :request-api
     >
@@ -24,6 +24,9 @@
         </el-table-column>
       </template>
     </v3-table>
+    <v3-dialog v-model="visible">
+      <span style="font-size:30px">弹框内容</span>
+    </v3-dialog>
   </div>
 </template>
 
@@ -80,7 +83,3 @@ function onDrawer(rows) {
   })
 }
 </script>
-
-<style>
-
-</style>
