@@ -1,4 +1,5 @@
 import { get } from 'lodash-es'
+import { ElMessage } from 'element-plus'
 
 /**
  * 根据key获取配置对象

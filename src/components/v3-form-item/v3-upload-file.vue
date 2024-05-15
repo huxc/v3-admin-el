@@ -36,7 +36,7 @@
 <script setup name="cus-upload-file">
 import { last } from 'lodash-es'
 import { useVModel } from '@vueuse/core'
-import { genFileId } from 'element-plus'
+import { ElMessage, genFileId } from 'element-plus'
 import appStore from '@/store/index.js'
 import { useUpload } from '@/hooks/useUpload'
 import { file_upload_url } from '@/api/config/globalsUrl.js'
@@ -156,7 +156,7 @@ function handleBeforeUpload(file) {
   if (!isExt) {
     ElMessage.warning({
       showClose: true,
-      message: `只能上传${props.ext}格式的文件！`,
+      message: `只能上传${props.ext}格式的文件!`,
     })
     return false
   }

@@ -15,7 +15,7 @@ export default antfu(
     ignores: [
         '**/eslint.config.js',
         '**/vite_config',
-        '**/routers'
+        '**/routers/modules/*.js'
     ]
   },
   {

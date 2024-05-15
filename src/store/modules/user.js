@@ -9,14 +9,14 @@ import { filterAsyncRoutes, splitPageAndBtn } from '@/utils/auth'
  *
  */
 function storeSetup() {
-  const authCodes = ref(null) // 所有权限code
-  const asyncRoutes = ref(null) // 根据权限code过滤后的动态路由
+  const authCodes = ref(null) // 所有按钮权限码
+  const asyncRoutes = ref(null) // 根据权限码过滤后的动态路由
 
   const state = reactive({
     access_token: '',
   })
 
-  const getToken = computed(() => `${state.token_type} ${state.access_token}`)
+  const getToken = computed(() => `${state.access_token}`)
 
   /**
    *
@@ -50,7 +50,7 @@ function storeSetup() {
    */
   const logIn = (loginForm) => {
     return new Promise((resolve, reject) => {
-      api.login.postSystemOauthToken(loginForm)
+      api_account_login(loginForm)
         .then(({ data }) => {
           refToken(data)
           resolve(data)
@@ -67,24 +67,20 @@ function storeSetup() {
    */
   const loginOut = () => {
     clearState()
-    api.login.loginOut().then()
   }
 
-  // 获取权限code 过滤动态路由
   /**
-   *
+   *获取权限code 过滤动态路由
    */
   const generateRoutes = () => {
     return new Promise((resolve, reject) => {
       // 如果是管理员应用所有权限
-    //   if (state.username === 'admin') {
-      if (true) {
+      if (state.username === 'admin') {
         asyncRoutes.value = dynamicRouter
         resolve(asyncRoutes.value)
       }
       else {
-        api.resource
-          .getLoginUser()
+        api_account_getAuths({ ruleId: state.ruleId })
           .then((res) => {
             // 根据接口 获取所有按钮权限 和 页面权限
             const { btnAuths, pageAuths } = splitPageAndBtn(res.data)

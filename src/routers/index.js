@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { useUserStore } from '@/store/modules/user'
 import NProgress from '@/config/nprogress'
-// import { LOGIN_URL } from '@/config/global'
+import { LOGIN_URL } from '@/config/global'
 import { errorRouter, staticRouter } from '@/routers/helper/staticRouter'
 
 const route = {
@@ -24,15 +24,19 @@ router.beforeEach(async (to, from, next) => {
 
   const userStore = useUserStore()
 
-  // const hasToken = userStore.state.access_token
+  const hasToken = userStore.state.access_token
 
-  // if (to.path.toLocaleLowerCase() === LOGIN_URL) {
-  //     if (hasToken) return next(from.fullPath)
-  //     resetRouter();
-  //     return next();
-  //   }
+  if (to.path.toLocaleLowerCase() === LOGIN_URL) {
+    if (hasToken) {
+      next(from.fullPath)
+      return
+    }
+    resetRouter()
+    return next()
+  }
 
-  // if (!hasToken) return next({ path: LOGIN_URL, replace: true });
+  if (!hasToken)
+    return next({ path: LOGIN_URL, replace: true })
 
   // 判断用户是否获取了权限数据
   const hasRoutes = userStore.asyncRoutes

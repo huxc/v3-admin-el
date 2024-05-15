@@ -17,6 +17,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@vueuse/components": "^10.9.0",
     "@vueuse/core": "^10.9.0",
     "animate.css": "^4.1.1",
     "axios": "^1.6.8",

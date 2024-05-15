@@ -6,20 +6,13 @@
     <!-- 登录表单 -->
     <el-form ref="formEl" class="cusform-box" style="width: 65%;" :rules="rules" :model="formLogin" label-position="top" label-width="100px">
       <el-form-item label="用户名/手机号" prop="username">
-        <el-input v-model="formLogin.username" maxlength="30" placeholder="请输入用户名/手机号" />
+        <el-input v-model="formLogin.username" maxlength="30" placeholder="用户名：admin / user01 / user02" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model="formLogin.password" maxlength="15" type="password" show-password placeholder="请输入密码" />
-      </el-form-item>
-      <el-form-item label="验证码" prop="code">
-        <div style="display: flex; justify-content: space-between;align-items: center;">
-          <el-input v-model="formLogin.code" maxlength="4" class="verification-code" placeholder="请输入验证码" />
-          <p style="width: 38px;" />
-          <image-code style="margin-top: 4px;" :change="imgRefresh" @click="changeImageCode" @get-code="getImgBase64" />
-        </div>
+        <el-input v-model="formLogin.password" maxlength="15" type="password" show-password placeholder="密码：123456" />
       </el-form-item>
     </el-form>
-    <p class="reset" @click="componentName = 'loginReset'">
+    <p class="reset">
       忘记密码？
     </p>
     <el-button v-on-key-stroke:c,v="handleValidate" class="cusform-btn" type="primary" size="default" @click="handleValidate">
@@ -27,25 +20,24 @@
     </el-button>
     <div class="login-footer">
       <span>还没有账号？</span>
-      <span class="register" @click=" componentName = 'loginRegister'">去注册</span>
+      <span class="register" @click="onRgister">去注册</span>
     </div>
   </div>
 </template>
 
 <script setup>
-// import md5 from 'js-md5'
 import { onKeyStroke } from '@vueuse/core'
+import { vOnKeyStroke } from '@vueuse/components'
 import { useRoute, useRouter } from 'vue-router'
-import imageCode from './img-code.vue'
 import { useForm } from './hooks/useForm'
-import { deepCopy } from '@/utils/index'
 import { HOME_URL } from '@/config/global'
-import appStore from '@/store'
+import { useUserStore } from '@/store/modules/user'
 
-const componentName = defineModel()
+const emit = defineEmits(['onRegister'])
+const userStore = useUserStore()
 
 const formEl = ref(null)
-const { rules, imgCode } = useForm()
+const { rules } = useForm()
 const formLogin = reactive({
   phone: '',
   password: '',
@@ -56,7 +48,6 @@ const formLogin = reactive({
 
 const router = useRouter()
 const route = useRoute()
-const imgRefresh = ref(true)
 const redirect = (route.query && route.query.redirect) || HOME_URL
 
 // 监听回车键登录
@@ -71,10 +62,7 @@ onKeyStroke('Enter', (e) => {
 function onLogin(loginEl) {
   if (!loginEl)
     return
-  const params = deepCopy(formLogin)
-  // params.password = md5(params.password)
-  params.phone = params.username
-  appStore.userStore.logIn(params).then(() => {
+  userStore.logIn(formLogin).then(() => {
     // 避免获取token失败
     setTimeout(() => {
       router.push(redirect)
@@ -82,6 +70,12 @@ function onLogin(loginEl) {
   })
 }
 
+/**
+ * 去注册
+ */
+function onRgister() {
+  emit('onRegister')
+}
 /**
  *登录校验
  */
@@ -102,35 +96,24 @@ function handleValidate() {
     }
   })
 }
-
-/**
- *getImgBase64
- */
-function getImgBase64(code) {
-  imgCode.value = code
-}
-
-/**
- *changeImageCode
- */
-function changeImageCode() {
-  imgRefresh.value = !imgRefresh.value
-}
 </script>
 
   <style lang='scss' scoped>
-  .login-x {
+.login-x {
+  --el-component-size: 42px;
+  --el-border-radius-base: 14px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 522px;
-  height: 620px;
+  width: 500px;
+  height: 560px;
   background: #ffffff;
   box-shadow: 0px 6px 16px 1px rgba(104, 105, 114, 0.1);
   border-radius: 30px;
   :deep(.cusform-box) {
     .el-form-item__label {
-      //   font-size: 14px;
+      font-size: 14px;
       font-family:
         Microsoft YaHei UI-Regular,
         Microsoft YaHei UI;
@@ -150,9 +133,9 @@ function changeImageCode() {
   .login-title {
     margin-top: 68px;
     margin-bottom: 46px;
-    font-size: 24px;
+    font-size: 34px;
     font-weight: bold;
-    color: #2b3eb1;
+    color: #8f6efe;
     font-family:
       Microsoft YaHei UI-Bold,
       Microsoft YaHei UI;
@@ -160,9 +143,9 @@ function changeImageCode() {
 
   .cusform-btn {
     margin-top: 30px;
-    width: 170px;
+    width: 330px;
     height: 48px;
-    background: #2b3eb1;
+    background: #8f6efe;
     box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
     border-radius: 14px;
     font-size: 16px;
@@ -178,7 +161,7 @@ function changeImageCode() {
     font-size: 16px;
     margin-top: 18px;
     font-family: PingFangSC-Regular-, PingFangSC-Regular;
-    color: #2b3eb1;
+    color: #8f6efe;
     .register {
       color: #fc7100;
       text-decoration: underline;

@@ -1,4 +1,4 @@
-import { nmb_eleven, reg_password } from '@/utils/regexs.js'
+import { reg_password } from '@/utils/regexs.js'
 
 /**
  * 注册
@@ -62,30 +62,6 @@ export function useRegister() {
         key: 'company',
         maxLength: 30,
         placeholder: '请输入所在公司',
-      },
-    },
-    {
-      tag: 'phonecode',
-      itemAttrs: {
-        label: '手机号码',
-        rules: [
-          { required: true, message: '请输入手机号', trigger: 'click' },
-          { pattern: nmb_eleven, message: '手机号格式错误', trigger: 'change' },
-        ],
-      },
-      attrs: {
-        key: 'phone',
-        typeCode: 0,
-        maxLength: '11',
-        placeholder: '请输入手机号码',
-      },
-    },
-
-    {
-      slot: 'phoneCode',
-      itemAttrs: {
-        label: '短信验证码',
-        rules: [{ required: true, message: '', trigger: 'click' }],
       },
     },
     {

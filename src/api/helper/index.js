@@ -56,7 +56,7 @@ function createService() {
       if (response.config.isLoading)
         closeLoading()
 
-      const { data: res, config, success } = response.data
+      const { data: res, config, success, msg } = response.data
 
       if (config?.responseType === 'blob') {
         exportFile(response)
@@ -70,18 +70,16 @@ function createService() {
             isRefreshing = true
 
             /** 此处为调转到登录逻辑 */
-            res.msg = '登录已失效，请重新登录。'
             router.push({ path: '/login' })
 
             if (response.config.isMsg) {
               ElMessage({
                 showClose: true,
-                message: res.msg || '错误',
+                message: '登录已失效，请重新登录。',
                 type: 'error',
                 duration: 3 * 1000,
               })
             }
-
             /**
              * 此处为刷新token逻辑
             return api_刷新token的方法
@@ -113,20 +111,29 @@ function createService() {
               isRefreshing = false
             }, 3000)
           }
+          else {
+            // 正在刷新token，返回一个未执行resolve的promise
+            // 把promise 的resolve 保存到队列的回调里面，等待刷新Token后调用
+            // 原调用者会处于等待状态直到 队列重新发起请求，再把响应返回，以达到用户无感知的目的（无痛刷新）
+            return new Promise((resolve) => {
+              // 将resolve放进队列，用一个函数形式来保存，等token刷新后直接执行
+              retryRequests.push(() => {
+                resolve(createRequest(service))
+              })
+            })
+          }
         }
         else {
-          // 正在刷新token，返回一个未执行resolve的promise
-          // 把promise 的resolve 保存到队列的回调里面，等待刷新Token后调用
-          // 原调用者会处于等待状态直到 队列重新发起请求，再把响应返回，以达到用户无感知的目的（无痛刷新）
-          return new Promise((resolve) => {
-            // 将resolve放进队列，用一个函数形式来保存，等token刷新后直接执行
-            retryRequests.push(() => {
-              resolve(createRequest(service))
+          if (response.config.isMsg) {
+            ElMessage({
+              showClose: true,
+              message: msg || '错误',
+              type: 'error',
+              duration: 3 * 1000,
             })
-          })
+          }
+          return Promise.reject(res)
         }
-
-        return Promise.reject(res)
       }
       else {
         if (response.config.isLoading)

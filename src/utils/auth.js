@@ -3,7 +3,7 @@
  */
 function hasAuth(route, authCodes) {
   const authCode = route?.meta.permissionCode
-  return authCode ? authCodes.includes(authCode) : true
+  return authCode ? authCodes.has(authCode) : true
 }
 
 /**
@@ -24,17 +24,16 @@ export function filterAsyncRoutes(asyncRotuers, authCodes) {
 }
 
 /**
- * 权限筛选
+ * 筛选出权限码，根据接口区分菜单权限和按钮权限
  */
 export function splitPageAndBtn(auths) {
-  const btnAuths = []
-  const pageAuths = []
+  const btnAuths = new Set()
+  const pageAuths = new Set()
   for (let i = 0; i < auths.length; i++) {
-    const item = auths[i]
-    if (item.permissionType === 3 && item.status)
-      btnAuths.push(item.permissionCode)
-    else if ((item.permissionType === 1 || item.permissionType === 2) && item.status)
-      pageAuths.push(item.permissionCode)
+    const { permissionType, permissionCode } = auths[i]
+    permissionType === 1
+      ? pageAuths.add(permissionCode)
+      : btnAuths.add(permissionCode)
   }
   return {
     btnAuths,

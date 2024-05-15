@@ -1,5 +1,5 @@
 const hosts = {
-  mock: 'https://mock.apifox.com/m1/854051-1975280-default',
+  mock: 'https://mock.apifox.com/m1/4483965-4130611-default',
   development: '', // 开发环境地址
   test: '', // 测试环境地址
   production: '', // 生产环境地址 运行 pnpm run prod

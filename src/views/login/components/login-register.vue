@@ -4,68 +4,37 @@
       用户注册
     </p>
     <div class="form-x">
-      <cus-el-form
+      <v3-form
         ref="formRef" class="cusform-box" :model="editForm" :gutter="100"
         label-position="top" :form-items="formItems" @submit="handleSave"
-      >
-        <!-- 验证码 -->
-        <template #phoneCode>
-          <div ref="codeboxEl" class="code-x">
-            <el-input v-model="smsCodes[0]" maxlength="1" sms="sms1" class="smsitem del1" />
-            <el-input v-model="smsCodes[1]" maxlength="1" sms="sms2" class="smsitem sms1 del2" del="del1" />
-            <el-input v-model="smsCodes[2]" maxlength="1" sms="sms3" class="smsitem sms2 del3" del="del2" />
-            <el-input v-model="smsCodes[3]" maxlength="1" sms="sms4" class="smsitem sms3 del4" del="del3" />
-            <el-input v-model="smsCodes[4]" maxlength="1" sms="sms5" class="smsitem sms4 del5" del="del4" />
-            <el-input v-model="smsCodes[5]" maxlength="1" class="smsitem sms5" del="del5" />
-          </div>
-          <el-input style="height: 0;width: 0; opacity: 0;" />
-          <div class="el-form-item__error">
-            {{ codeError || '' }}
-          </div>
-        </template>
-      </cus-el-form>
+      />
       <div class="btn-x">
         <el-button class="cusform-btn" size="default" @click="handleRegister">
           快速注册
         </el-button>
+      </div>
+      <div class="login-footer">
+        <span>已注册账号</span>
+        <span class="register" @click="onLogin">去登录</span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// import md5 from 'js-md5'
-import { onKeyStroke, useEventListener } from '@vueuse/core'
-import { useAutoFocus } from './hooks/useAutoFocus'
+import { onKeyStroke } from '@vueuse/core'
 import { useRegister } from './hooks/useRegister'
 import { deepCopy } from '@/utils/index'
 
-const componentName = defineModel()
-const { autoFocus, codeboxEl } = useAutoFocus()
+const emit = defineEmits(['onLogin'])
+
 const {
   formRef,
   formItems,
   editForm,
   smsCodes,
-  codeError,
   validateCode,
 } = useRegister()
-
-onMounted(() => {
-  autoFocus()
-  // 验证码-连续删除
-  onKeyStroke('Backspace', () => {
-    useEventListener(codeboxEl.value, 'input', (evt) => {
-      if (!evt?.data) {
-        const lastClass = evt.target.getAttribute('del')
-        if (lastClass) {
-          const lastEl = codeboxEl.value.querySelector(`.${lastClass}`)
-          lastEl.querySelector('input').focus()
-        }
-      }
-    })
-  })
-})
 
 // 监听回车键注册
 onKeyStroke('Enter', (e) => {
@@ -83,25 +52,6 @@ function handleSave() {
   const params = deepCopy(editForm)
   // params.password = md5(params.password)
   delete params.passwords
-  api.login.postRegister(params).then((res) => {
-    if (res) {
-      // eslint-disable-next-line no-undef
-      ElNotification({
-        title: '已成功注册！',
-        message: '即将跳转至登录',
-        type: 'success',
-        duration: 2 * 1000,
-        /**
-         * 关闭
-         */
-        onClose: () => {
-        // appStore.userStore.refToken(res.data)
-        // router.push({ path: '/project/list' })
-          componentName.value = 'loginForm'
-        },
-      })
-    }
-  })
 }
 
 /**
@@ -112,10 +62,20 @@ function handleRegister() {
   if (isVali)
     formRef.value.handleSubmit()
 }
+
+/**
+ * 去登录
+ */
+function onLogin() {
+  emit('onLogin')
+}
 </script>
 
   <style lang='scss' scoped>
   .register-x {
+  --el-component-size: 42px;
+  --el-border-radius-base: 14px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,12 +92,12 @@ function handleRegister() {
   }
   .cusform-btn {
     margin-top: 10px;
-    width: 170px;
-    height: 48px;
-    background: #2b3eb1;
+    width: 100%;
+    height: 58px;
+    background: linear-gradient(45deg, #b342fe 50%, #41d1ff);
     box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
     border-radius: 14px;
-    font-size: 16px;
+    font-size: 18px;
     font-family:
       Microsoft YaHei UI-Regular,
       Microsoft YaHei UI;
@@ -191,9 +151,9 @@ function handleRegister() {
 .login-title {
   margin-top: 30px;
   margin-bottom: 30px;
-  font-size: 24px;
+  font-size: 34px;
   font-weight: bold;
-  color: #2b3eb1;
+  color: #b342fe;
   font-family:
     Microsoft YaHei UI-Bold,
     Microsoft YaHei UI;
@@ -223,6 +183,21 @@ function handleRegister() {
   }
   .active {
     border: 2px solid #fc7100;
+  }
+}
+
+.login-footer {
+  font-size: 16px;
+  margin-top: 18px;
+  text-align: right;
+  font-family: PingFangSC-Regular-, PingFangSC-Regular;
+  color: #ad3afe;
+  .register {
+    color: #fc7100;
+    margin-left: 30px;
+    margin-right: 20px;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 </style>

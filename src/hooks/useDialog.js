@@ -1,5 +1,6 @@
 import { createApp, h, ref } from 'vue'
 import { Icon } from '@iconify/vue'
+import { ElButton, ElDialog, ElScrollbar } from 'element-plus'
 import { isObjEmpty, typeOf } from '@/utils'
 
 /**

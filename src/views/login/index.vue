@@ -1,42 +1,20 @@
 <template>
-  <div class="container" :class="{ 'sign-up-mode': isSignUp }">
+  <div class="login-main" :class="{ 'sign-up-mode': isSignUp }">
     <div class="form-warp">
-      <el-form class="sign-in-form">
-        <span class="form-title">
-          登录
-        </span>
-        <input placeholder="用户名">
-        <input type="password" placeholder="密码">
-        <div class="submit-btn">
-          立即登录
-        </div>
-      </el-form>
-      <el-form class="sign-up-form">
-        <span class="form-title">
-          注册
-        </span>
-        <input placeholder="用户名">
-        <input type="password" placeholder="密码">
-        <div class="submit-btn">
-          立即注册
-        </div>
-      </el-form>
+      <form class="sign-in-form">
+        <loginForm @on-register="isSignUp = true" />
+      </form>
+      <form class="sign-up-form">
+        <loginRegister @on-login="isSignUp = false" />
+      </form>
     </div>
     <div class="desc-warp">
       <div class="desc-warp-item sign-up-desc">
-        <div class="content">
-          <button class="sign-up-btn" @click="isSignUp = true">
-            注册
-          </button>
-        </div>
+        <div class="content" />
         <img src="/images/login.svg" alt="">
       </div>
       <div class="desc-warp-item sign-in-desc">
-        <div class="content">
-          <button class="sign-in-btn" @click="isSignUp = false">
-            登录
-          </button>
-        </div>
+        <div class="content" />
         <img src="/images/register.svg" alt="">
       </div>
     </div>
@@ -44,17 +22,18 @@
 </template>
 
 <script setup>
-const isSignUp = ref(false)
+import loginForm from './components/login-form.vue'
+import loginRegister from './components/login-register.vue'
 </script>
 
 <style>
-.container {
+.login-main {
   position: relative;
   min-height: 100vh;
   width: 100%;
   overflow: hidden;
 }
-.container::before {
+.login-main::before {
   content: ' ';
   position: absolute;
   width: 2000px;
@@ -68,7 +47,7 @@ const isSignUp = ref(false)
   right: 48%;
   transform: translateY(-50%);
 }
-.container.sign-up-mode::before {
+.login-main.sign-up-mode::before {
   transform: translate(100%, -50%);
 }
 
@@ -106,14 +85,14 @@ const isSignUp = ref(false)
   opacity: 0;
   z-index: 3;
 }
-.container.sign-up-mode .form-warp {
+.login-main.sign-up-mode .form-warp {
   left: 25%;
 }
-.container.sign-up-mode .sign-in-form {
+.login-main.sign-up-mode .sign-in-form {
   opacity: 0;
   z-index: 3;
 }
-.container.sign-up-mode .sign-up-form {
+.login-main.sign-up-mode .sign-up-form {
   opacity: 1;
   z-index: 4;
 }
@@ -218,7 +197,7 @@ img {
 
 /* 响应式 */
 @media screen and (max-width: 870px) {
-  .container::before {
+  .login-main::before {
     width: 1500px;
     height: 1500px;
     transform: translateX(-50%);
@@ -228,7 +207,7 @@ img {
     top: initial;
     transition: 2s ease-in-out;
   }
-  .container.sign-up-mode::before {
+  .login-main.sign-up-mode::before {
     transform: translate(-50%, 100%);
     bottom: 32%;
     right: initial;
@@ -240,7 +219,7 @@ img {
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;
   }
-  .container.sign-up-mode .form-warp {
+  .login-main.sign-up-mode .form-warp {
     top: 25%;
     left: 50%;
     transform: translate(-50%, 0);
@@ -282,7 +261,7 @@ img {
 }
 
 @media screen and (max-width: 570px) {
-  .container::before {
+  .login-main::before {
     bottom: 72%;
     left: 50%;
   }
