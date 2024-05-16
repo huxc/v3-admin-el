@@ -114,9 +114,6 @@ function handleValidate() {
   :deep(.cusform-box) {
     .el-form-item__label {
       font-size: 14px;
-      font-family:
-        Microsoft YaHei UI-Regular,
-        Microsoft YaHei UI;
       font-weight: 400;
       color: #495363;
       line-height: 24px;
@@ -133,12 +130,10 @@ function handleValidate() {
   .login-title {
     margin-top: 68px;
     margin-bottom: 46px;
-    font-size: 34px;
+    font-size: 40px;
     font-weight: bold;
     color: #8f6efe;
-    font-family:
-      Microsoft YaHei UI-Bold,
-      Microsoft YaHei UI;
+    font-family: W03;
   }
 
   .cusform-btn {
@@ -153,14 +148,12 @@ function handleValidate() {
   .reset {
     margin-left: 355px;
     font-size: 16px;
-    font-family: PingFangSC-Regular-, PingFangSC-Regular;
     color: #7d8592;
     cursor: pointer;
   }
   .login-footer {
     font-size: 16px;
     margin-top: 18px;
-    font-family: PingFangSC-Regular-, PingFangSC-Regular;
     color: #8f6efe;
     .register {
       color: #fc7100;

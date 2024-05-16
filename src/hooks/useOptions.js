@@ -7,6 +7,7 @@ export function getDepOptions(tree, key) {
   getOptions({
     tree,
     key,
+    okey: 'data.list',
     getOptions: api_account_gettDepartments,
   })
 }

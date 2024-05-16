@@ -3,11 +3,11 @@
     <el-button @click="show3 = !show3">
       Click Me
     </el-button>
-    <el-collapse-transition>
+    <v3-collapse-transition>
       <div v-show="show3" class="title">
         <span>首页</span>
       </div>
-    </el-collapse-transition>
+    </v3-collapse-transition>
     <div class="title">
       <span>首页</span>
     </div>
@@ -24,5 +24,6 @@ onMounted(() => {
 <style lang='scss' scoped>
   .title {
   font-size: 300px;
+  color: antiquewhite;
 }
 </style>

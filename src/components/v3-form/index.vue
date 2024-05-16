@@ -149,7 +149,7 @@ function handleReset() {
   emit('afterReset')
 }
 
-defineExpose({ handleReset, promiseSubmit })
+defineExpose({ handleReset, submit, promiseSubmit })
 </script>
 
 <style lang='scss' scoped>

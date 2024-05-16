@@ -17,6 +17,413 @@ export function useSearch() {
       },
     },
     {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '角色',
+      },
+      attrs: {
+        key: 'roleName',
+        maxlength: 10,
+        placeholder: '请输入工号',
+      },
+    },
+    {
       tag: 'select',
       itemAttrs: {
         label: '兴趣',
@@ -42,7 +449,7 @@ export function useSearch() {
         placeholder: '请选择部门',
         subProps: {
           value: 'id',
-          label: 'departmentName',
+          label: 'name',
         },
         options: [],
       }),

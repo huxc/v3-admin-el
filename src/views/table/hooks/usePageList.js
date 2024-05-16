@@ -8,7 +8,7 @@ export function usePageList() {
   const columns = [
     { type: 'selection', label: '多选' },
     { type: 'index', label: '序号', width: '60px' },
-    // { prop: 'avatar', label: '头像', isImg: true },
+    { prop: 'avatar', label: '头像', isImg: true },
     { prop: 'gender', label: '性别' },
     { prop: 'age', label: '年龄' },
     { prop: 'idCard', label: '身份证' },
@@ -21,8 +21,8 @@ export function usePageList() {
       // eslint-disable-next-line jsdoc/require-jsdoc
       render: (h, { row }) => {
         const status = ['禁用', '启用']
-        const types = ['danger', 'success']
-        return h('el-tag', { type: types[row.status] }, status[row.status])
+        // const types = ['danger', 'success']
+        return h('el-tag', { type: 'success' }, status[row.status])
       },
     },
     { prop: 'createTime', label: '创建时间' },

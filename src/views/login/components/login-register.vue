@@ -75,7 +75,6 @@ function onLogin() {
   .register-x {
   --el-component-size: 42px;
   --el-border-radius-base: 14px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,9 +97,6 @@ function onLogin() {
     box-shadow: 0px 6px 12px 1px rgba(63, 140, 255, 0.26);
     border-radius: 14px;
     font-size: 18px;
-    font-family:
-      Microsoft YaHei UI-Regular,
-      Microsoft YaHei UI;
     font-weight: 400;
     color: #ffffff;
   }
@@ -151,12 +147,10 @@ function onLogin() {
 .login-title {
   margin-top: 30px;
   margin-bottom: 30px;
-  font-size: 34px;
+  font-size: 40px;
   font-weight: bold;
   color: #b342fe;
-  font-family:
-    Microsoft YaHei UI-Bold,
-    Microsoft YaHei UI;
+  font-family: 'W03';
 }
 .code-x {
   display: flex;
@@ -190,7 +184,6 @@ function onLogin() {
   font-size: 16px;
   margin-top: 18px;
   text-align: right;
-  font-family: PingFangSC-Regular-, PingFangSC-Regular;
   color: #ad3afe;
   .register {
     color: #fc7100;

@@ -44,7 +44,7 @@ export function getUsers(data, prop = {}) {
 }
 
 /**
- *gettDepartments
+ * 获取部门列表
  */
 export function gettDepartments(data, prop = {}) {
   return useRequest({
@@ -52,6 +52,6 @@ export function gettDepartments(data, prop = {}) {
     ...prop,
     method: 'get',
     domain: 'account',
-    url: '/user/departments',
+    url: '/departments',
   })
 }

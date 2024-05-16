@@ -51,7 +51,7 @@ export function useTable(props) {
     const query = filterEmptyValue(state.listQuery, initParam, searchForm)
 
     // 格式化查询参数
-    if (typeOf(searchProps.formatQuery) === 'function')
+    if (typeOf(searchProps?.formatQuery) === 'function')
       searchProps.formatQuery(query)
 
     // 接口请求数据

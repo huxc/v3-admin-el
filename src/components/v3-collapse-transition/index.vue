@@ -1,107 +1,143 @@
 <template>
-  <Transition
-    @enter="onEnter"
-    @leave="onLeave"
-    @after-enter="onAfterEnter"
-    @before-enter="onBeforeEnter"
-    @after-leave="onAfterLeave"
-    @before-leave="onBeforeLeave"
-  >
-    <slot />
-  </Transition>
+  <div ref="collapseRef" class="collapse_box">
+    <div
+      class="collapse_box_over"
+      :class="{ collapse_box_over_max: isOver }"
+    >
+      <div ref="collapseMain" class="collapse_box_main">
+        <slot />
+      </div>
+      <!-- <div v-if="isOverBtn" class="collapse_box_over_show">
+        <div class="collapse_box_over_btn" @click="onCollapse">
+          <v3-icon class="svg" :class="{ svg_rotate: !isOver }" icon="clarity:collapse-line" />
+        </div>
+      </div> -->
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { addClass, removeClass } from '@/utils/dom'
+const props = defineProps({
+  // 是否折叠
+  defaultOver: {
+    type: Boolean,
+    default: false,
+  },
+  // 是否监听超过高度动态折叠
+  isListener: {
+    type: Boolean,
+    default: true,
+  },
+  isOverBtn: {
+    type: Boolean,
+    default: true,
+  },
+  // 折叠后的高度
+  collapseHeight: {
+    type: Number,
+    default: 100,
+  },
+})
+const collapseRef = ref()
+const collapseMain = ref()
+
+const boxWidth = ref(0)
+const mainHeight = ref(0)
+const isOver = ref(false)
+const initOver = ref(props.defaultOver)
+
+onMounted(() => {
+  changeSize(props.defaultOver)
+  if (props.isListener)
+    window.addEventListener('resize', changeSize)
+})
+
+onBeforeUnmount(() => {
+  if (props.isListener)
+    window.removeEventListener('resize', changeSize)
+})
+
+const clpHeightPx = computed(() => `${props.collapseHeight}px`)
+const mainHeightPx = computed(() => mainHeight.value > 0 ? `${mainHeight.value}px` : '')
 
 /**
- * 当进入过渡完成时调用。
+ * 初始化宽度/高度/是否折叠
  */
-function onAfterLeave(el) {
-  removeClass(el, 'collapse-transition')
-  el.style.height = ''
-  el.style.overflow = el.dataset.oldOverflow
-  el.style.paddingTop = el.dataset.oldPaddingTop
-  el.style.paddingBottom = el.dataset.oldPaddingBottom
+function changeSize() {
+  boxWidth.value = collapseRef.value.offsetWidth
+  mainHeight.value = collapseMain.value.offsetHeight // + 15
+  if (initOver.value)
+    isOver.value = mainHeight.value > props.collapseHeight
+
+  initOver.value = true
 }
 
 /**
- * 在元素被插入到 DOM 之前被调用
+ * 切换隐藏显示
  */
-function onBeforeEnter(el) {
-  addClass(el, 'collapse-transition')
-  if (!el.dataset)
-    el.dataset = {}
-
-  el.dataset.oldPaddingTop = el.style.paddingTop
-  el.dataset.oldPaddingBottom = el.style.paddingBottom
-
-  el.style.height = '0'
-  el.style.paddingTop = 0
-  el.style.paddingBottom = 0
+function onCollapse() {
+  isOver.value = !isOver.value
+  return isOver.value
 }
 
 /**
- * 在元素被插入到 DOM 之后的下一帧被调用
+ * 根据传值是隐藏显示
  */
-function onEnter(el) {
-  el.dataset.oldOverflow = el.style.overflow
-  if (el.scrollHeight !== 0) {
-    el.style.height = `${el.scrollHeight}px`
-    el.style.paddingTop = el.dataset.oldPaddingTop
-    el.style.paddingBottom = el.dataset.oldPaddingBottom
-  }
-  else {
-    el.style.height = ''
-    el.style.paddingTop = el.dataset.oldPaddingTop
-    el.style.paddingBottom = el.dataset.oldPaddingBottom
-  }
-
-  el.style.overflow = 'hidden'
+function handleCollapse(visible) {
+  isOver.value = visible
+  return visible
 }
 
-/**
- * 当进入过渡完成时调用。
- */
-function onAfterEnter(el) {
-  removeClass(el, 'collapse-transition')
-  el.style.height = ''
-  el.style.overflow = el.dataset.oldOverflow
-}
-
-/**
- * 在 leave 钩子之前调用
- */
-function onBeforeLeave(el) {
-  if (!el.dataset)
-    el.dataset = {}
-  el.dataset.oldPaddingTop = el.style.paddingTop
-  el.dataset.oldPaddingBottom = el.style.paddingBottom
-  el.dataset.oldOverflow = el.style.overflow
-
-  el.style.height = `${el.scrollHeight}px`
-  el.style.overflow = 'hidden'
-}
-
-/**
- * 在离开过渡开始时调用
- */
-function onLeave(el) {
-  if (el.scrollHeight !== 0) {
-    // 在设置高度后添加类，否则会缺失动画效果
-    addClass(el, 'collapse-transition')
-    el.style.height = 0
-    el.style.paddingTop = 0
-    el.style.paddingBottom = 0
-  }
-}
+// 暴露给父组件
+defineExpose({
+  onCollapse,
+  handleCollapse,
+})
 </script>
 
-<style>
-.collapse-transition {
-  transition:
-    0.3s height ease-in-out,
-    0.3s padding-top ease-in-out,
-    0.3s padding-bottom ease-in-out;
+<style lang="scss" scoped>
+$overHight: 15px;
+
+.collapse_box {
+  width: 100%;
+  .collapse_box_over {
+    overflow: hidden;
+    position: relative;
+    height: v-bind(mainHeightPx);
+    transition: all 0.4s ease;
+  }
+  .collapse_box_over_max {
+    height: v-bind(clpHeightPx) !important;
+  }
+  .collapse_box_main {
+    width: 100%;
+  }
+  .collapse_box_over_show {
+    height: $overHight;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+  }
+  .collapse_box_over_btn {
+    width: 20px;
+    height: $overHight;
+    cursor: pointer;
+    text-align: center;
+    line-height: $overHight;
+    margin: 0 auto;
+    svg {
+      font-size: 20px;
+      color: var(--el-color-primary);
+      transform: rotate(180deg);
+      transition: all 0.4s ease;
+    }
+    &:hover {
+      color: var(--el-color-primary-light-3);
+    }
+  }
+  .svg_rotate.svg {
+    transform: rotate(0deg);
+  }
 }
 </style>

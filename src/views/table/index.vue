@@ -1,8 +1,10 @@
 <template>
-  <div class="table-box card">
-    <v3-table
-      ref="tableRef" :search-props :init-param :columns :request-api
-    >
+  <div class="table-box">
+    <!-- 查询 -->
+    <v3-search collapse :init-param :form-items="searchItems" @on-search="handleSearch" />
+
+    <!-- 列表数据 -->
+    <v3-table ref="tableRef" style="margin-top: 20px;" :init-param :columns :request-api>
       <template #headLeft="{ rows, ids, isSelected }">
         <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
           新建[useDrawer]
@@ -34,8 +36,8 @@ import Form from './components/form/index.vue'
 
 const tableRef = ref()
 const visible = ref(false)
-const initParam = { roleName: 888, hobby: '2', depid: 5 }
-const searchProps = useSearch()
+const initParam = { roleName: 888, hobby: '2', depid: 125 }
+const { searchItems } = useSearch()
 
 const { columns, requestApi } = usePageList()
 
@@ -44,6 +46,13 @@ onMounted(() => {
     // requestApi.value = api.account.getUserPage
   }, 3000)
 })
+
+/**
+ * 查询
+ */
+function handleSearch(form) {
+  tableRef.value.handleSearch(form)
+}
 
 /**
  * 弹窗编辑

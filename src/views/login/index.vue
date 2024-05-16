@@ -24,6 +24,8 @@
 <script setup>
 import loginForm from './components/login-form.vue'
 import loginRegister from './components/login-register.vue'
+
+const isSignUp = ref(false)
 </script>
 
 <style>
