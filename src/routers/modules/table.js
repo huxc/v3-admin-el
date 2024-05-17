@@ -50,7 +50,7 @@ export default {
         name: 'table-t4',
         component: () => import('@/views/table/t4/index.vue'),
         meta: {
-          title: '默认折叠',
+          title: '默认展开',
           keepAlive: false,
           icon: 'data',
           permissionCode: '',

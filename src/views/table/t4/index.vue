@@ -40,7 +40,7 @@ const { searchItems } = useSearch()
 const searchProps = {
   searchItems, // 查询条件表单
   collapse: true, // 是否开启折叠功能
-  defaultOver: false, // 默认折叠
+  defaultOver: true, // 默认展开
 }
 const { columns, requestApi } = usePageList()
 

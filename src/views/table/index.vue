@@ -27,15 +27,21 @@
 </template>
 
 <script setup name="example-table">
-import { useSearch } from './hooks/useSearch'
-import { usePageList } from './hooks/usePageList'
-import Form from './components/form/index.vue'
+import { useSearch } from '../hooks/useSearch'
+import { usePageList } from '../hooks/usePageList'
+import Form from '../components/form/index.vue'
 
 const tableRef = ref()
 const visible = ref(false)
 const initParam = { roleName: 888, hobby: '2', depid: 125 }
-const searchProps = useSearch()
+const { searchItems } = useSearch()
 
+// 查询条件props
+const searchProps = {
+  searchItems, // 查询条件表单
+  collapse: true, // 是否开启折叠功能
+  defaultOver: false, // 默认展开
+}
 const { columns, requestApi } = usePageList()
 
 onMounted(() => {

@@ -34,14 +34,14 @@ import Form from '../components/form/index.vue'
 const tableRef = ref()
 const visible = ref(false)
 const initParam = { roleName: 888, hobby: '2', depid: 125 }
-const { searchItems } = useSearch()
+const searchProps = useSearch()
 
 // 查询条件props
-const searchProps = {
-  searchItems, // 查询条件表单
-  collapse: true, // 是否开启折叠功能
-  defaultOver: true, // 默认展开
-}
+// const searchProps = {
+//   searchItems, // 查询条件表单
+//   collapse: true, // 是否开启折叠功能
+//   defaultOver: false, // 默认展开
+// }
 const { columns, requestApi } = usePageList()
 
 onMounted(() => {

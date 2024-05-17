@@ -42,9 +42,12 @@ const clpHeightPx = computed(() => `${props.collapseHeight}px`)
 const mainHeightPx = computed(() => mainHeight.value > 0 ? `${mainHeight.value}px` : '')
 
 onMounted(() => {
-  mainHeight.value = collapseMain.value.offsetHeight
   if (props.collapse && !props.defaultOver)
     isOver.value = true
+
+  setTimeout(() => {
+    mainHeight.value = collapseMain.value.offsetHeight
+  }, 200)
 
   if (props.isListener)
     window.addEventListener('resize', changeSize)

@@ -5,7 +5,7 @@ import { getDepOptions } from '@/hooks/useOptions'
  */
 export function useSearch() {
   const collapse = true // 搜索框可折叠
-  const defaultOver = true
+  const defaultOver = false
   const searchItems = [
     {
       tag: 'select',
