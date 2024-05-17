@@ -6,10 +6,10 @@ import pinia from '@/store'
 import directives from '@/directives' // 自定义指令
 import router from '@/routers'
 
-// import 'virtual:svg-icons-register' // svg
-// import '@/styles/element/index.scss'
-// import '@/styles/common.scss'
-// import '@/styles/reset.scss'
+import 'virtual:svg-icons-register' // svg
+import '@/styles/element/index.scss'
+import '@/styles/common.scss'
+import '@/styles/reset.scss'
 
 const app = createApp(App)
 

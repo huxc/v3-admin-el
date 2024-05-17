@@ -195,7 +195,7 @@ function handleSearch(form) {
 defineExpose({ refresh, getList, tableData, searchReset, resetSelections, setTableData, handleSearch })
 </script>
 
-<style>
+<style lang="scss" scoped>
 .header-buttons {
   margin-bottom: 10px;
 }
