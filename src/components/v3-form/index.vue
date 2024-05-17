@@ -69,14 +69,14 @@
 
 <script setup>
 import { toReactive } from '@vueuse/core'
-import { computeFormItem, elementComponent, formItemComponents } from '../v3-form-item/map-form-item.js'
+import { comElements, comFormItems, computeFormItem } from '../v3-form-item/map-form-item.js'
 import { cusProps } from './useProps'
 
 defineOptions({
   name: 'V3Form',
   components: {
-    ...elementComponent(),
-    ...formItemComponents(), // 动态加载表单子组件
+    ...comElements,
+    ...comFormItems, // 动态加载表单子组件
   },
 })
 

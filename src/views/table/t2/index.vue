@@ -1,8 +1,7 @@
 <template>
-  <div class="table-box" style="position:relative">
-    <v3-table
-      ref="tableRef" :search-props :init-param :columns :request-api
-    >
+  <div class="table-box">
+    <!-- 列表数据 -->
+    <v3-table ref="tableRef" :search-props :init-param :columns :request-api>
       <template #headLeft="{ rows, ids, isSelected }">
         <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
           新建[useDrawer]
@@ -24,22 +23,24 @@
         </el-table-column>
       </template>
     </v3-table>
-    <v3-dialog v-model="visible">
-      <span style="font-size:30px">弹框内容</span>
-    </v3-dialog>
   </div>
 </template>
 
 <script setup name="example-table">
-import { useSearch } from './hooks/useSearch'
-import { usePageList } from './hooks/usePageList'
-import Form from './components/form/index.vue'
+import { useSearch } from '../hooks/useSearch'
+import { usePageList } from '../hooks/usePageList'
+import Form from '../components/form/index.vue'
 
 const tableRef = ref()
 const visible = ref(false)
-const initParam = { roleName: 888, hobby: '2', depid: 5 }
-const searchProps = useSearch()
+const initParam = { roleName: 888, hobby: '2', depid: 125 }
 
+const { searchItems } = useSearch()
+
+const searchProps = {
+  searchItems,
+  collapse: false,
+}
 const { columns, requestApi } = usePageList()
 
 onMounted(() => {
@@ -83,3 +84,7 @@ function onDrawer(rows) {
   })
 }
 </script>
+
+    <style>
+
+    </style>

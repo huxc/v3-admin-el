@@ -1,7 +1,7 @@
 <template>
   <div class="table-box">
     <!-- 列表数据 -->
-    <v3-table ref="tableRef" :search-props :init-param :columns :request-api>
+    <v3-table ref="tableRef" :init-param :columns :request-api>
       <template #headLeft="{ rows, ids, isSelected }">
         <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
           新建[useDrawer]
@@ -27,14 +27,12 @@
 </template>
 
 <script setup name="example-table">
-import { useSearch } from './hooks/useSearch'
-import { usePageList } from './hooks/usePageList'
-import Form from './components/form/index.vue'
+import { usePageList } from '../hooks/usePageList'
+import Form from '../components/form/index.vue'
 
 const tableRef = ref()
 const visible = ref(false)
 const initParam = { roleName: 888, hobby: '2', depid: 125 }
-const searchProps = useSearch()
 
 const { columns, requestApi } = usePageList()
 
@@ -80,6 +78,6 @@ function onDrawer(rows) {
 }
 </script>
 
-<style>
+  <style>
 
-</style>
+  </style>

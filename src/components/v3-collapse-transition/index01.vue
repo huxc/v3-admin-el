@@ -1,7 +1,10 @@
 <template>
-  <div ref="collapseRef" class="clsBox">
-    <div class="clsBox_over" :class="{ clsBox_over_max: isOver }">
-      <div ref="collapseMain" class="clsBox_main">
+  <div ref="collapseRef" class="collapse_box">
+    <div
+      class="collapse_box_over"
+      :class="{ collapse_box_over_max: isOver }"
+    >
+      <div ref="collapseMain" class="collapse_box_main">
         <slot />
       </div>
     </div>
@@ -10,15 +13,10 @@
 
 <script setup>
 const props = defineProps({
-  // 是否开启折叠功能
-  collapse: {
-    type: Boolean,
-    default: false,
-  },
-  // 是否默认折叠
+  // 默认是否展开
   defaultOver: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   // 是否监听超过高度动态折叠
   isListener: {
@@ -31,21 +29,16 @@ const props = defineProps({
     default: 100,
   },
 })
-
 const collapseRef = ref()
 const collapseMain = ref()
 
+const boxWidth = ref(0)
 const mainHeight = ref(0)
 const isOver = ref(false)
-
-const clpHeightPx = computed(() => `${props.collapseHeight}px`)
-const mainHeightPx = computed(() => mainHeight.value > 0 ? `${mainHeight.value}px` : '')
+const initOver = ref(props.defaultOver)
 
 onMounted(() => {
-  mainHeight.value = collapseMain.value.offsetHeight
-  if (props.collapse && !props.defaultOver)
-    isOver.value = true
-
+  changeSize(props.defaultOver)
   if (props.isListener)
     window.addEventListener('resize', changeSize)
 })
@@ -55,25 +48,30 @@ onBeforeUnmount(() => {
     window.removeEventListener('resize', changeSize)
 })
 
+const clpHeightPx = computed(
+  () => `${props.collapseHeight}px`,
+)
+
 /**
  * 初始化宽度/高度/是否折叠
  */
 function changeSize() {
+  // setTimeout处理页面渲染完成后计算
   setTimeout(() => {
+    boxWidth.value = collapseRef.value.offsetWidth
     mainHeight.value = collapseMain.value.offsetHeight
-    if (props.isListener)
+    if (!initOver.value)
       isOver.value = mainHeight.value > props.collapseHeight
-  }, 300)
+
+    initOver.value = false
+  }, 500)
 }
 
 /**
- * 根据传值是隐藏显示
+ * 根据传值隐藏显示
  */
 function handleCollapse(visible) {
-  changeSize()
-  setTimeout(() => {
-    isOver.value = visible
-  }, 300)
+  isOver.value = visible
 }
 
 // 暴露给父组件
@@ -82,21 +80,19 @@ defineExpose({
 })
 </script>
 
-  <style lang="scss" scoped>
-  $overHight: 15px;
-
-.clsBox {
+<style lang="scss" scoped>
+.collapse_box {
   width: 100%;
-  .clsBox_over {
+  .collapse_box_over {
     overflow: hidden;
     position: relative;
-    height: v-bind(mainHeightPx);
+    // height: v-bind(mainHeightPx);
     transition: all 0.4s ease;
   }
-  .clsBox_over_max {
+  .collapse_box_over_max {
     height: v-bind(clpHeightPx) !important;
   }
-  .clsBox_main {
+  .collapse_box_main {
     width: 100%;
   }
 }

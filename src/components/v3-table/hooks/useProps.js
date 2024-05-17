@@ -42,13 +42,6 @@ export const cusProps = {
     type: Boolean,
     default: false,
   },
-  initParam: {
-    type: Object,
-    /**
-     *获取数据初始化参数
-     */
-    default: () => ({}),
-  },
   // 格式化列表数据
   formatRequest: {
     type: Function,
@@ -67,12 +60,20 @@ export const cusProps = {
     type: [Object, null],
     default: null, // 参数见下-search_props_default
   },
+  initParam: {
+    type: Object,
+    /**
+     *查询列表默认参数
+     */
+    default: () => ({}),
+  },
 }
 
 // searchProps的默认值
 export const search_props_default = reactive({
-  submitMsg: '查询', // 查询按钮名称
-  resetMsg: '重置', // 重置按钮名称
-  searchItems: [], // 查询表单
+  collapse: false, // 是否可折叠搜索栏
+  collapseHeight: 70, // 折叠后的高度
+  defaultOver: false, // 当collapse为true时生效，搜索栏默认展开/折叠（true/false）
+  formItems: [], // 查询表单（数组json）
   formatQuery: null, // 格式化查询数据-需定义为方法
 })

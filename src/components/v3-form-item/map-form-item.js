@@ -1,53 +1,27 @@
-import { defineAsyncComponent } from 'vue'
-
-import {
+/**
+ * 因为按需加载插件无法打包动态组件，要把需要用到的表单组件才此处统一引入
+ */
+export const comElements = {
+  ElInput,
+  ElRadio,
+  ElInputNumber,
+  ElSelect,
+  ElDatePicker,
+  ElCol,
   ElCascader,
   ElCheckbox,
-  ElCol,
-  ElDatePicker,
-  ElInput,
-  ElInputNumber,
-  ElRadio,
-  ElRadioButton,
   ElRadioGroup,
-  ElSelect,
-  ElSelectV2,
+  ElRadioButton,
   ElUpload,
-} from 'element-plus'
-
-/**
- * 因为按需加载插件无法打包动态组件(component标签)，所以封装form组件按需引入
- */
-export function elementComponent() {
-  const elementComponent = {
-    ElInput,
-    ElRadio,
-    ElInputNumber,
-    ElSelect,
-    ElDatePicker,
-    ElCol,
-    ElCascader,
-    ElCheckbox,
-    ElRadioGroup,
-    ElRadioButton,
-    ElUpload,
-    ElSelectV2,
-  }
-  return elementComponent
+  ElSelectV2,
 }
 
-/**
- * 组件的映射关系
- */
-export function formItemComponents() {
-  const components = {
-    'v3-select': defineAsyncComponent(() => import('./v3-select.vue')),
-    'v3-upload-img': defineAsyncComponent(() => import('./v3-upload-img.vue')),
-    'v3-upload-file': defineAsyncComponent(() => import('./v3-upload-file.vue')),
-    'v3-radio-group': defineAsyncComponent(() => import('./v3-radio-group.vue')),
-    'v3-checkbox-group': defineAsyncComponent(() => import('./v3-checkbox-group.vue')),
-  }
-  return components
+export const comFormItems = {
+  'v3-select': defineAsyncComponent(() => import('./v3-select.vue')),
+  'v3-upload-img': defineAsyncComponent(() => import('./v3-upload-img.vue')),
+  'v3-upload-file': defineAsyncComponent(() => import('./v3-upload-file.vue')),
+  'v3-radio-group': defineAsyncComponent(() => import('./v3-radio-group.vue')),
+  'v3-checkbox-group': defineAsyncComponent(() => import('./v3-checkbox-group.vue')),
 }
 
 const componentMap = {

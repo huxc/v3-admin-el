@@ -1,15 +1,9 @@
 <template>
   <!-- 搜索条件 -->
-  <!-- <v3-form
-    v-if="searchProps" ref="formRef" inline footer :reset-msg :submit-msg :model="searchForm"
-    :form-items="searchItems" @submit="refresh"
-  /> -->
+  <v3-search v-if="searchProps" :collapse :init-param :default-over :collapse-height :form-items="searchItems" @on-search="handleSearch" />
 
-  <!-- <v3-search
-    v-bind="searchProps" inline footer :reset-msg :submit-msg :model="searchForm"
-    :form-items="searchItems" @submit="refresh"
-  /> -->
-  <div class="card table-main">
+  <!-- 列表数据 -->
+  <div class="card table-main" style="margin-top: 10px;">
     <!-- 列表顶部的操作按钮 -->
     <div class="header-buttons">
       <slot name="headLeft" :rows="selectedList" :ids="selectedListIds" :is-selected="isSelected" />
@@ -88,7 +82,7 @@ const isMultiple = props.columns.some(i => i?.type === 'selection')
 // 合并props.searchProps
 Object.assign(search_props_default, props.searchProps || {})
 
-// const { searchItems, submitMsg, resetMsg } = toRefs(search_props_default)
+const { searchItems, collapse, defaultOver, collapseHeight } = toRefs(search_props_default)
 
 const { headerCellStyle, cellStyle } = useTableStyle()
 

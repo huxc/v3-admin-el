@@ -11,7 +11,7 @@
     </el-button>
   </DefineTemplate>
 
-  <v3-collapse-transition ref="collapseRef" :is-over-btn="false" :collapse-height="70">
+  <v3-collapse-transition ref="collapseRef" :collapse :collapse-height :default-over>
     <div class="search-x card">
       <div class="form-x">
         <v3-form ref="formRef" :model="searchForm" :form-items inline footer :submit-msg="false" :reset-msg="false">
@@ -22,7 +22,7 @@
       </div>
       <template v-if="collapse">
         <Transition name="fade" mode="out-in">
-          <div v-show="isOver" class="btn-x">
+          <div v-show="!isOver" class="btn-x">
             <ReuseTemplate :visible="false" handle-name="展开" icon="ep:arrow-down-bold" />
           </div>
         </Transition>
@@ -32,8 +32,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-
 const props = defineProps({
   // 是否开启折叠功能
   collapse: {
@@ -41,9 +39,14 @@ const props = defineProps({
     default: false,
   },
   // 默认是否折叠
-  isOver: {
+  defaultOver: {
     type: Boolean,
     default: false,
+  },
+  // 折叠后的高度
+  collapseHeight: {
+    type: Number,
+    default: 70,
   },
 
   initParam: {
@@ -67,7 +70,7 @@ const emit = defineEmits(['onSearch', 'afterReset'])
 
 const formRef = ref()
 const collapseRef = ref()
-const isOver = ref(props.isOver)
+const isOver = ref(props.defaultOver)
 const searchForm = reactive({})
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
@@ -94,9 +97,18 @@ function onReset() {
 
 /**
  * 折叠合并事件
+ * 因为布局会影响高度变化导则动画不够流畅，使用setTimeout做延迟处理
  */
 function onCollapse(visible) {
-  isOver.value = collapseRef.value.handleCollapse(visible)
+  collapseRef.value.handleCollapse(visible)
+  if (visible) {
+    setTimeout(() => {
+      isOver.value = false
+    }, 600)
+  }
+  else {
+    isOver.value = true
+  }
 }
 </script>
 
