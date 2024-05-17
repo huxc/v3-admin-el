@@ -28,7 +28,7 @@ import loginRegister from './components/login-register.vue'
 const isSignUp = ref(false)
 </script>
 
-<style>
+<style lang="scss" scoped>
 .login-main {
   position: relative;
   min-height: 100vh;
