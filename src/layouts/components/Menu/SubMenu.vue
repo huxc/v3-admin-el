@@ -31,7 +31,6 @@ const iconStyle = {
   height: '20px',
   marginRight: '10px',
 }
-
 /**
  *handleClickMenu
  */

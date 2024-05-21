@@ -55,6 +55,16 @@ const componentMap = {
       'value-format': 'YYYY-MM-DD HH:mm:ss',
     },
   },
+  'daterange': {
+    component: 'el-date-picker',
+    attrs: {
+      'clearable': true,
+      'type': 'daterange',
+      'range-separator': '至',
+      'start-placeholder': '开始日期',
+      'end-placeholder': '截止日期',
+    },
+  },
   'radio': {
     component: 'v3-radio-group', // 自定义组件,为了在el-radio-group添加options能够生成el-radio节点
     value: [],

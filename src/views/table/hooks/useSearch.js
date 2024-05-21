@@ -70,7 +70,7 @@ export function useSearch() {
       }),
     },
     {
-      tag: 'date',
+      tag: 'daterange',
       itemAttrs: {
         label: '创建时间',
       },

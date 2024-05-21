@@ -1,4 +1,5 @@
 import Layout from '@/layouts/index.vue'
+import { routeAuths } from '@/enums/auth.js'
 
 export default {
   path: '/table',
@@ -9,7 +10,7 @@ export default {
     title: '表格',
     sort: 0,
     icon: 'data',
-    permissionCode: '',
+    permissionCode: routeAuths.table,
   },
   children: [
     {

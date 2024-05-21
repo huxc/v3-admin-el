@@ -1,4 +1,6 @@
-import appStore from '@/store/index.js'
+import { useUserStore } from '@/store/modules/user'
+
+const userStore = useUserStore()
 
 const auth = {
   /**
@@ -7,7 +9,7 @@ const auth = {
    */
   mounted(el, binding) {
     const value = binding.value || ''
-    const auths = appStore.userStore.authCodes || []
+    const auths = userStore.authCodes || []
     if (value !== '' && !auths.includes(value))
       el.parentNode && el.parentNode.removeChild(el)
   },

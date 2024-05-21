@@ -112,6 +112,6 @@ function storeSetup() {
 export const useUserStore = defineStore('userStore', storeSetup, {
   persist: {
     storage: sessionStorage,
-    paths: ['state'],
+    paths: ['state', 'authCodes'],
   },
 })
