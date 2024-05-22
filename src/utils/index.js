@@ -1,7 +1,7 @@
 /**
  * 获取类型
  */
-function typeOf(obj) {
+export function typeOf(obj) {
   const toString = Object.prototype.toString
   const map = {
     '[object Boolean]': 'boolean',
@@ -17,20 +17,18 @@ function typeOf(obj) {
   }
   return map[toString.call(obj)]
 }
-export { typeOf }
 
 /**
  * 判断空对象
  */
-function isObjEmpty(obj) {
+export function isObjEmpty(obj) {
   return obj?.constructor === Object && Reflect.ownKeys(obj).length === 0
 }
-export { isObjEmpty }
 
 /**
- * deepCopy
+ * 深拷贝
  */
-function deepCopy(data) {
+export function deepCopy(data) {
   const t = typeOf(data)
   let o
 
@@ -51,7 +49,6 @@ function deepCopy(data) {
   }
   return o
 }
-export { deepCopy }
 
 /**
  * 清除无效参数
@@ -132,6 +129,17 @@ export function randomid() {
   const [max, min] = [Math.floor(Math.random() * (10 - 7 + 1) + 1), Math.floor(Math.random() * (17 - 10 + 1) + 17)]
   abc = abc.sort(() => 0.4 - Math.random()).slice(max, min).slice(0, 8).join('')
   return (abc + new Date().getTime())
+}
+
+/**
+ * 遍历 Tree 节点
+ */
+export function foreachTree(data, callback, childrenName = 'children') {
+  for (let i = 0; i < data.length; i++) {
+    callback(data[i])
+    if (data[i][childrenName] && data[i][childrenName].length > 0)
+      foreachTree(data[i][childrenName], callback, childrenName)
+  }
 }
 
 /**

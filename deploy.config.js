@@ -7,7 +7,7 @@ module.exports = {
   test: {
     // 环境对象
     name: '测试环境', // 环境名称
-    script: 'npm run build:test', // 打包命令
+    script: 'pnpm run build:test', // 打包命令
     host: '192.168.0.1', // 服务器地址
     port: 22, // 服务器端口号
     username: 'root', // 服务器登录用户名
@@ -21,7 +21,7 @@ module.exports = {
   prod: {
     // 环境对象
     name: '生产环境', // 环境名称
-    script: 'npm run build:prod', // 打包命令
+    script: 'pnpm run build', // 打包命令
     host: '192.168.0.1', // 服务器地址
     port: 22, // 服务器端口号
     username: 'root', // 服务器登录用户名
