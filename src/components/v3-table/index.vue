@@ -54,7 +54,7 @@
           :total="totalCount"
           layout="total, sizes, prev, pager, next, jumper"
           :page-size="listQuery.pageSize"
-          :hide-on-single-page="onePage"
+          :hide-on-single-page="isOnePage"
           @current-change="onPageChange" @size-change="onSizeChange"
         />
       </div>
@@ -93,13 +93,6 @@ const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected }
 const { refresh, getList, tableData, totalCount, listLoading, listQuery, searchForm, onSizeChange, onPageChange } = useTable(props)
 
 Object.assign(searchForm, props.initParam)
-
-const onePage = computed(() => {
-  if (props.isOnePage)
-    return totalCount > 1
-
-  return true
-})
 
 // table数据源变化 滚动条滑到顶部
 watch(tableData, () => {

@@ -74,7 +74,7 @@ export const cusProps = {
 export const search_props_default = reactive({
   collapse: false, // 是否可折叠搜索栏
   collapseHeight: 70, // 折叠后的高度
-  defaultOver: true, // 当collapse为true时生效，搜索栏是否折叠（true/false）
+  defaultOver: true, // 当collapse为true时生效，搜索栏默认是否折叠（true/false）
   formItems: [], // 查询表单（数组json）
   formatQuery: null, // 格式化查询数据-需定义为方法
 })
