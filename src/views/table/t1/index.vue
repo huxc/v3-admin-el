@@ -1,16 +1,10 @@
 <template>
   <div class="table-box">
     <!-- 列表数据 -->
-    <v3-table ref="tableRef" :init-param :columns :request-api>
+    <v3-table ref="tableRef" :columns :request-api>
       <template #headLeft="{ rows, ids, isSelected }">
         <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
-          新建[useDrawer]
-        </el-button>
-        <el-button class="btn" type="primary" @click="onDialog(rows, ids, isSelected)">
-          新建[useDialog]
-        </el-button>
-        <el-button class="btn" type="primary" @click="visible = true">
-          局部弹框v3-ialog
+          添加
         </el-button>
       </template>
       <template #operation>
@@ -18,6 +12,9 @@
           <template #default="{ row }">
             <el-button type="primary" @click="handleM(row)">
               编辑
+            </el-button>
+            <el-button type="danger" @click="handleM(row)">
+              删除
             </el-button>
           </template>
         </el-table-column>
@@ -31,39 +28,15 @@ import { usePageList } from '../hooks/usePageList'
 import Form from '../components/form/index.vue'
 
 const tableRef = ref()
-const visible = ref(false)
-const initParam = { roleName: 888, hobby: '2', depid: 125 }
 
 const { columns, requestApi } = usePageList()
 
-onMounted(() => {
-  setTimeout(() => {
-    // requestApi.value = api.account.getUserPage
-  }, 3000)
-})
-
-/**
- * 弹窗编辑
- */
-function onDialog(rows) {
-  useDialog({
-    attrs: { title: '表单编辑' },
-    footer: { okText: '提交' },
-    props: { oldForm: rows },
-    componentEl: Form,
-    /**
-     * 刷新列表
-     */
-    afterClose: () => {
-    },
-  })
-}
 /**
  *弹窗编辑
  */
 function onDrawer(rows) {
   useDrawer({
-    attrs: { title: '表单编辑' },
+    attrs: { title: '表单' },
     props: { oldForm: rows },
     componentEl: Form,
     /**

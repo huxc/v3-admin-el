@@ -38,13 +38,7 @@ const userStore = useUserStore()
 
 const formEl = ref(null)
 const { rules } = useForm()
-const formLogin = reactive({
-  phone: '',
-  password: '',
-  grant_type: 'password',
-  client_id: 'client_2',
-  client_secret: '123456',
-})
+const formLogin = reactive({})
 
 const router = useRouter()
 const route = useRoute()

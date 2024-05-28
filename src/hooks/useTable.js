@@ -70,7 +70,7 @@ export function useTable(props) {
         }
         else {
           state.tableData = response.data?.list || []
-          state.totalCount = response.data?.total || 0
+          state.totalCount = response.data?.totalCount || 0
         }
       })
     }).finally(() => {

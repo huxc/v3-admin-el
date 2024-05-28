@@ -50,7 +50,7 @@ function storeSetup() {
    */
   const logIn = (loginForm) => {
     return new Promise((resolve, reject) => {
-      api_account_login(loginForm)
+      api_user_login(loginForm)
         .then(({ data }) => {
           refToken(data)
           resolve(data)

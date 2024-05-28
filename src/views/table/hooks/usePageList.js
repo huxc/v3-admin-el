@@ -2,7 +2,7 @@
  * 分页查询接口
  */
 export function usePageList() {
-  const requestApi = ref(api_account_getUsers)
+  const requestApi = ref(api_user_getCustomers)
 
   // 列表列名
   const columns = [
