@@ -2,22 +2,16 @@
   <div class="table-box">
     <!-- 列表数据 -->
     <v3-table ref="tableRef" :search-props :init-param :columns :request-api>
-      <template #headLeft="{ rows, ids, isSelected }">
-        <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
-          新建[useDrawer]
-        </el-button>
-        <el-button class="btn" type="primary" @click="onDialog(rows, ids, isSelected)">
-          新建[useDialog]
-        </el-button>
-        <el-button class="btn" type="primary" @click="visible = true">
-          局部弹框v3-ialog
+      <template #headLeft>
+        <el-button class="btn" type="primary" @click="handleEdit()">
+          <v3-icon class="table-ico" icon="ep:circle-plus" />新增客户
         </el-button>
       </template>
       <template #operation>
         <el-table-column label="操作" width="120px" align="center">
           <template #default="{ row }">
-            <el-button type="primary" @click="handleM(row)">
-              编辑
+            <el-button type="primary" link @click="handleEdit(row)">
+              <v3-icon class="table-ico" icon="ep:edit-pen" />编辑
             </el-button>
           </template>
         </el-table-column>
@@ -27,12 +21,11 @@
 </template>
 
 <script setup name="example-table">
-import { useSearch } from '../hooks/useSearch'
 import { usePageList } from '../hooks/usePageList'
 import Form from '../components/form/index.vue'
+import { useSearch } from './hooks/useSearch'
 
 const tableRef = ref()
-const visible = ref(false)
 const initParam = { roleName: 888, hobby: '2', depid: 125 }
 
 const { searchItems } = useSearch()
@@ -52,7 +45,7 @@ onMounted(() => {
 /**
  * 弹窗编辑
  */
-function onDialog(rows) {
+function handleEdit(rows) {
   useDialog({
     attrs: { title: '表单编辑' },
     footer: { okText: '提交' },
@@ -62,24 +55,6 @@ function onDialog(rows) {
      * 刷新列表
      */
     afterClose: () => {
-    },
-  })
-}
-
-/**
- *弹窗编辑
- */
-function onDrawer(rows) {
-  useDrawer({
-    attrs: { title: '表单编辑' },
-    props: { oldForm: rows },
-    componentEl: Form,
-    /**
-     * 刷新列表
-     */
-    beforeClose: (done) => {
-      tableRef.value.refresh()
-      done()
     },
   })
 }

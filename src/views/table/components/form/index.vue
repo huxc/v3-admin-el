@@ -22,9 +22,7 @@ const emit = defineEmits(['clsDwr', 'clsDlg'])
 const { formItems, editForm, formRef } = useForm()
 
 onMounted(() => {
-  setTimeout(() => {
-    Object.assign(editForm, props.oldForm)
-  }, 2000)
+  Object.assign(editForm, props.oldForm)
 })
 
 /**
@@ -32,7 +30,11 @@ onMounted(() => {
  */
 function onSubmit() {
   formRef.value.promiseSubmit().then(() => {
-    api_user_postCustomers(editForm).then(() => {
+    const apiRes = editForm.id
+      ? api_user_patchCustomers
+      : api_user_postCustomers
+
+    apiRes(editForm).then(() => {
       emit('clsDwr')
     })
   })

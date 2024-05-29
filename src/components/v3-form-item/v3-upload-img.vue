@@ -24,8 +24,8 @@
               class="el-upload-list__item-preview"
             >
               <el-image
-                style="width: 24px;height: 24px;"
-                class="el-upload-list__item-thumbnail" src="/images/preview.png" :zoom-rate="1.2"
+                style="width: 22px;height: 22px;"
+                class="el-upload-list__item-thumbnail" :src="preview" :zoom-rate="1.2"
                 :max-scale="7"
                 :min-scale="0.2"
                 :preview-src-list="[file.url]"
@@ -55,10 +55,12 @@
 </template>
 
 <script setup name="cus-upload-img">
+import { invoke, until } from '@vueuse/core'
 import { useUpload } from '@/hooks/useUpload'
 import { file_upload_url } from '@/api/config/globalsUrl.js'
-import appStore from '@/store/index.js'
 import { typeOf } from '@/utils'
+import { useUserStore } from '@/store/modules/user'
+import preview from '@/assets/images/preview.png'
 
 const props = defineProps({
   action: {
@@ -100,9 +102,10 @@ const props = defineProps({
     default: () => [],
   },
 })
-const formItem = defineModel()
+const userStore = useUserStore()
+const filePaths = defineModel()
 // 设置token
-const headers = { Authorization: appStore.userStore?.getToken }
+const headers = { Authorization: userStore?.getToken }
 
 const {
   fileList,
@@ -115,7 +118,7 @@ const {
   maxSizeWithUnit,
   handleDeleteFile,
   handleBeforeUpload,
-} = useUpload(props, formItem)
+} = useUpload(props, filePaths)
 
 /**
  * 移出事件
@@ -124,17 +127,13 @@ function onRemove(file) {
   uploadRef.value.handleRemove(file)
 }
 
-let oneWatch = true
-watch(formItem, () => {
-  if (formItem.value?.length > 0 && oneWatch) {
-    fileList.value = []
-    if (typeOf(formItem.value) === 'array')
-      fileList.value = formItem.value.map(url => ({ url }))
-    else
-      fileList.value.push({ url: formItem.value })
-    oneWatch = false
-  }
-}, { immediate: true })
+invoke(async () => {
+  await until(filePaths).toMatch(v => v?.length > 0)
+  fileList.value = []
+  typeOf(filePaths.value) === 'array'
+    ? fileList.value = filePaths.value.map(url => ({ url }))
+    : fileList.value.push({ url: filePaths.value })
+})
 </script>
 
   <style lang="scss">

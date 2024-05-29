@@ -4,12 +4,7 @@
  *
  */
 export function useForm() {
-  const editForm = reactive({
-    status: 1,
-    avatar: 'http://dummyimage.com/100x100',
-    created_at: '2007-08-18 01:50:33',
-    updated_at: '2007-08-18 01:50:33',
-  })
+  const editForm = reactive({})
   const formRef = ref()
   const formItems = [
     {
@@ -26,7 +21,7 @@ export function useForm() {
       },
     },
     {
-      tag: 'input',
+      tag: 'select',
       itemAttrs: {
         label: '性别',
         rules: [
@@ -35,7 +30,11 @@ export function useForm() {
       },
       attrs: {
         key: 'gender',
-        placeholder: '请输入年龄',
+        placeholder: '请选择性别',
+        options: [
+          { value: 1, label: '男' },
+          { value: 2, label: '女' },
+        ],
       },
     },
     {
@@ -65,12 +64,19 @@ export function useForm() {
       },
     },
     {
+      tag: 'uploadImg',
+      itemAttrs: {
+        label: '头像',
+      },
+      attrs: {
+        key: 'avatar',
+        limit: 1,
+      },
+    },
+    {
       tag: 'input',
       itemAttrs: {
         label: '邮箱',
-        rules: [
-          { required: true, message: '不能为空', trigger: 'click' },
-        ],
       },
       attrs: {
         key: 'email',

@@ -1,5 +1,3 @@
-import { getDepOptions } from '@/hooks/useOptions'
-
 /**
  * 查询条件配置
  */
@@ -69,15 +67,15 @@ export function useSearch() {
         options: [],
       }),
     },
-    {
-      tag: 'daterange',
-      itemAttrs: {
-        label: '创建时间',
-      },
-      attrs: {
-        key: 'createTime',
-      },
-    },
+    // {
+    //   tag: 'daterange',
+    //   itemAttrs: {
+    //     label: '创建时间',
+    //   },
+    //   attrs: {
+    //     key: 'createTime',
+    //   },
+    // },
     {
       tag: 'select',
       itemAttrs: {
@@ -140,19 +138,16 @@ export function useSearch() {
         options: [],
       }),
     },
-    {
-      tag: 'date',
-      itemAttrs: {
-        label: '创建时间',
-      },
-      attrs: {
-        key: 'createTime',
-      },
-    },
+    // {
+    //   tag: 'date',
+    //   itemAttrs: {
+    //     label: '创建时间',
+    //   },
+    //   attrs: {
+    //     key: 'createTime',
+    //   },
+    // },
   ]
-
-  // 动态给key='depid'的options赋值
-  getDepOptions(searchItems, 'depid')
 
   return {
     collapse,

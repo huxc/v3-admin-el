@@ -41,7 +41,7 @@ export function getCustomers(data, prop = {}) {
 
 /**
  * api_user_postCustomers
- * 获取客户信息列表
+ * 新增客户
  */
 export function postCustomers(data, prop = {}) {
   return useRequest({
@@ -50,5 +50,33 @@ export function postCustomers(data, prop = {}) {
     method: 'post',
     domain: 'user',
     url: '/customer',
+  })
+}
+
+/**
+ * api_user_patchCustomers
+ * 更新客户
+ */
+export function patchCustomers(data, prop = {}) {
+  return useRequest({
+    data,
+    ...prop,
+    method: 'patch',
+    domain: 'user',
+    url: `/customer/${data.id}`,
+  })
+}
+
+/**
+ * api_user_deleteCustomers
+ * 删除客户
+ */
+export function deleteCustomers(data, prop = {}) {
+  return useRequest({
+    data,
+    ...prop,
+    method: 'delete',
+    domain: 'user',
+    url: `/customer`,
   })
 }
