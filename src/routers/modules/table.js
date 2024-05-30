@@ -9,7 +9,7 @@ export default {
   meta: {
     title: '表格',
     sort: 0,
-    icon: 'data',
+    icon: 'list',
     permissionCode: routeAuths.table,
   },
   children: [
@@ -20,7 +20,7 @@ export default {
       meta: {
         title: '列表',
         keepAlive: false,
-        icon: 'data',
+        icon: 'table',
         permissionCode: '',
       },
     },
@@ -31,7 +31,7 @@ export default {
         meta: {
           title: '查询列表',
           keepAlive: false,
-          icon: 'data',
+          icon: 'selet',
           permissionCode: '',
         },
       },
@@ -42,7 +42,7 @@ export default {
         meta: {
           title: '可折叠查询',
           keepAlive: false,
-          icon: 'data',
+          icon: 'fold',
           permissionCode: '',
         },
       },
@@ -53,7 +53,7 @@ export default {
         meta: {
           title: '默认展开',
           keepAlive: false,
-          icon: 'data',
+          icon: 'unfold',
           permissionCode: '',
         },
       },

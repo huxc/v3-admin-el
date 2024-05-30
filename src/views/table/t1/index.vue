@@ -27,12 +27,12 @@
 </template>
 
 <script setup name="example-table">
-import { usePageList } from '../hooks/usePageList'
 import Form from '../components/form/index.vue'
+import { useTable } from '../hooks/useTable'
 
 const tableRef = ref()
 
-const { columns, requestApi } = usePageList()
+const { columns, requestApi } = useTable()
 
 /**
  * 批量删除
@@ -45,8 +45,8 @@ function handleDel(ids) {
 /**
  *弹窗编辑
  */
-function handleEdit(row) {
-  row = row ?? {} //   对实时数据要求较高的项目 此处应根据id读取row
+function handleEdit(row = {}) {
+  // 对实时数据要求较高的项目 此处应根据id读取row
   useDrawer({
     attrs: { title: '表单' },
     props: { oldForm: row },

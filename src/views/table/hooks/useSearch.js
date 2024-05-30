@@ -6,16 +6,13 @@ export function useSearch() {
   const defaultOver = false
   const searchItems = [
     {
-      tag: 'select',
+      tag: 'input',
       itemAttrs: {
-        label: '性别',
+        label: '姓名',
       },
       attrs: {
-        key: 'gender',
-        options: [
-          { value: 0, label: '男' },
-          { value: 1, label: '女' },
-        ],
+        key: 'name',
+        maxlength: 10,
       },
     },
     {
@@ -25,57 +22,9 @@ export function useSearch() {
       },
       attrs: {
         key: 'age',
-        maxlength: 10,
-        placeholder: '请输入工号',
+        maxlength: 3,
       },
     },
-
-    {
-      tag: 'input',
-      itemAttrs: {
-        label: '身份证',
-      },
-      attrs: {
-        key: 'idCard',
-        maxlength: 10,
-        placeholder: '请输入工号',
-      },
-    },
-    {
-      tag: 'input',
-      itemAttrs: {
-        label: '邮箱',
-      },
-      attrs: {
-        key: 'email',
-        maxlength: 10,
-        placeholder: '请输入工号',
-      },
-    },
-    {
-      tag: 'select',
-      itemAttrs: {
-        label: '部门',
-      },
-      attrs: shallowReactive({
-        key: 'depid',
-        placeholder: '请选择部门',
-        subProps: {
-          value: 'id',
-          label: 'name',
-        },
-        options: [],
-      }),
-    },
-    // {
-    //   tag: 'daterange',
-    //   itemAttrs: {
-    //     label: '创建时间',
-    //   },
-    //   attrs: {
-    //     key: 'createTime',
-    //   },
-    // },
     {
       tag: 'select',
       itemAttrs: {
@@ -84,9 +33,29 @@ export function useSearch() {
       attrs: {
         key: 'gender',
         options: [
-          { value: 0, label: '男' },
-          { value: 1, label: '女' },
+          { value: 1, label: '男' },
+          { value: 2, label: '女' },
         ],
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '身份证',
+      },
+      attrs: {
+        key: 'idCard',
+        maxlength: 18,
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '姓名',
+      },
+      attrs: {
+        key: 'name',
+        maxlength: 10,
       },
     },
     {
@@ -96,11 +65,22 @@ export function useSearch() {
       },
       attrs: {
         key: 'age',
-        maxlength: 10,
-        placeholder: '请输入工号',
+        maxlength: 3,
       },
     },
-
+    {
+      tag: 'select',
+      itemAttrs: {
+        label: '性别',
+      },
+      attrs: {
+        key: 'gender',
+        options: [
+          { value: 1, label: '男' },
+          { value: 2, label: '女' },
+        ],
+      },
+    },
     {
       tag: 'input',
       itemAttrs: {
@@ -108,45 +88,52 @@ export function useSearch() {
       },
       attrs: {
         key: 'idCard',
-        maxlength: 10,
-        placeholder: '请输入工号',
+        maxlength: 18,
       },
     },
     {
       tag: 'input',
       itemAttrs: {
-        label: '邮箱',
+        label: '姓名',
       },
       attrs: {
-        key: 'email',
+        key: 'name',
         maxlength: 10,
-        placeholder: '请输入工号',
+      },
+    },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '年龄',
+      },
+      attrs: {
+        key: 'age',
+        maxlength: 3,
       },
     },
     {
       tag: 'select',
       itemAttrs: {
-        label: '部门',
+        label: '性别',
       },
-      attrs: shallowReactive({
-        key: 'depid',
-        placeholder: '请选择部门',
-        subProps: {
-          value: 'id',
-          label: 'name',
-        },
-        options: [],
-      }),
+      attrs: {
+        key: 'gender',
+        options: [
+          { value: 1, label: '男' },
+          { value: 2, label: '女' },
+        ],
+      },
     },
-    // {
-    //   tag: 'date',
-    //   itemAttrs: {
-    //     label: '创建时间',
-    //   },
-    //   attrs: {
-    //     key: 'createTime',
-    //   },
-    // },
+    {
+      tag: 'input',
+      itemAttrs: {
+        label: '身份证',
+      },
+      attrs: {
+        key: 'idCard',
+        maxlength: 18,
+      },
+    },
   ]
 
   return {

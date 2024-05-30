@@ -1,7 +1,7 @@
 /**
  * 查询条件配置
  */
-export function useSearch() {
+export function useQuery() {
   const collapse = true // 搜索框可折叠
   const defaultOver = false
   const searchItems = [
@@ -48,11 +48,33 @@ export function useSearch() {
         maxlength: 18,
       },
     },
+    {
+      tag: 'daterange',
+      itemAttrs: {
+        label: '创建时间',
+      },
+      attrs: {
+        key: 'createTime', // createdEndAt createdStartAt
+      },
+    },
   ]
+
+  /**
+   * 格式化创建时间查询
+   */
+  const formatQuery = (params) => {
+    if (params?.createTime?.length) {
+      params.createdStartAt = params.createTime[0]
+      params.createdEndAt = params.createTime[1]
+      delete params.createTime
+    }
+  }
 
   return {
     collapse,
+    formatQuery,
     defaultOver,
     searchItems,
+
   }
 }

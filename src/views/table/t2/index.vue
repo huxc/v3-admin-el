@@ -1,7 +1,7 @@
 <template>
   <div class="table-box">
     <!-- 列表数据 -->
-    <v3-table ref="tableRef" :search-props :init-param :columns :request-api>
+    <v3-table ref="tableRef" :search-props :columns :request-api>
       <template #headLeft>
         <el-button class="btn" type="primary" @click="handleEdit()">
           <v3-icon class="table-ico" icon="ep:circle-plus" />新增客户
@@ -21,12 +21,11 @@
 </template>
 
 <script setup name="example-table">
-import { usePageList } from '../hooks/usePageList'
-import Form from '../components/form/index.vue'
+import { useTable } from '../hooks/useTable.js'
+import Form from './components/form/index.vue'
 import { useSearch } from './hooks/useSearch'
 
 const tableRef = ref()
-const initParam = { roleName: 888, hobby: '2', depid: 125 }
 
 const { searchItems } = useSearch()
 
@@ -34,27 +33,25 @@ const searchProps = {
   searchItems,
   collapse: false,
 }
-const { columns, requestApi } = usePageList()
-
-onMounted(() => {
-  setTimeout(() => {
-    // requestApi.value = api.account.getUserPage
-  }, 3000)
-})
+const { columns, requestApi } = useTable()
 
 /**
  * 弹窗编辑
  */
-function handleEdit(rows) {
+function handleEdit(rows = {}) {
+  // 对实时数据要求较高的项目 此处应根据id读取row
+  const title = rows.id ? '编辑客户' : '新增客户'
   useDialog({
-    attrs: { title: '表单编辑' },
+    attrs: { title },
     footer: { okText: '提交' },
     props: { oldForm: rows },
     componentEl: Form,
     /**
-     * 刷新列表
+     *编辑成功后回调
      */
     afterClose: () => {
+      // 刷新列表
+      tableRef.value.refresh()
     },
   })
 }

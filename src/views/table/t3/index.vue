@@ -1,87 +1,43 @@
 <template>
-  <div class="table-box">
+  <div class="table-box" style="position: relative;">
     <!-- 列表数据 -->
     <v3-table ref="tableRef" :search-props :init-param :columns :request-api>
-      <template #headLeft="{ rows, ids, isSelected }">
-        <el-button class="btn" type="primary" @click="onDrawer(rows, ids, isSelected)">
-          新建[useDrawer]
-        </el-button>
-        <el-button class="btn" type="primary" @click="onDialog(rows, ids, isSelected)">
-          新建[useDialog]
-        </el-button>
-        <el-button class="btn" type="primary" @click="visible = true">
-          局部弹框v3-ialog
-        </el-button>
-      </template>
       <template #operation>
         <el-table-column label="操作" width="120px" align="center">
           <template #default="{ row }">
-            <el-button type="primary" @click="handleM(row)">
-              编辑
+            <el-button link type="primary" @click="handleDlg(row)">
+              <v3-icon class="table-ico" icon="ep:view" />详情
             </el-button>
           </template>
         </el-table-column>
       </template>
     </v3-table>
+    <v3-dialog v-model="visible">
+      <Detail :key="selectRow?.id" :row="selectRow" />
+    </v3-dialog>
   </div>
 </template>
 
 <script setup name="example-table">
-import { useSearch } from '../hooks/useSearch'
-import { usePageList } from '../hooks/usePageList'
-import Form from '../components/form/index.vue'
+import { useTable } from '../hooks/useTable'
+import { useQuery } from './hooks/useQuery'
+import Detail from './components/detail.vue'
 
 const tableRef = ref()
+const selectRow = ref()
 const visible = ref(false)
-const initParam = { roleName: 888, hobby: '2', depid: 125 }
-const searchProps = useSearch()
 
-// 查询条件props
-// const searchProps = {
-//   searchItems, // 查询条件表单
-//   collapse: true, // 是否开启折叠功能
-//   defaultOver: false, // 默认展开
-// }
-const { columns, requestApi } = usePageList()
+// 初始化查询参数默认值
+const initParam = { gender: 2 }
+const searchProps = useQuery()
 
-onMounted(() => {
-  setTimeout(() => {
-    // requestApi.value = api.account.getUserPage
-  }, 3000)
-})
+const { columns, requestApi } = useTable()
 
 /**
- * 弹窗编辑
+ * 查看详情
  */
-function onDialog(rows) {
-  useDialog({
-    attrs: { title: '表单编辑' },
-    footer: { okText: '提交' },
-    props: { oldForm: rows },
-    componentEl: Form,
-    /**
-     * 刷新列表
-     */
-    afterClose: () => {
-    },
-  })
-}
-
-/**
- *弹窗编辑
- */
-function onDrawer(rows) {
-  useDrawer({
-    attrs: { title: '表单编辑' },
-    props: { oldForm: rows },
-    componentEl: Form,
-    /**
-     * 刷新列表
-     */
-    beforeClose: (done) => {
-      tableRef.value.refresh()
-      done()
-    },
-  })
+function handleDlg(row) {
+  selectRow.value = row
+  visible.value = true
 }
 </script>

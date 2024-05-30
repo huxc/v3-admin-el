@@ -28,8 +28,8 @@
 
 <script setup name="example-table">
 import { useSearch } from '../hooks/useSearch'
-import { usePageList } from '../hooks/usePageList'
 import Form from '../components/form/index.vue'
+import { useTable } from './hooks/useTable.js'
 
 const tableRef = ref()
 const visible = ref(false)
@@ -42,7 +42,7 @@ const searchProps = {
   collapse: true, // 是否开启折叠功能
   defaultOver: false, // 默认展开
 }
-const { columns, requestApi } = usePageList()
+const { columns, requestApi } = useTable()
 
 onMounted(() => {
   setTimeout(() => {

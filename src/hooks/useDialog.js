@@ -122,7 +122,6 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
                 ...props,
                 onClsDlg: onClose,
               })),
-          //   header: headerDom,
           footer: footerDom,
         })
     },

@@ -74,16 +74,6 @@ export function useForm() {
       },
     },
     {
-      tag: 'daterange',
-      itemAttrs: {
-        label: '日期范围',
-        col: 10,
-      },
-      attrs: {
-        key: ['start', 'end'],
-      },
-    },
-    {
       tag: 'radio',
       itemAttrs: {
         label: '单选框',

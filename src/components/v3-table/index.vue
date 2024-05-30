@@ -25,11 +25,6 @@
               <Render :row="row" :index="index" :render="column.render" />
             </template>
           </el-table-column>
-          <!-- <el-table-column v-else-if="column.render" :key="column.prop" v-bind="setAttrs(column)">
-        <template #default="{ row }">
-          <component :is="column.render" v-bind="row" />
-        </template>
-      </el-table-column> -->
           <slot v-else-if="column.slot" :key="`slot-${column.prop}`" :name="column.slot" />
           <el-table-column v-else-if="column.isImg" :key="`img-${column.prop}`" v-bind="setAttrs(column)">
             <template #default="{ row }">
