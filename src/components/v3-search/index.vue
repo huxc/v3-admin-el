@@ -20,13 +20,6 @@
           </template>
         </v3-form>
       </div>
-      <template v-if="collapse">
-        <Transition name="fade" mode="out-in">
-          <div v-show="!isOver" class="btn-x">
-            <ReuseTemplate :visible="false" handle-name="展开" icon="ep:arrow-down-bold" />
-          </div>
-        </Transition>
-      </template>
     </div>
   </v3-collapse-transition>
 </template>

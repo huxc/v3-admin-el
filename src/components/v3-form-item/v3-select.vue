@@ -25,5 +25,5 @@ defineProps({
   },
 })
 
-const value = defineModel()
+// const value = defineModel()
 </script>

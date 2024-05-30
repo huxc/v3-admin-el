@@ -1,3 +1,4 @@
+import V3Select from './v3-select.vue'
 /**
  * 因为按需加载插件无法打包动态组件，要把需要用到的表单组件才此处统一引入
  */
@@ -14,10 +15,11 @@ export const comElements = {
   ElRadioButton,
   ElUpload,
   ElSelectV2,
+  V3Select,
 }
 
+// 异步组件，如渲染过慢可改成同步，放入上方comElements中 如V3Select方式
 export const comFormItems = {
-  'v3-select': defineAsyncComponent(() => import('./v3-select.vue')),
   'v3-upload-img': defineAsyncComponent(() => import('./v3-upload-img.vue')),
   'v3-upload-file': defineAsyncComponent(() => import('./v3-upload-file.vue')),
   'v3-radio-group': defineAsyncComponent(() => import('./v3-radio-group.vue')),
