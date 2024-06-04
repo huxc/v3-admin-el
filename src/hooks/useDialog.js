@@ -27,6 +27,7 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
       let bcParam = null
       const dialogRef = ref()
       const visible = ref(true)
+      const loading = ref(false)
       const elChild = ref(null)
 
       // el-dialog默认参数与传入参数合并
@@ -55,6 +56,7 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
        * 关闭
        */
       const done = () => {
+        loading.value = false
         dialogRef.value.visible = false
       }
 
@@ -63,10 +65,13 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
        */
       const onClose = (param) => {
         bcParam = param
-        if (typeOf(beforeClose) === 'function')
-          beforeClose(done, param)
-        else
+        if (typeOf(beforeClose) === 'function') {
+          loading.value = true
+          beforeClose(done, param, loading)
+        }
+        else {
           done()
+        }
       }
 
       /**
@@ -98,7 +103,7 @@ export function useDialog({ attrs = {}, props = {}, footer = {}, componentEl, be
                 ),
                 h(
                   ElButton,
-                  { onClick: onConfirm, type: 'primary' },
+                  { onClick: onConfirm, type: 'primary', loading: loading.value },
                   () => footer.okText || '确定',
                 ),
               ],

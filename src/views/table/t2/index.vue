@@ -46,6 +46,10 @@ function handleEdit(rows = {}) {
     footer: { okText: '提交' },
     props: { oldForm: rows },
     componentEl: Form,
+    // eslint-disable-next-line jsdoc/require-jsdoc
+    beforeClose: (done) => {
+      done()
+    },
     /**
      *编辑成功后回调
      */
