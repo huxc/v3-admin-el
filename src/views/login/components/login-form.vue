@@ -6,7 +6,7 @@
     <!-- 登录表单 -->
     <el-form ref="formEl" class="cusform-box" style="width: 65%;" :rules="rules" :model="formLogin" label-position="top" label-width="100px">
       <el-form-item label="用户名/手机号" prop="username">
-        <el-input v-model="formLogin.username" maxlength="30" placeholder="用户名：admin / user01 / user02" />
+        <el-input v-model="formLogin.username" maxlength="30" placeholder="用户名：admin" />
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="formLogin.password" maxlength="15" type="password" show-password placeholder="密码：123456" />
