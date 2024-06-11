@@ -34,7 +34,6 @@ const searchProps = {
   collapse: false,
 }
 const { columns, requestApi } = useTable()
-
 /**
  * 弹窗编辑
  */

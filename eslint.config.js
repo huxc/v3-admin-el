@@ -1,5 +1,16 @@
+import fs  from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import antfu from '@antfu/eslint-config'
-import globs from './.eslintrc-auto-import.json' assert {type: 'json'}
+
+// 获取 __dirname 等效的路径
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename)
+
+const globalsPath = path.resolve(__dirname, '.eslintrc-auto-import.json');
+const { globals } = JSON.parse(fs.readFileSync(globalsPath, 'utf-8'));
+
+
 export default antfu(
   {
     vue: {
@@ -20,9 +31,7 @@ export default antfu(
   },
   {
     languageOptions: {
-      globals:{
-        ...globs.globals
-      },
+      globals,
     }
   },
   {

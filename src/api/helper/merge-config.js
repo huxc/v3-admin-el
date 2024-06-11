@@ -38,7 +38,6 @@ export function mergeConfig({ domain = 'user', ...config }) {
     isMsg: true, // 是否弹出错误信息
     headers: {
       'Authorization': token,
-      'apifoxToken': token,
       'Authorization-Refresh': 'none-token-refresh',
       'Content-Type': 'application/json;charset=UTF-8',
     },
