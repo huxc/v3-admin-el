@@ -34,6 +34,7 @@ export function createVitePlugins(viteEnv) {
       eslintrc: {
         enabled: true,
       },
+      vueTemplate: true,
     }),
     Components({
       dirs: ['src/components/'],
