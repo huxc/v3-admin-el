@@ -2,6 +2,7 @@
 import { resolve } from 'node:path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { envParse } from 'vite-plugin-env-parse'
 import AutoImport from 'unplugin-auto-import/vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 // import ElementPlus from 'unplugin-element-plus/vite'
@@ -16,6 +17,8 @@ export function createVitePlugins(viteEnv) {
   const { VITE_GLOB_APP_TITLE } = viteEnv
   return [
     vue(),
+    
+    envParse(),
     // vue 可以使用 jsx/tsx 语法
     vueJsx(),
     // name 可以写在 script 标签上
@@ -58,7 +61,7 @@ export function createVitePlugins(viteEnv) {
     createSvgIconsPlugin({
       iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
       symbolId: 'icon-[dir]-[name]',
-    }),
+    })
   ]
 }
 

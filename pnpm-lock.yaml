@@ -120,6 +120,9 @@ importers:
       vite-plugin-compression:
         specifier: ^0.5.1
         version: 0.5.1(vite@5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4))
+      vite-plugin-env-parse:
+        specifier: ^1.0.14
+        version: 1.0.14(vite@5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4))
       vite-plugin-html:
         specifier: ^3.2.2
         version: 3.2.2(vite@5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4))
@@ -3532,6 +3535,11 @@ packages:
     resolution: {integrity: sha512-5QJKBDc+gNYVqL/skgFAP81Yuzo9R+EAf19d+EtsMF/i8kFUpNi3J/H01QD3Oo8zBQn+NzoCIFkpPLynoOzaJg==}
     peerDependencies:
       vite: '>=2.0.0'
+
+  vite-plugin-env-parse@1.0.14:
+    resolution: {integrity: sha512-i7WAJFdHooIM3FeHEe6gq1GybAteRKoa/93Pii5qciAIvez2xis8U2nFmEB/RZ2LgGJROytWFAa+z0B4uzXZ0w==}
+    peerDependencies:
+      vite: '*'
 
   vite-plugin-html@3.2.2:
     resolution: {integrity: sha512-vb9C9kcdzcIo/Oc3CLZVS03dL5pDlOFuhGlZYDCJ840BhWl/0nGeZWf3Qy7NlOayscY4Cm/QRgULCQkEZige5Q==}
@@ -7465,6 +7473,10 @@ snapshots:
       vite: 5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4)
     transitivePeerDependencies:
       - supports-color
+
+  vite-plugin-env-parse@1.0.14(vite@5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4)):
+    dependencies:
+      vite: 5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4)
 
   vite-plugin-html@3.2.2(vite@5.2.10(@types/node@20.12.7)(sass@1.75.0)(terser@5.30.4)):
     dependencies:

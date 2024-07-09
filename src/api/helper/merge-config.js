@@ -1,7 +1,6 @@
 import qs from 'qs'
 import { invoke, merge } from 'lodash-es'
 import { isObjEmpty, typeOf } from '@/utils'
-import { domain_list } from '@/api/config/domainConfig'
 import { useUserStore } from '@/store/modules/user'
 
 /**
@@ -12,6 +11,17 @@ export function mergeConfig({ domain = 'user', ...config }) {
   // 获取token
   const token = userStore?.getToken
   const _params = config.data || config.params
+
+  // 配置接口域名
+  if (import.meta.env.VITE_IS_MICRO_SERVICE) {
+    // 微服务处理
+    const domainList = import.meta.env.VITE_API_DOMAIN_JSON
+    config.baseURL ??= domainList[domain]
+  }
+  else {
+    config.baseURL ??= import.meta.env.VITE_API_BASE_URL
+  }
+
   // 判断是否有参数
   if (!isObjEmpty(_params)) {
     // 格式化get参数
@@ -43,9 +53,6 @@ export function mergeConfig({ domain = 'user', ...config }) {
     },
     method: 'POST',
     timeout: 2 * 60 * 1000,
-
-    // 选择相应的域名
-    baseURL: domain_list[domain],
 
     /**
      *序列化`params`

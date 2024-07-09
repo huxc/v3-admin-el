@@ -1,8 +1,9 @@
 import { resolve } from 'node:path'
+import process from 'node:process'
 import dayjs from 'dayjs'
 import { defineConfig, loadEnv } from 'vite'
+import { parseLoadedEnv } from 'vite-plugin-env-parse'
 import pkg from './package.json'
-import { wrapperEnv } from './vite_config/getEnv'
 import { createVitePlugins } from './vite_config/plugins'
 
 const { dependencies, devDependencies, name, version } = pkg
@@ -13,13 +14,10 @@ const __APP_INFO__ = {
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // eslint-disable-next-line node/prefer-global/process
-  const env = loadEnv(mode, process.cwd())
-
-  // 取所有变量，包含数值转换
-  const viteEnv = wrapperEnv(env)
+  const viteEnv = parseLoadedEnv(loadEnv(mode, `${process.cwd()}/env`))
 
   return {
+    envDir: './env',
     base: viteEnv.VITE_PUBLIC_PATH,
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__),
