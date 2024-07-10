@@ -28,3 +28,4 @@ src/api/auto-api
 .eslintrc-auto-import.js
 auto-imports.d.ts
 components.d.ts
+env.d.ts
