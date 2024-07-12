@@ -33,7 +33,7 @@ import { simple } from 'acorn-walk';
 
 export function getApiKeys() {
   const modules = {
-    '@/api/helper/index': ['useRequest'],
+    '@/utils/ofetch/index': ['useRequest'],
     '@/hooks/useDialog': ['useDialog'],
     '@/hooks/useDrawer': ['useDrawer'],
     '@/hooks/useHandleData': ['useHandleData'],
