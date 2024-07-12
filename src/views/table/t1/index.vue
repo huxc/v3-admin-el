@@ -45,7 +45,7 @@ function handleDel(ids) {
 /**
  *弹窗编辑
  */
-function handleEdit(row = {}) {
+async function handleEdit(row = {}) {
   // 对实时数据要求较高的项目 此处应根据id读取row
   useDrawer({
     attrs: { title: '表单' },

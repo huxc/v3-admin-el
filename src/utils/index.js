@@ -22,7 +22,7 @@ export function typeOf(obj) {
  * 判断空对象
  */
 export function isObjEmpty(obj) {
-  return obj?.constructor === Object && Reflect.ownKeys(obj).length === 0
+  return !!obj && obj.constructor === Object && Object.keys(obj).length === 0
 }
 
 /**

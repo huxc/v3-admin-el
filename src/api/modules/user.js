@@ -1,4 +1,4 @@
-import { useRequest } from '../helper'
+import { useRequest } from '@/utils/ofetch'
 
 /**
  * 180.100.200.14 登录

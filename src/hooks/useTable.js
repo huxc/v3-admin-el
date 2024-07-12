@@ -73,9 +73,10 @@ export function useTable(props) {
           state.totalCount = response.data?.totalCount || 0
         }
       })
-    }).finally(() => {
-      state.listLoading = false
     })
+      .finally(() => {
+        state.listLoading = false
+      })
   }
 
   /**

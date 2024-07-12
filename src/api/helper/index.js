@@ -44,7 +44,6 @@ function createService() {
     config => config,
     (error) => {
       // 发送失败
-      console.error(error)
       return Promise.reject(error)
     },
   )

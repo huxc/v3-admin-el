@@ -55,9 +55,8 @@ router.beforeEach(async (to, from, next) => {
 /**
  *   路由跳转错误
  */
-router.onError((error) => {
+router.onError(() => {
   NProgress.done()
-  console.warn('路由错误', error.message)
 })
 
 /**
