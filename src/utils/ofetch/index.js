@@ -66,7 +66,8 @@ const fetchInstance = ofetch.create({
       closeLoading()
 
     const res = response._data
-    if (passStatus.includes(response.status)) {
+    const { status } = response
+    if ((status >= 200 && status < 300) || passStatus.includes(status)) {
     // 错误提醒
       if (!res.success && options?.isErrorMsg) {
         ElMessage({
@@ -91,7 +92,7 @@ const fetchInstance = ofetch.create({
     }
     else {
       // 错误状态码处理
-      handleErrorStatus(response.status)
+      handleErrorStatus(status)
     }
   },
 })
