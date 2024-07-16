@@ -8,9 +8,6 @@ export function login(data, prop = {}) {
   return useRequest({
     data,
     ...prop,
-    headers: {
-      apifoxToken: 'moZglxeJmCbZ2h5jheDEN',
-    },
     method: 'get',
     domain: 'account',
     url: '/account/token',
