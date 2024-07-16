@@ -62,6 +62,16 @@ export default defineConfig(({ mode }) => {
       port: viteEnv.VITE_PORT,
       open: viteEnv.VITE_OPEN,
       cors: true,
+      proxy: {
+        '/api': {
+          target: 'https://www.w3.org', // 接口域名,接口服务器地止
+          changeOrigin: true,
+          /**
+           * dd
+           */
+          rewrite: path => path.replace(/^\/api/, ''),
+        },
+      },
     },
   }
 })

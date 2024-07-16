@@ -5,6 +5,7 @@ import router from '../../routers'
 import { useUserStore } from '../../store/modules/user'
 import {
   closeLoading,
+  expStream,
   generateRequestKey,
   handleErrorStatus,
   ongoingRequests,
@@ -68,7 +69,12 @@ const fetchInstance = ofetch.create({
     const res = response._data
     const { status } = response
     if ((status >= 200 && status < 300) || passStatus.includes(status)) {
-    // 错误提醒
+      // 判断是否为导出文件流
+      if (options?.responseType === 'blob') {
+        expStream(options, response)
+        return
+      }
+      // 错误提醒
       if (!res.success && options?.isErrorMsg) {
         ElMessage({
           showClose: true,
