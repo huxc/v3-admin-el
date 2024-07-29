@@ -3,16 +3,7 @@ import { ofetch } from 'ofetch'
 import { isObjEmpty } from '../../utils'
 import router from '../../routers'
 import { useUserStore } from '../../store/modules/user'
-import {
-  closeLoading,
-  expStream,
-  generateRequestKey,
-  handleErrorStatus,
-  ongoingRequests,
-  openLoading,
-  passStatus,
-  refreshToken,
-} from './base'
+import { closeLoading, expStream, generateRequestKey, handleErrorStatus, ongoingRequests, openLoading, passStatus, refreshToken } from './base'
 
 // 创建 ofetch 实例
 const fetchInstance = ofetch.create({
