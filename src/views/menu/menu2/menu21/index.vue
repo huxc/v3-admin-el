@@ -138,6 +138,26 @@ function handleDownload() {
   a.click()
   URL.revokeObjectURL(docxBlobUrl.value)
 }
+/**
+ * 根据url获取blob
+ */
+// async function fetchAndRenderDocx(url) {
+//   try {
+//     const response = await fetch(url)
+//     if (!response.ok)
+//       throw new Error('Network response was not ok')
+
+//     const blob = await response.blob()
+
+//     // 使用 docx-preview 渲染 Blob 到页面
+//     const container = document.getElementById('preview')
+//     container.innerHTML = '' // 清空之前的内容
+//     renderAsync(blob, container)
+//   }
+//   catch (error) {
+//     console.error('Error fetching or rendering the document:', error)
+//   }
+// }
 
 onMounted(async () => {
   chartInstance = echarts.init(chartRef.value)
